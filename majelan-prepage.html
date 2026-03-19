@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier Majelan — Diagnostic Digital & Générateur de Logo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{--navy:#12132D;--navy2:#1e2044;--orange:#F97316;--bg:#EBF0F7;--bg2:#DDE6F0;--pink:#FCE8DF;--blue-c:#DDEAFF;--green:#22c55e;--muted:#6b7a99;--border:#cdd5e0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);overflow-x:hidden;min-height:100vh}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(235,240,247,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(205,213,224,.4);padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo-wrap{display:flex;align-items:center;gap:11px;text-decoration:none;cursor:pointer}
+.logo-text-block{display:flex;flex-direction:column;gap:1px}
+.logo-name{font-size:16px;font-weight:500;color:var(--navy);letter-spacing:-.3px;line-height:1}
+.logo-tagline{font-size:7.5px;font-weight:600;color:var(--muted);letter-spacing:2.2px;text-transform:uppercase}
+.nav-cta{background:var(--navy);color:#fff;padding:10px 22px;border-radius:100px;font-size:14px;font-weight:500;cursor:pointer;border:none;text-decoration:none;transition:background .2s,transform .15s}
+.nav-cta:hover{background:var(--navy2);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 40px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,#b8c8d8 1px,transparent 1px);background-size:32px 32px;opacity:.45;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.16;pointer-events:none;animation:floatBlob 12s ease-in-out infinite alternate}
+.blob-1{width:600px;height:600px;background:var(--orange);top:-200px;right:-200px}
+.blob-2{width:500px;height:500px;background:#6366f1;bottom:-150px;left:-150px;animation-delay:-4s}
+.blob-3{width:300px;height:300px;background:#F5A623;top:40%;left:5%;animation-delay:-8s}
+@keyframes floatBlob{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,30px) scale(1.08)}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:100px;padding:6px 16px 6px 8px;font-size:13px;font-weight:500;margin-bottom:24px;animation:fadeUp .8s ease both;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.25);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.25)}50%{box-shadow:0 0 0 6px rgba(34,197,94,.1)}}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(34px,5.5vw,72px);line-height:1.08;text-align:center;max-width:860px;margin-bottom:18px;animation:fadeUp .8s ease .1s both}
+.hero-title em{font-style:italic;color:var(--orange)}
+.hero-sub{font-size:15.5px;color:var(--muted);text-align:center;max-width:680px;line-height:1.72;margin-bottom:32px;animation:fadeUp .8s ease .2s both}
+.hero-sub strong{color:var(--navy);font-weight:600}
+
+/* ── TABS ── */
+.tool-tabs{display:flex;gap:5px;background:#fff;border-radius:13px;padding:5px;border:1px solid var(--border);margin-bottom:22px;animation:fadeUp .8s ease .25s both;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.tool-tab{padding:10px 22px;border-radius:9px;font-size:14px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif}
+.tool-tab.active{background:var(--navy);color:#fff;box-shadow:0 2px 10px rgba(18,19,45,.18)}
+.tool-tab:hover:not(.active){background:var(--bg);color:var(--navy)}
+
+/* ── FORM CARD ── */
+.form-card{background:#fff;border-radius:22px;padding:34px 42px;width:100%;max-width:620px;box-shadow:0 4px 40px rgba(18,19,45,.09);position:relative;z-index:1;animation:fadeUp .8s ease .3s both}
+.form-title{font-size:18px;font-weight:600;color:var(--navy);margin-bottom:22px;text-align:center}
+.form-row{display:flex;gap:13px;margin-bottom:13px}
+.form-group{flex:1;display:flex;flex-direction:column;gap:5px}
+.form-group.full{flex:0 0 100%}
+label{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.7px}
+input,select{border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--navy);background:var(--bg);transition:border-color .2s,box-shadow .2s;outline:none;width:100%}
+input:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(249,115,22,.1);background:#fff}
+.btn-main{width:100%;padding:14px;background:linear-gradient(135deg,var(--orange),#ea580c);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:5px;transition:transform .15s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 18px rgba(249,115,22,.28);position:relative;overflow:hidden}
+.btn-main::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);transition:left .5s}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(249,115,22,.38)}
+.btn-main:hover::before{left:100%}
+
+/* ── LOGO UPLOAD ── */
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:18px 16px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:var(--bg);margin-bottom:13px}
+.upload-zone:hover{border-color:var(--orange);background:var(--pink)}
+.upload-icon{font-size:22px;margin-bottom:5px}
+.upload-text{font-size:13px;font-weight:600;color:var(--navy)}
+.upload-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.upload-preview{display:none;align-items:center;gap:12px;padding:10px 14px;background:var(--bg);border-radius:10px;border:1.5px solid var(--border);margin-bottom:13px}
+.upload-preview img{max-height:44px;max-width:80px;object-fit:contain;border-radius:4px}
+.upload-preview-text{flex:1;font-size:12px;font-weight:600;color:var(--navy)}
+.upload-clear{background:none;border:1px solid var(--border);border-radius:100px;width:22px;height:22px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;transition:border-color .2s,color .2s}
+.upload-clear:hover{border-color:#ef4444;color:#ef4444}
+
+/* ── COLOR PICKERS ── */
+.color-section{margin-bottom:14px}
+.color-section-label{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.color-preview-dot{width:18px;height:18px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px var(--border);flex-shrink:0;transition:background .2s}
+.color-grid{display:flex;flex-wrap:wrap;gap:6px}
+.color-swatch{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:transform .12s,border-color .12s;flex-shrink:0}
+.color-swatch:hover{transform:scale(1.15)}
+.color-swatch.active{border-color:var(--navy);transform:scale(1.18);box-shadow:0 0 0 2px #fff inset}
+.custom-hex{display:flex;align-items:center;gap:6px;margin-top:6px}
+.custom-hex input{flex:1;padding:6px 10px;font-size:12px;border-radius:8px;width:auto}
+.hex-preview{width:22px;height:22px;border-radius:5px;border:1px solid var(--border);flex-shrink:0}
+
+/* ── STATS ── */
+.stats-bar{display:flex;justify-content:center;gap:40px;padding:20px 0;animation:fadeUp .8s ease .5s both}
+.stat-item{text-align:center}
+.stat-num{font-size:24px;font-weight:700;color:var(--navy);line-height:1}
+.stat-lbl{font-size:11px;color:var(--muted);margin-top:3px}
+.stat-sep{width:1px;background:var(--border)}
+
+/* ── LOADER ── */
+#loader{display:none;position:fixed;inset:0;z-index:300;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:26px}
+#loader.active{display:flex}
+.loader-title{font-family:'DM Serif Display',serif;font-size:30px;color:var(--navy);text-align:center}
+.loader-steps{display:flex;flex-direction:column;gap:11px;width:320px}
+.loader-step{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);opacity:0;transform:translateX(-18px);transition:opacity .5s,transform .5s}
+.loader-step.done{opacity:1;transform:translateX(0)}
+.step-icon{width:28px;height:28px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:background .3s}
+.loader-step.done .step-icon{background:var(--green);color:#fff}
+.loader-bar-wrap{width:320px;height:5px;background:var(--bg2);border-radius:10px;overflow:hidden}
+.loader-bar{height:100%;width:0;background:linear-gradient(90deg,var(--orange),#F5A623);border-radius:10px;transition:width .4s ease}
+
+/* ── RESULTS COMMON ── */
+.res-section{display:none;padding:100px 40px 80px;max-width:1160px;margin:0 auto}
+.res-section.active{display:block}
+.results-header{text-align:center;margin-bottom:50px;animation:fadeUp .7s ease both}
+.res-company{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--orange);margin-bottom:10px}
+.res-title{font-family:'DM Serif Display',serif;font-size:clamp(26px,3.8vw,48px);color:var(--navy);line-height:1.15;margin-bottom:12px}
+.res-sub{font-size:15px;color:var(--muted)}
+
+/* ── SCORE TAGS (used in gauges & detail cards) ── */
+.tag-d{background:#fee2e2;color:#dc2626}.tag-w{background:#fef3c7;color:#d97706}.tag-g{background:#dcfce7;color:#16a34a}
+
+/* ── KEYWORDS PANEL ── */
+.ph{padding:16px 20px 13px;border-bottom:1px solid var(--bg2);display:flex;align-items:center;justify-content:space-between}
+.ph-title{font-size:13px;font-weight:600;color:var(--navy)}
+.ph-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px;background:var(--pink);color:var(--orange)}
+.kw-panel{padding:20px}
+.kw-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.kw-t{padding:5px 12px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;transition:transform .15s}
+.kw-t:hover{transform:scale(1.05)}
+.kw-p{background:var(--navy);color:#fff;font-size:13px;font-weight:700}
+.kw-s{background:var(--pink);color:var(--orange)}
+.kw-t3{background:var(--blue-c);color:#3b5bdb}
+
+/* ── CTA PANEL ── */
+.cta-panel{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:13px;animation:fadeUp .7s ease .3s both;box-shadow:0 4px 26px rgba(18,19,45,.2);position:relative;overflow:hidden}
+.cta-panel::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:20px 20px}
+.cta-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(249,115,22,.2);border:1px solid rgba(249,115,22,.3);border-radius:100px;padding:3px 11px;font-size:11px;font-weight:700;color:var(--orange);width:fit-content}
+.cta-title{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1.25}
+.cta-title em{color:var(--orange);font-style:italic}
+.cta-list{display:flex;flex-direction:column;gap:8px}
+.cta-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.8)}
+.cta-check{width:16px;height:16px;border-radius:50%;background:rgba(249,115,22,.2);border:1px solid var(--orange);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--orange);flex-shrink:0}
+.btn-big{background:linear-gradient(135deg,var(--orange),#ea580c);color:#fff;border:none;border-radius:11px;padding:12px 22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;box-shadow:0 4px 16px rgba(249,115,22,.32);transition:transform .15s,box-shadow .2s;width:100%;justify-content:center}
+.btn-big:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(249,115,22,.42)}
+.btn-sub-s{font-size:10px;color:rgba(255,255,255,.38);text-align:center;margin-top:2px}
+.btn-reset{display:flex;align-items:center;gap:7px;margin:0 auto 40px;background:none;border:1.5px solid var(--border);border-radius:100px;padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;transition:all .2s}
+.btn-reset:hover{border-color:var(--navy);color:var(--navy)}
+
+/* ── LOGO RESULTS ── */
+.logo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.logo-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);cursor:pointer;border:2.5px solid transparent;transition:all .2s;animation:fadeUp .6s ease both}
+.logo-card:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(0,0,0,.1)}
+.logo-card.selected{border-color:var(--orange);box-shadow:0 0 0 4px rgba(249,115,22,.12)}
+.lc-body{padding:18px;display:flex;align-items:center;justify-content:center;background:var(--bg);min-height:155px}
+.lc-body svg{max-width:115px;max-height:125px}
+.lc-foot{padding:9px 13px;border-top:1px solid var(--bg2)}
+.lc-nm{font-size:12px;font-weight:700;color:var(--navy)}
+.lc-desc{font-size:10px;color:var(--muted)}
+/* Upload ref card */
+.upload-ref-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);border:2.5px solid var(--blue-c);animation:fadeUp .6s ease both}
+.upload-ref-body{padding:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#DDEAFF,#EBF4FF);min-height:155px}
+.upload-ref-body img{max-width:100px;max-height:100px;object-fit:contain}
+.upload-ref-foot{padding:9px 13px;border-top:1px solid var(--blue-c)}
+.upload-ref-nm{font-size:12px;font-weight:700;color:#3b5bdb}
+.upload-ref-desc{font-size:10px;color:var(--muted)}
+/* Preview section */
+.logo-preview-section{background:#fff;border-radius:18px;padding:36px;margin-bottom:24px;box-shadow:0 2px 16px rgba(0,0,0,.05);display:none;animation:fadeUp .5s ease both}
+.logo-preview-section.active{display:block}
+.lps-inner{display:flex;align-items:center;gap:40px;flex-wrap:wrap;justify-content:center}
+.lps-svg{background:var(--bg);border-radius:12px;padding:30px;flex:0 0 240px;display:flex;align-items:center;justify-content:center}
+.lps-svg svg{max-width:180px;max-height:200px}
+.lps-info{flex:1;min-width:220px}
+.lps-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px}
+.lps-sub{font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.preview-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn-dl{background:var(--navy);color:#fff;padding:10px 22px;border-radius:100px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;gap:7px}
+.btn-dl:hover{background:var(--navy2);transform:translateY(-1px)}
+.btn-ol{background:none;border:1.5px solid var(--border);color:var(--muted);padding:10px 18px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+.btn-ol:hover{border-color:var(--navy);color:var(--navy)}
+/* Palette selector in results */
+.pal-selector{background:#fff;border-radius:16px;padding:22px 26px;margin-bottom:20px;box-shadow:0 2px 16px rgba(0,0,0,.05)}
+.ps-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:14px}
+.ps-grid{display:flex;gap:10px;flex-wrap:wrap}
+.ps-item{border:2px solid var(--border);border-radius:11px;padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .2s}
+.ps-item:hover{border-color:var(--muted);background:var(--bg)}
+.ps-item.active{border-color:var(--orange);background:var(--pink)}
+.ps-swatches{display:flex;gap:4px}
+.ps-dot{width:14px;height:14px;border-radius:50%}
+.ps-nm{font-size:11px;font-weight:600;color:var(--navy)}
+
+/* ── COMMERCIAL BANNER ── */
+.commercial-banner{border-radius:16px;overflow:hidden;margin-bottom:20px;box-shadow:0 4px 24px rgba(0,0,0,.08);animation:fadeUp .7s ease .25s both}
+.cb-inner{background:linear-gradient(135deg,var(--navy),#1e2044);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cb-content{flex:1;min-width:220px}
+.cb-pre{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--orange);margin-bottom:8px}
+.cb-title{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1.2;margin-bottom:8px}
+.cb-title em{color:var(--orange);font-style:italic}
+.cb-desc{font-size:13px;color:rgba(255,255,255,.65);line-height:1.55}
+.cb-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.cb-btn{display:flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;white-space:nowrap}
+.cb-btn-main{background:var(--orange);color:#fff;box-shadow:0 4px 14px rgba(249,115,22,.35)}
+.cb-btn-main:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(249,115,22,.45)}
+.cb-btn-sec{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2)}
+.cb-btn-sec:hover{background:rgba(255,255,255,.18)}
+
+.footer-hint{text-align:center;padding:32px 20px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);margin-top:10px}
+
+/* ── LOGO ANALYSIS ── */
+/* ══ PREMIUM LOGO ANALYSIS — 2026 ══ */
+.logo-analysis{background:#fff;border-radius:24px;padding:34px 38px;margin-bottom:24px;box-shadow:0 6px 40px rgba(18,19,45,.1),0 0 0 1px rgba(205,213,224,.4);animation:fadeUp .6s ease both}
+.la-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--bg2);gap:20px;flex-wrap:wrap}
+.la-title{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:5px;letter-spacing:-.3px}
+.la-sub{font-size:12px;color:var(--muted);line-height:1.55}
+.la-global-score{flex-shrink:0;display:flex;flex-direction:column;align-items:center}
+.la-section-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:12px}
+/* Score cards — horizontal bars */
+.la-scores-grid{display:flex;flex-direction:column;gap:7px;margin-bottom:26px}
+.la-score-card{display:flex;align-items:center;gap:14px;padding:11px 16px;background:var(--bg);border-radius:12px;border:1px solid var(--border);transition:background .15s}
+.la-score-card:hover{background:#f0f4fb}
+.la-sc-bar-wrap{flex:1;height:5px;background:var(--bg2);border-radius:3px;overflow:hidden;min-width:60px}
+.la-sc-bar{height:100%;border-radius:3px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.la-sc-info{width:116px;flex-shrink:0}
+.la-sc-label{font-size:11.5px;font-weight:700;color:var(--navy);line-height:1}
+.la-sc-desc{font-size:9.5px;color:var(--muted);margin-top:2px}
+.la-sc-val{font-size:16px;font-weight:800;font-family:'Inter',sans-serif;width:28px;text-align:right;flex-shrink:0;letter-spacing:-.5px}
+/* Color palette */
+.la-palette-row{display:flex;gap:16px;align-items:flex-start;margin-bottom:26px;flex-wrap:wrap}
+.la-colors{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+.la-chip{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:44px}
+.la-chip-color{width:44px;border-radius:10px;border:2px solid rgba(255,255,255,.7);box-shadow:0 3px 12px rgba(0,0,0,.15)}
+.la-chip-hex{font-size:9px;color:var(--muted);font-weight:700;font-family:'Inter',monospace;letter-spacing:-.2px}
+.la-chip-role{font-size:8px;color:var(--orange);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.la-color-msg{font-size:11.5px;color:var(--muted);line-height:1.55;max-width:280px;padding:10px 14px;background:var(--bg);border-radius:10px;border-left:3px solid var(--orange);margin-left:6px;align-self:center}
+/* Strategic grid */
+.la-strategic-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.la-card{border-radius:14px;padding:20px 22px;border:1px solid}
+.la-card-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;margin-bottom:13px}
+.la-card.forces{background:#f0fdf4;border-color:#bbf7d0}.la-card.forces .la-card-title{color:#16a34a}
+.la-card.faiblesses{background:#fef2f2;border-color:#fecaca}.la-card.faiblesses .la-card-title{color:#dc2626}
+.la-item{font-size:12px;line-height:1.6;margin-bottom:10px;color:#374151;display:flex;gap:10px;align-items:flex-start}
+.la-item:last-child{margin-bottom:0}
+.la-item-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;margin-top:1px;font-weight:700}
+.la-item-icon.good{background:rgba(22,163,74,.12);color:#16a34a}
+.la-item-icon.bad{background:rgba(239,68,68,.1);color:#dc2626}
+/* Digital readiness checklist */
+.la-checklist{background:var(--bg);border-radius:16px;padding:20px 24px;margin-bottom:22px;border:1px solid var(--border)}
+.la-checklist-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:var(--navy);margin-bottom:14px}
+.la-checklist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.la-check-item{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;padding:8px 10px;border-radius:9px;line-height:1.3}
+.la-check-item.ok{background:#f0fdf4;color:#15803d}
+.la-check-item.nok{background:#fef2f2;color:#dc2626}
+.la-check-icon{font-size:10px;font-weight:900;flex-shrink:0}
+.la-checklist-score{font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;margin-top:4px}
+.la-checklist-score strong{color:var(--navy)}
+/* Recommendations */
+.la-recs{margin-bottom:22px}
+.la-recs-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:var(--navy);margin-bottom:14px}
+.la-rec{display:flex;gap:14px;margin-bottom:12px;padding:16px 20px;background:#fff;border-radius:14px;border:1px solid var(--border);box-shadow:0 2px 12px rgba(18,19,45,.04);transition:box-shadow .15s}
+.la-rec:hover{box-shadow:0 4px 20px rgba(18,19,45,.09)}
+.la-rec-num{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;font-family:'Inter',sans-serif;flex-shrink:0;margin-top:2px}
+.la-rec-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.la-rec-detail{font-size:12px;color:var(--muted);line-height:1.65}
+/* CTA bar */
+.la-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--navy) 0%,#1a1f4a 100%);border-radius:16px;padding:20px 26px;flex-wrap:wrap;position:relative;overflow:hidden}
+.la-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(249,115,22,.2),transparent 65%);pointer-events:none}
+.la-cta-text{font-size:13.5px;color:rgba(255,255,255,.8);max-width:360px;line-height:1.55;position:relative;z-index:1}
+.la-cta-text strong{color:#fff}
+.la-cta-btn{background:linear-gradient(135deg,var(--orange),#ea580c);color:#fff;padding:12px 24px;border-radius:100px;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:transform .15s,box-shadow .2s;box-shadow:0 4px 18px rgba(249,115,22,.35);position:relative;z-index:1}
+.la-cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(249,115,22,.45)}
+@media(max-width:900px){.la-strategic-grid{grid-template-columns:1fr}.la-checklist-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ── RADIAL GAUGES ── */
+.gauges-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:36px}
+.gauge-wrap{background:#fff;border-radius:20px;padding:26px 20px 22px;box-shadow:0 2px 20px rgba(0,0,0,.06);display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;overflow:hidden;animation:fadeUp .7s ease both}
+.gauge-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0}
+.gw-seo::before{background:linear-gradient(90deg,#f97316,#ea580c)}
+.gw-ux::before{background:linear-gradient(90deg,#6366f1,#8b5cf6)}
+.gw-social::before{background:linear-gradient(90deg,#ec4899,#f43f5e)}
+.gw-brand::before{background:linear-gradient(90deg,#22c55e,#16a34a)}
+.gauge-svg-wrap{position:relative;width:110px;height:110px}
+.gauge-bg{fill:none;stroke:var(--bg2);stroke-width:10;stroke-linecap:round}
+.gauge-ring{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);transform:rotate(-90deg);transform-origin:50% 50%}
+.gauge-center-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.gauge-num{font-size:26px;font-weight:700;color:var(--navy);line-height:1}
+.gauge-denom{font-size:10px;color:var(--muted);font-weight:600}
+.gauge-icon{font-size:20px}
+.gauge-label{font-size:12px;font-weight:700;color:var(--navy);text-align:center}
+.gauge-tag{padding:4px 11px;border-radius:100px;font-size:10px;font-weight:700}
+.gw-1{animation-delay:.04s}.gw-2{animation-delay:.1s}.gw-3{animation-delay:.16s}.gw-4{animation-delay:.22s}
+
+/* ── DETAIL CARDS (accordion) ── */
+.detail-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:36px}
+.dc{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.05);animation:fadeUp .7s ease both}
+.dc-1{animation-delay:.12s}.dc-2{animation-delay:.18s}.dc-3{animation-delay:.24s}.dc-4{animation-delay:.30s}
+.dc-head{display:flex;align-items:center;gap:12px;padding:18px 20px;cursor:pointer;user-select:none;transition:background .15s;border-bottom:1px solid transparent}
+.dc-head:hover{background:var(--bg)}
+.dc.open .dc-head{border-bottom-color:var(--bg2)}
+.dc-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.dc-info{flex:1}
+.dc-title{font-size:13px;font-weight:700;color:var(--navy)}
+.dc-sub{font-size:11px;color:var(--muted)}
+.dc-score-chip{padding:5px 13px;border-radius:100px;font-size:13px;font-weight:700;flex-shrink:0}
+.dc-chevron{font-size:11px;color:var(--muted);transition:transform .25s;flex-shrink:0;margin-left:4px}
+.dc.open .dc-chevron{transform:rotate(180deg)}
+.dc-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+.dc.open .dc-body{max-height:700px}
+.dc-content{padding:0 20px 20px}
+.dc-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.dc-col{border-radius:12px;padding:14px 16px}
+.dc-col.prob{background:#fef2f2;border:1px solid #fecaca}
+.dc-col.sol{background:#f0fdf4;border:1px solid #bbf7d0}
+.dc-col-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.dc-col.prob .dc-col-title{color:#dc2626}
+.dc-col.sol .dc-col-title{color:#16a34a}
+.dc-li{display:flex;gap:7px;align-items:flex-start;font-size:11.5px;color:#374151;line-height:1.5;margin-bottom:8px}
+.dc-li-dot{width:16px;height:16px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;margin-top:1px}
+.dc-col.prob .dc-li-dot{background:#fee2e2;color:#dc2626}
+.dc-col.sol .dc-li-dot{background:#dcfce7;color:#16a34a}
+
+/* ── TIMELINE ── */
+.timeline-section{background:#fff;border-radius:20px;padding:32px 36px;margin-bottom:28px;box-shadow:0 2px 16px rgba(0,0,0,.05);animation:fadeUp .7s ease .36s both}
+.tl-header{text-align:center;margin-bottom:28px}
+.tl-pre{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--orange);margin-bottom:6px}
+.tl-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);line-height:1.2}
+.tl-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
+.tl-row::before{content:'';position:absolute;top:20px;left:16%;right:16%;height:2px;background:linear-gradient(90deg,var(--orange),#6366f1,#22c55e);border-radius:10px;z-index:0}
+.tl-card{border-radius:16px;padding:22px 20px;text-align:center;position:relative;z-index:1}
+.tl-card:nth-child(1){background:linear-gradient(135deg,#fff7ed,#fff);border:1px solid #fed7aa}
+.tl-card:nth-child(2){background:linear-gradient(135deg,#eef2ff,#fff);border:1px solid #c7d2fe}
+.tl-card:nth-child(3){background:linear-gradient(135deg,#f0fdf4,#fff);border:1px solid #bbf7d0}
+.tl-dot{width:40px;height:40px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.tl-card:nth-child(1) .tl-dot{background:#fce8df;border:2px solid var(--orange)}
+.tl-card:nth-child(2) .tl-dot{background:#eef2ff;border:2px solid #6366f1}
+.tl-card:nth-child(3) .tl-dot{background:#dcfce7;border:2px solid #22c55e}
+.tl-period{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.tl-card:nth-child(1) .tl-period{color:var(--orange)}
+.tl-card:nth-child(2) .tl-period{color:#6366f1}
+.tl-card:nth-child(3) .tl-period{color:#22c55e}
+.tl-name{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:10px}
+.tl-items{text-align:left;display:flex;flex-direction:column;gap:6px}
+.tl-item{font-size:11px;color:#4b5563;line-height:1.5;display:flex;gap:5px;align-items:flex-start}
+.tl-arrow{color:var(--muted);flex-shrink:0;font-size:9px;margin-top:2px;font-weight:700}
+
+/* ── KEYWORDS SOLO ── */
+.kw-solo{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.05);margin-bottom:24px;animation:fadeUp .7s ease .4s both}
+
+/* ── GAUGE INSIGHT ── */
+.gauge-insight{font-size:10.5px;color:var(--muted);text-align:center;line-height:1.5;min-height:28px;padding:0 4px}
+.gi-good{color:#16a34a;font-weight:600}.gi-bad{color:#dc2626;font-weight:600}
+
+/* ── AUDIT PANEL (replaces commercial banner) ── */
+.audit-panel{background:linear-gradient(135deg,#0f1229 0%,#1a1f4a 55%,#251840 100%);border-radius:22px;padding:36px 40px;margin-bottom:36px;box-shadow:0 12px 60px rgba(18,19,45,.28);position:relative;overflow:hidden;animation:fadeUp .7s ease .22s both}
+.audit-panel::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.022) 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
+.audit-panel::after{content:'';position:absolute;top:-100px;right:-100px;width:380px;height:380px;background:radial-gradient(circle,rgba(249,115,22,.11),transparent 68%);pointer-events:none;z-index:0}
+.audit-panel>*{position:relative;z-index:1}
+.audit-head{display:flex;align-items:flex-start;gap:32px;margin-bottom:30px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.07);flex-wrap:wrap}
+.audit-head-left{flex:1;min-width:260px}
+.audit-over{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:2.2px;color:var(--orange);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.audit-over::before{content:'';width:24px;height:2px;background:var(--orange);border-radius:2px;flex-shrink:0}
+.audit-cname{font-family:'DM Serif Display',serif;font-size:30px;color:#fff;line-height:1.1;margin-bottom:12px}
+.audit-csub{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:14px;letter-spacing:.04em}
+.audit-verdict{font-size:13.5px;color:rgba(255,255,255,.6);line-height:1.75;max-width:600px;margin-top:14px}
+.audit-verdict strong{color:rgba(255,255,255,.9);font-weight:600}
+.audit-globe{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+/* Sector stats grid */
+.audit-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px}
+.audit-stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;transition:background .2s}
+.audit-stat:hover{background:rgba(255,255,255,.07)}
+.audit-stat-val{font-size:18px;font-weight:800;color:#F97316;margin-bottom:5px;line-height:1.1}
+.audit-stat-txt{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5}
+/* Finding cards — benchmark bar */
+.fc-bench-bar{transition:width 1.8s cubic-bezier(.4,0,.2,1);width:0}
+/* KPI metrics row */
+.audit-kpis{display:flex;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(255,255,255,.08);overflow:hidden}
+.audit-kpi{flex:1;padding:12px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.audit-kpi-val{font-size:17px;font-weight:800;color:#F97316;margin-bottom:3px;line-height:1}
+.audit-kpi-lbl{font-size:9px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.04em;line-height:1.3}
+@media(max-width:700px){.audit-stats-grid{grid-template-columns:1fr}.audit-kpis{flex-wrap:wrap}}
+.audit-global{display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 28px;flex-shrink:0;backdrop-filter:blur(4px)}
+.audit-global-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:rgba(255,255,255,.45)}
+.audit-global-wrap{position:relative;width:88px;height:88px}
+.audit-global-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0}
+.agn-val{font-size:30px;font-weight:700;color:#fff;line-height:1}
+.agn-denom{font-size:9px;color:rgba(255,255,255,.45)}
+.audit-findings{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.fc{border-radius:14px;padding:16px 14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);transition:background .2s,transform .2s;cursor:default}
+.fc:hover{background:rgba(255,255,255,.08);transform:translateY(-2px)}
+.fc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.fc-icon{font-size:17px}.fc-score{font-size:24px;font-weight:700;color:#fff;line-height:1}
+.fc-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:rgba(255,255,255,.45);margin-bottom:8px}
+.fc-bar-wrap{height:3px;background:rgba(255,255,255,.1);border-radius:10px;overflow:hidden;margin-bottom:10px}
+.fc-bar{height:100%;border-radius:10px;transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0}
+.fc-tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-size:9px;font-weight:700;margin-bottom:8px}
+.fc-tag.crit{background:rgba(239,68,68,.2);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+.fc-tag.warn{background:rgba(245,158,11,.18);color:#fbbf24;border:1px solid rgba(245,158,11,.3)}
+.fc-tag.good{background:rgba(34,197,94,.18);color:#4ade80;border:1px solid rgba(34,197,94,.3)}
+.fc-insight{font-size:11px;color:rgba(255,255,255,.52);line-height:1.55}
+.audit-rec{display:flex;align-items:center;gap:28px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,.07)}
+.audit-rec-left{flex:1;min-width:240px}
+.ar-pre{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.6px;color:var(--orange);margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.ar-pre::before{content:'▲';font-size:8px;opacity:.7}
+.ar-title{font-family:'DM Serif Display',serif;font-size:23px;color:#fff;line-height:1.22;margin-bottom:8px}
+.ar-title em{color:var(--orange);font-style:italic}
+.ar-desc{font-size:12.5px;color:rgba(255,255,255,.56);line-height:1.68;max-width:500px}
+.audit-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+.ab-main{background:linear-gradient(135deg,var(--orange),#ea580c);color:#fff;border:none;border-radius:100px;padding:13px 26px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;box-shadow:0 4px 22px rgba(249,115,22,.35);white-space:nowrap}
+.ab-main:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(249,115,22,.45)}
+.ab-sec{background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:12px 26px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;white-space:nowrap}
+.ab-sec:hover{background:rgba(255,255,255,.15)}
+
+/* ── COMBO PICKER (logo form) ── */
+.combo-grid{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.combo-card{border:2px solid var(--border);border-radius:10px;padding:7px 12px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .18s;background:#fff}
+.combo-card:hover{border-color:var(--muted);transform:translateY(-1px)}
+.combo-card.active{border-color:var(--orange);background:var(--pink)}
+.combo-dots{display:flex;gap:3px}
+.combo-dot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5)}
+.combo-nm{font-size:11px;font-weight:600;color:var(--navy)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+
+/* ══ PREMIUM 2026 OVERRIDES ══ */
+/* Nav — glass refinement */
+nav{background:rgba(235,240,247,.88);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid rgba(205,213,224,.35)}
+
+/* Hero — gradient mesh overlay */
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 20%,rgba(249,115,22,.06) 0%,transparent 55%),radial-gradient(ellipse at 20% 80%,rgba(99,102,241,.05) 0%,transparent 50%);pointer-events:none;z-index:0}
+
+/* Form card — refined */
+.form-card{border:1px solid rgba(205,213,224,.5);box-shadow:0 6px 40px rgba(18,19,45,.08),0 1px 0 rgba(255,255,255,.9) inset}
+input:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(249,115,22,.08);background:#fff}
+
+/* Gauge cards — elevated premium */
+.gauge-wrap{box-shadow:0 4px 28px rgba(18,19,45,.08),0 0 0 1px rgba(205,213,224,.4);transition:transform .2s,box-shadow .2s}
+.gauge-wrap:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(18,19,45,.13),0 0 0 1px rgba(205,213,224,.5)}
+.gauge-num{font-family:'Inter',sans-serif;font-weight:800;letter-spacing:-1px}
+
+/* Detail cards — premium */
+.dc{border:1px solid rgba(205,213,224,.6);box-shadow:0 2px 16px rgba(18,19,45,.05);transition:box-shadow .2s}
+.dc:hover>.dc-head{background:rgba(249,115,22,.02)}
+.dc.open{box-shadow:0 6px 32px rgba(18,19,45,.1)}
+.dc-head{transition:background .15s}
+
+/* Timeline — premium */
+.tl-card{border:1px solid rgba(205,213,224,.5);box-shadow:0 2px 16px rgba(18,19,45,.04);transition:transform .2s,box-shadow .2s}
+.tl-card:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(18,19,45,.1)}
+
+/* Keyword cloud — refined */
+.kw-t{transition:transform .15s,box-shadow .15s;cursor:default}
+.kw-t:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.1)}
+
+/* Logo cards — premium */
+.logo-card{box-shadow:0 4px 24px rgba(18,19,45,.08),0 0 0 1px rgba(205,213,224,.4);transition:transform .2s,box-shadow .2s}
+.logo-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,19,45,.14)}
+
+/* Number typography — Inter throughout */
+.tl-card,.dc-score-chip,.stats-bar,.gauge-num{font-family:'Inter',sans-serif}
+
+/* Btn shimmer refinement */
+.btn-main::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);animation:shimmer 3s ease 2s infinite}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px}
+::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+/* Embeddable iframe-safe */
+body{min-height:100vh;width:100%}
+
+@media(max-width:900px){
+  .gauges-row{grid-template-columns:repeat(2,1fr)}.detail-cards{grid-template-columns:1fr}.tl-row{grid-template-columns:1fr}
+  .logo-grid{grid-template-columns:repeat(2,1fr)}.form-row{flex-direction:column}
+  .form-card{padding:24px 20px}.stats-bar{gap:18px}.nav{padding:0 18px}
+  .lps-inner{flex-direction:column}.cb-inner{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a class="logo-wrap" href="#" onclick="resetAll()">
+    <svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+      <defs><clipPath id="nc"><rect x="0" y="0" width="200" height="200" rx="32"/></clipPath></defs>
+      <rect x="0" y="0" width="200" height="200" rx="32" fill="#BDD2E6"/>
+      <g clip-path="url(#nc)">
+        <polygon points="18,182 62,28 106,182" fill="#1B2340"/>
+        <path d="M104,180 C102,130 112,65 120,44 Q130,28 142,44 C150,65 158,130 156,180 Z" fill="#D93D44"/>
+        <path d="M132,180 C130,130 140,65 148,44 Q158,28 170,44 C178,65 186,130 184,180 Z" fill="#E86A2A"/>
+        <path d="M160,180 C158,130 168,65 176,44 Q186,28 198,44 C206,65 214,130 212,180 Z" fill="#F5B429"/>
+      </g>
+    </svg>
+    <div class="logo-text-block">
+      <span class="logo-name">atelier majelan</span>
+      <span class="logo-tagline">Créateur de communication sur-mesure</span>
+    </div>
+  </a>
+  <a class="nav-cta" href="https://www.atelier-majelan.com/contact" target="_blank">Contactez-nous</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div>
+  <div class="hero-badge"><span class="badge-dot"></span>Outils exclusifs — Atelier Majelan, Lyon</div>
+  <h1 class="hero-title">Votre croissance digitale,<br>révélée en <em>30 secondes</em></h1>
+  <p class="hero-sub">
+    Depuis 11 ans, l'Atelier Majelan accompagne les entrepreneurs et PME dans leur transformation numérique —
+    <strong>création de site web</strong>, <strong>référencement SEO & IA</strong>, <strong>identité visuelle</strong>,
+    <strong>réseaux sociaux</strong> et <strong>stratégie de communication</strong> sur-mesure.
+    Testez nos deux outils gratuits : mesurez votre présence digitale ou générez votre logo de marque en quelques secondes.
+  </p>
+
+  <div class="tool-tabs">
+    <button class="tool-tab active" id="tabDiag" onclick="switchTab('diag')">🔍 Diagnostic Digital</button>
+    <button class="tool-tab" id="tabLogo" onclick="switchTab('logo')">✦ Générateur de Logo</button>
+  </div>
+
+  <!-- DIAGNOSTIC FORM -->
+  <div class="form-card" id="diagForm">
+    <p class="form-title">✦ Analysez votre présence en ligne</p>
+    <form id="auditForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom de l'entreprise</label>
+          <input type="text" id="companyName" placeholder="Ex: Dupont & Associés" required>
+        </div>
+        <div class="form-group">
+          <label>Secteur d'activité</label>
+          <select id="sector">
+            <option value="">Choisir votre secteur…</option>
+            <optgroup label="⚖️ Conseil & Services">
+              <option>Juridique & Conseil</option>
+              <option>Finance & Assurance</option>
+              <option>Comptabilité & Audit</option>
+              <option>RH & Recrutement</option>
+              <option>Communication & Marketing</option>
+              <option>Relations Presse & RP</option>
+            </optgroup>
+            <optgroup label="🏗️ Industrie & BTP">
+              <option>BTP & Industrie</option>
+              <option>Architecture & Design intérieur</option>
+              <option>Transport & Logistique</option>
+              <option>Énergie & Environnement</option>
+              <option>Agriculture & Agroalimentaire</option>
+            </optgroup>
+            <optgroup label="💻 Tech & Innovation">
+              <option>Tech & Digital</option>
+              <option>Informatique & Télécom</option>
+              <option>E-commerce & Marketplace</option>
+              <option>SaaS & Logiciels</option>
+            </optgroup>
+            <optgroup label="🛍️ Commerce & Retail">
+              <option>Commerce & Retail</option>
+              <option>Mode & Luxe</option>
+              <option>Auto & Moto</option>
+              <option>Maison & Décoration</option>
+            </optgroup>
+            <optgroup label="🍽️ Lifestyle & Bien-être">
+              <option>Restauration & Food</option>
+              <option>Santé & Bien-être</option>
+              <option>Beauté & Cosmétiques</option>
+              <option>Sport & Fitness</option>
+              <option>Hôtellerie & Tourisme</option>
+            </optgroup>
+            <optgroup label="🎨 Création & Culture">
+              <option>Artisanat & Création</option>
+              <option>Événementiel & Mariage</option>
+              <option>Médias & Presse</option>
+              <option>Photographie & Vidéo</option>
+            </optgroup>
+            <optgroup label="📚 Éducation & Impact">
+              <option>Formation & Éducation</option>
+              <option>Immobilier</option>
+              <option>Association & ONG</option>
+            </optgroup>
+            <option value="Autre">— Autre / Non listé</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full">
+          <label>URL de votre site actuel (optionnel)</label>
+          <input type="text" id="siteUrl" placeholder="www.votre-site.fr">
+        </div>
+      </div>
+      <button type="submit" class="btn-main"><span>🚀</span>Générer mon diagnostic gratuit</button>
+    </form>
+  </div>
+
+  <!-- LOGO FORM -->
+  <div class="form-card" id="logoForm" style="display:none">
+    <p class="form-title">✦ Créez votre logo de marque</p>
+    <form id="logoGenForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom de la marque</label>
+          <input type="text" id="logoCompany" placeholder="Ex: Studio Lumière" required>
+        </div>
+        <div class="form-group">
+          <label>Tagline (optionnel)</label>
+          <input type="text" id="logoTagline" placeholder="Ex: Créons ensemble">
+        </div>
+      </div>
+
+      <!-- Upload -->
+      <div style="margin-bottom:4px">
+        <label>Logo actuel (optionnel — pour inspiration)</label>
+      </div>
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('logoFile').click()">
+        <input type="file" id="logoFile" accept="image/*" style="display:none">
+        <div class="upload-icon">⬆</div>
+        <div class="upload-text">Glissez votre logo ou cliquez pour importer</div>
+        <div class="upload-sub">PNG, JPG, SVG · Sera intégré dans les créations</div>
+      </div>
+      <div class="upload-preview" id="uploadPreview">
+        <img id="uploadedImg" src="" alt="Logo importé">
+        <span class="upload-preview-text" id="uploadFileName">logo.png</span>
+        <button type="button" class="upload-clear" onclick="clearUpload()">×</button>
+      </div>
+
+      <!-- Combo presets -->
+      <div class="color-section">
+        <div class="color-section-label">Palettes recommandées</div>
+        <div class="combo-grid" id="comboPicker"></div>
+      </div>
+
+      <!-- Primary color picker -->
+      <div class="color-section">
+        <div class="color-section-label">
+          Couleur principale
+          <div class="color-preview-dot" id="primaryDot" style="background:#12132D"></div>
+        </div>
+        <div class="color-grid" id="primaryGrid"></div>
+        <div class="custom-hex">
+          <span style="font-size:11px;color:var(--muted);font-weight:600">HEX:</span>
+          <input type="text" id="primaryHex" value="#12132D" placeholder="#000000" style="width:100px">
+          <div class="hex-preview" id="primaryHexPrev" style="background:#12132D"></div>
+        </div>
+      </div>
+
+      <!-- Accent color picker -->
+      <div class="color-section">
+        <div class="color-section-label">
+          Couleur d'accent
+          <div class="color-preview-dot" id="accentDot" style="background:#F97316"></div>
+        </div>
+        <div class="color-grid" id="accentGrid"></div>
+        <div class="custom-hex">
+          <span style="font-size:11px;color:var(--muted);font-weight:600">HEX:</span>
+          <input type="text" id="accentHex" value="#F97316" placeholder="#FF0000" style="width:100px">
+          <div class="hex-preview" id="accentHexPrev" style="background:#F97316"></div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-main"><span>✦</span>Générer mes 4 logos</button>
+    </form>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">152</div><div class="stat-lbl">Sites réalisés</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat-item"><div class="stat-num">11</div><div class="stat-lbl">Ans d'expérience</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat-item"><div class="stat-num">63</div><div class="stat-lbl">Clients actifs</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat-item"><div class="stat-num">Lyon</div><div class="stat-lbl">& toute la France</div></div>
+  </div>
+</section>
+
+<!-- ═══ LOADER ═══ -->
+<div id="loader">
+  <svg width="56" height="56" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <defs><clipPath id="lc"><rect x="0" y="0" width="200" height="200" rx="32"/></clipPath></defs>
+    <rect x="0" y="0" width="200" height="200" rx="32" fill="#BDD2E6"/>
+    <g clip-path="url(#lc)">
+      <polygon points="18,182 62,28 106,182" fill="#1B2340"/>
+      <path d="M104,180 C102,130 112,65 120,44 Q130,28 142,44 C150,65 158,130 156,180 Z" fill="#D93D44"/>
+      <path d="M132,180 C130,130 140,65 148,44 Q158,28 170,44 C178,65 186,130 184,180 Z" fill="#E86A2A"/>
+      <path d="M160,180 C158,130 168,65 176,44 Q186,28 198,44 C206,65 214,130 212,180 Z" fill="#F5B429"/>
+    </g>
+  </svg>
+  <h2 class="loader-title" id="loaderTitle">Analyse en cours…</h2>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+  <div class="loader-steps">
+    <div class="loader-step" id="ls1"><div class="step-icon">🔍</div><span id="ls1t">Étape 1</span></div>
+    <div class="loader-step" id="ls2"><div class="step-icon">🎨</div><span id="ls2t">Étape 2</span></div>
+    <div class="loader-step" id="ls3"><div class="step-icon">📱</div><span id="ls3t">Étape 3</span></div>
+    <div class="loader-step" id="ls4"><div class="step-icon">✨</div><span id="ls4t">Étape 4</span></div>
+  </div>
+</div>
+
+<!-- ═══ DIAGNOSTIC RESULTS ═══ -->
+<div id="diagResults" class="res-section">
+  <div class="results-header">
+    <div class="res-company" id="resCompany">DIAGNOSTIC</div>
+    <h2 class="res-title">Votre potentiel digital <span style="color:var(--orange)">analysé</span></h2>
+    <p class="res-sub">Scores indicatifs basés sur votre secteur — par l'équipe Majelan</p>
+  </div>
+  <div class="gauges-row">
+    <div class="gauge-wrap gw-seo gw-1">
+      <div class="gauge-icon">🔍</div>
+      <div class="gauge-svg-wrap">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle class="gauge-bg" cx="55" cy="55" r="43"/>
+          <circle class="gauge-ring" id="gaugeRingSeo" cx="55" cy="55" r="43" stroke="#f97316" stroke-dasharray="270.18" stroke-dashoffset="270.18"/>
+        </svg>
+        <div class="gauge-center-txt"><span class="gauge-num" id="seoScore">0</span><span class="gauge-denom">/100</span></div>
+      </div>
+      <div class="gauge-label">Score SEO</div>
+      <div class="gauge-tag tag-d" id="seoTag">—</div>
+      <div class="gauge-insight" id="seoInsight"></div>
+    </div>
+    <div class="gauge-wrap gw-ux gw-2">
+      <div class="gauge-icon">🖥️</div>
+      <div class="gauge-svg-wrap">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle class="gauge-bg" cx="55" cy="55" r="43"/>
+          <circle class="gauge-ring" id="gaugeRingUx" cx="55" cy="55" r="43" stroke="#6366f1" stroke-dasharray="270.18" stroke-dashoffset="270.18"/>
+        </svg>
+        <div class="gauge-center-txt"><span class="gauge-num" id="uxScore">0</span><span class="gauge-denom">/100</span></div>
+      </div>
+      <div class="gauge-label">Design & UX</div>
+      <div class="gauge-tag tag-w" id="uxTag">—</div>
+      <div class="gauge-insight" id="uxInsight"></div>
+    </div>
+    <div class="gauge-wrap gw-social gw-3">
+      <div class="gauge-icon">📱</div>
+      <div class="gauge-svg-wrap">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle class="gauge-bg" cx="55" cy="55" r="43"/>
+          <circle class="gauge-ring" id="gaugeRingSocial" cx="55" cy="55" r="43" stroke="#ec4899" stroke-dasharray="270.18" stroke-dashoffset="270.18"/>
+        </svg>
+        <div class="gauge-center-txt"><span class="gauge-num" id="socialScore">0</span><span class="gauge-denom">/100</span></div>
+      </div>
+      <div class="gauge-label">Réseaux Sociaux</div>
+      <div class="gauge-tag tag-w" id="socialTag">—</div>
+      <div class="gauge-insight" id="socialInsight"></div>
+    </div>
+    <div class="gauge-wrap gw-brand gw-4">
+      <div class="gauge-icon">✦</div>
+      <div class="gauge-svg-wrap">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle class="gauge-bg" cx="55" cy="55" r="43"/>
+          <circle class="gauge-ring" id="gaugeRingBrand" cx="55" cy="55" r="43" stroke="#22c55e" stroke-dasharray="270.18" stroke-dashoffset="270.18"/>
+        </svg>
+        <div class="gauge-center-txt"><span class="gauge-num" id="brandScore">0</span><span class="gauge-denom">/100</span></div>
+      </div>
+      <div class="gauge-label">Image de Marque</div>
+      <div class="gauge-tag tag-g" id="brandTag">—</div>
+      <div class="gauge-insight" id="brandInsight"></div>
+    </div>
+  </div>
+
+  <!-- Audit Panel — fully generated by JS -->
+  <div id="commBanner"></div>
+
+  <!-- Detail Cards — populated by JS -->
+  <div class="detail-cards" id="detailCards"></div>
+
+  <!-- Timeline — populated by JS -->
+  <div class="timeline-section" id="timelineSection"></div>
+
+  <div class="kw-solo">
+    <div class="ph"><span class="ph-title">🔑 Mots-clés SEO prioritaires</span><span class="ph-badge">Google & ChatGPT</span></div>
+    <div class="kw-panel"><div class="kw-cloud" id="kwCloud"></div></div>
+  </div>
+
+  <div class="cta-panel">
+    <div><div class="cta-tag">✦ Prochaine étape</div></div>
+    <div class="cta-title">Transformons l'analyse<br>en <em>résultats concrets</em></div>
+    <div class="cta-list">
+      <div class="cta-item"><div class="cta-check">✓</div>Audit complet offert (1h)</div>
+      <div class="cta-item"><div class="cta-check">✓</div>Stratégie personnalisée sur-mesure</div>
+      <div class="cta-item"><div class="cta-check">✓</div>Devis transparent & sans engagement</div>
+      <div class="cta-item"><div class="cta-check">✓</div>Réponse sous 24h garantie</div>
+    </div>
+    <div>
+      <button class="btn-big" onclick="window.open('https://www.atelier-majelan.com/contact','_blank')"><span>🚀</span>Démarrer mon projet avec Majelan</button>
+      <div class="btn-sub-s">Répond en moins de 24h · Sans engagement</div>
+    </div>
+  </div>
+  <button class="btn-reset" onclick="resetAll()">← Relancer une analyse</button>
+  <div class="footer-hint">✦ Scores indicatifs · <strong>Atelier Majelan</strong> · Communication & SEO · Lyon · <a href="https://www.atelier-majelan.com" target="_blank" style="color:var(--orange)">atelier-majelan.com</a></div>
+</div>
+
+<!-- ═══ LOGO RESULTS ═══ -->
+<div id="logoResults" class="res-section">
+  <div class="results-header">
+    <div class="res-company" id="lgResComp">LOGOS GÉNÉRÉS</div>
+    <h2 class="res-title">Choisissez votre <span style="color:var(--orange)">identité visuelle</span></h2>
+    <p class="res-sub" id="lgResSub">4 créations professionnelles générées selon vos couleurs et votre marque</p>
+  </div>
+
+  <!-- Commercial banner for logo -->
+  <div class="commercial-banner">
+    <div class="cb-inner">
+      <div class="cb-content">
+        <div class="cb-pre">IDENTITÉ VISUELLE COMPLÈTE</div>
+        <h3 class="cb-title">Au-delà du logo,<br><em>une charte qui vous ressemble</em></h3>
+        <p class="cb-desc">Ces logos sont un avant-goût. L'Atelier Majelan crée votre identité complète : logo final, charte graphique, templates print & digital, déclinaisons réseaux sociaux.</p>
+      </div>
+      <div class="cb-actions">
+        <a class="cb-btn cb-btn-main" href="https://www.atelier-majelan.com/identite-visuelle" target="_blank">🎨 Voir l'offre Identité</a>
+        <a class="cb-btn cb-btn-sec" href="https://www.atelier-majelan.com/contact" target="_blank">📞 Discutons de votre projet</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logo analysis (shown only when logo uploaded) -->
+  <div class="logo-analysis" id="logoAnalysis" style="display:none">
+    <div class="la-header">
+      <div>
+        <div class="la-title">Diagnostic Identité Visuelle</div>
+        <div class="la-sub">Analyse algorithmique · Positionnement stratégique · Recommandations actionnables — <strong>par Atelier Majelan</strong></div>
+      </div>
+      <div class="la-global-score" id="laGlobalScore"></div>
+    </div>
+
+    <div class="la-section-label">Palette chromatique détectée</div>
+    <div class="la-palette-row">
+      <div class="la-colors" id="laColors"></div>
+    </div>
+
+    <div class="la-section-label">Scores par critère — Analyse professionnelle</div>
+    <div id="laScores"></div>
+
+    <div class="la-strategic-grid">
+      <div class="la-card forces" id="laForces"><div class="la-card-title">✓ Points forts identifiés</div></div>
+      <div class="la-card faiblesses" id="laFaiblesses"><div class="la-card-title">⚠ Axes critiques à corriger</div></div>
+    </div>
+
+    <div id="laChecklist"></div>
+    <div id="laRecs"></div>
+
+    <div class="la-cta">
+      <div class="la-cta-text"><strong>Une identité visuelle forte</strong> est votre meilleur commercial — disponible 24h/24, visible sur tous vos supports, mémorisée par vos prospects.</div>
+      <a href="https://www.atelier-majelan.com/identite-visuelle/" target="_blank" class="la-cta-btn">Démarrer ma refonte identité →</a>
+    </div>
+  </div>
+
+  <!-- Palette selector -->
+  <div class="pal-selector">
+    <div class="ps-title">🎨 Modifier la palette de couleurs</div>
+    <div class="ps-grid" id="psGrid"></div>
+  </div>
+
+  <!-- Logo grid -->
+  <div class="logo-grid" id="logoGrid"></div>
+
+  <!-- Preview -->
+  <div class="logo-preview-section" id="logoPrev">
+    <div class="lps-inner">
+      <div class="lps-svg" id="prevSvgWrap"></div>
+      <div class="lps-info">
+        <div class="lps-title" id="prevTitle">Nom du template</div>
+        <div class="lps-sub" id="prevDesc">Description du style et usage recommandé.</div>
+        <div class="preview-btns">
+          <button class="btn-dl" id="btnDl"><span>⬇</span>Télécharger SVG</button>
+          <button class="btn-ol" onclick="closePreview()">← Autres variantes</button>
+          <a class="btn-dl" href="https://www.atelier-majelan.com/identite-visuelle" target="_blank" style="background:#1a4731;text-decoration:none">✦ Finaliser avec Majelan</a>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-top:10px">Fichier SVG vectoriel · Compatible tous supports · Modifiable</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-reset" onclick="resetAll()">← Générer un autre logo</button>
+  <div class="footer-hint">✦ Logos illustratifs · <strong>Atelier Majelan</strong> · <a href="https://www.atelier-majelan.com" target="_blank" style="color:var(--orange)">atelier-majelan.com</a></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+//  COLOR DATA
+// ══════════════════════════════════════════════
+// Primary: varied range — dark, medium & rich tones (less "all dark")
+const PRIMARY_COLORS = [
+  '#1e3a5f','#2563eb','#4338ca','#1e1b4b','#7c3aed',
+  '#065f46','#1a4731','#15803d','#7c2d12','#b45309',
+  '#374151','#1f2937','#4a1942','#be123c','#92400e',
+  '#0f2748','#1c3d2e','#3d0070','#2c3e50','#12132D'
+];
+const ACCENT_COLORS = [
+  '#F97316','#ef4444','#F5B429','#22c55e','#06b6d4',
+  '#6366f1','#ec4899','#10b981','#3b82f6','#a855f7',
+  '#C9A227','#f43f5e','#84cc16','#14b8a6','#fb923c',
+  '#D93D44'
+];
+
+// Preset combos (primary + accent) shown as combo-cards in the logo form
+const PRESET_COMBOS = [
+  {name:'Majelan',  p:'#12132D',  a:'#F97316'},
+  {name:'Corporate',p:'#1e3a5f',  a:'#06b6d4'},
+  {name:'Créatif',  p:'#4338ca',  a:'#ec4899'},
+  {name:'Nature',   p:'#1a4731',  a:'#F5B429'},
+  {name:'Premium',  p:'#1f2937',  a:'#C9A227'},
+  {name:'Impact',   p:'#be123c',  a:'#F5B429'},
+  {name:'Tech',     p:'#1e1b4b',  a:'#22c55e'},
+  {name:'Luxe',     p:'#4a1942',  a:'#fb923c'},
+];
+
+// Preset palette combos for the results palette switcher
+const PALETTES = [
+  {name:'Majelan',p:'#12132D',a:'#F97316',bg:'#C2D8EC'},
+  {name:'Forêt',p:'#1a4731',a:'#D4A017',bg:'#C8DFC7'},
+  {name:'Tech',p:'#1e1b4b',a:'#06b6d4',bg:'#C7D2FE'},
+  {name:'Luxe',p:'#1a1a1a',a:'#C9A227',bg:'#E8E8E8'},
+  {name:'Océan',p:'#0f2748',a:'#FF6B6B',bg:'#B8D4E8'},
+  {name:'Soleil',p:'#7c2d12',a:'#F59E0B',bg:'#FDE68A'},
+  {name:'Violet',p:'#2d3561',a:'#e879a0',bg:'#E8D5F5'},
+  {name:'Nature',p:'#1c3d2e',a:'#22c55e',bg:'#D1FAE5'},
+];
+
+let selPrimary = '#12132D', selAccent = '#F97316';
+let uploadedDataUrl = null;
+let logoSvgs = [], logoData = {}, selectedLogoIdx = -1;
+
+// ══════════════════════════════════════════════
+//  INIT COLOR PICKERS
+// ══════════════════════════════════════════════
+function buildColorGrid(containerId, colors, type, selectedColor) {
+  const g = document.getElementById(containerId);
+  g.innerHTML = colors.map(c =>
+    `<div class="color-swatch${c===selectedColor?' active':''}" style="background:${c}" title="${c}"
+      onclick="selectColor('${type}','${c}',this)"></div>`
+  ).join('');
+}
+function selectColor(type, hex, el) {
+  if(type==='primary') {
+    selPrimary = hex;
+    document.getElementById('primaryDot').style.background = hex;
+    document.getElementById('primaryHex').value = hex;
+    document.getElementById('primaryHexPrev').style.background = hex;
+    document.querySelectorAll('#primaryGrid .color-swatch').forEach(s=>s.classList.remove('active'));
+  } else {
+    selAccent = hex;
+    document.getElementById('accentDot').style.background = hex;
+    document.getElementById('accentHex').value = hex;
+    document.getElementById('accentHexPrev').style.background = hex;
+    document.querySelectorAll('#accentGrid .color-swatch').forEach(s=>s.classList.remove('active'));
+  }
+  if(el) el.classList.add('active');
+}
+document.getElementById('primaryHex').addEventListener('input', function() {
+  const v = this.value.trim();
+  if(/^#[0-9A-Fa-f]{6}$/.test(v)) { selPrimary=v; document.getElementById('primaryDot').style.background=v; document.getElementById('primaryHexPrev').style.background=v; }
+});
+document.getElementById('accentHex').addEventListener('input', function() {
+  const v = this.value.trim();
+  if(/^#[0-9A-Fa-f]{6}$/.test(v)) { selAccent=v; document.getElementById('accentDot').style.background=v; document.getElementById('accentHexPrev').style.background=v; }
+});
+buildColorGrid('primaryGrid', PRIMARY_COLORS, 'primary', selPrimary);
+buildColorGrid('accentGrid', ACCENT_COLORS, 'accent', selAccent);
+
+function buildComboPicker() {
+  const g = document.getElementById('comboPicker');
+  if (!g) return;
+  g.innerHTML = PRESET_COMBOS.map((c,i) =>
+    `<div class="combo-card${i===0?' active':''}" onclick="applyCombo('${c.p}','${c.a}',this)">
+      <div class="combo-dots">
+        <div class="combo-dot" style="background:${c.p}"></div>
+        <div class="combo-dot" style="background:${c.a}"></div>
+      </div>
+      <span class="combo-nm">${c.name}</span>
+    </div>`
+  ).join('');
+}
+function applyCombo(p, a, el) {
+  selectColor('primary', p, document.querySelector(`#primaryGrid .color-swatch[style*="${p}"]`));
+  selectColor('accent', a, document.querySelector(`#accentGrid .color-swatch[style*="${a}"]`));
+  document.querySelectorAll('.combo-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+buildComboPicker();
+
+// ══════════════════════════════════════════════
+//  LOGO UPLOAD
+// ══════════════════════════════════════════════
+document.getElementById('logoFile').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    uploadedDataUrl = ev.target.result;
+    document.getElementById('uploadedImg').src = uploadedDataUrl;
+    document.getElementById('uploadFileName').textContent = file.name;
+    document.getElementById('uploadPreview').style.display = 'flex';
+    document.getElementById('uploadZone').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+});
+['dragover','drop'].forEach(ev=>document.getElementById('uploadZone').addEventListener(ev, e=>{ e.preventDefault(); if(ev==='drop'&&e.dataTransfer.files[0]){document.getElementById('logoFile').files=e.dataTransfer.files;document.getElementById('logoFile').dispatchEvent(new Event('change'));}}));
+function clearUpload() {
+  uploadedDataUrl = null;
+  document.getElementById('uploadedImg').src = '';
+  document.getElementById('uploadPreview').style.display = 'none';
+  document.getElementById('uploadZone').style.display = '';
+  document.getElementById('logoFile').value = '';
+}
+
+// ══════════════════════════════════════════════
+//  COLOR HELPERS
+// ══════════════════════════════════════════════
+function lc(hex, p) {
+  const n=parseInt(hex.replace('#',''),16),a=Math.round(2.55*p);
+  const r=Math.min(255,(n>>16)+a),g=Math.min(255,((n>>8)&0xFF)+a),b=Math.min(255,(n&0xFF)+a);
+  return '#'+((r<<16)|(g<<8)|b).toString(16).padStart(6,'0');
+}
+function dc(hex,p){const n=parseInt(hex.replace('#',''),16),a=Math.round(2.55*p);return '#'+(((Math.max(0,(n>>16)-a))<<16)|((Math.max(0,((n>>8)&0xFF)-a))<<8)|Math.max(0,(n&0xFF)-a)).toString(16).padStart(6,'0');}
+function getBg(primary) {
+  // Generate a light tint from primary for the icon background
+  return lc(primary, 75);
+}
+
+// ══════════════════════════════════════════════
+//  LOGO TEMPLATES (4)
+// ══════════════════════════════════════════════
+// ── TEMPLATE 1: NEXUS — Diagonal split bold geometric ──
+function tmplNexus(nm, ini, tl, p, a, uid, logoUrl) {
+  const h = tl?310:286;
+  const inner = logoUrl
+    ? `<image href="${logoUrl}" x="82" y="30" width="116" height="116" clip-path="url(#nx${uid})"/>
+       <defs><clipPath id="nx${uid}"><rect x="82" y="30" width="116" height="116" rx="0"/></clipPath></defs>`
+    : `<text x="140" y="113" text-anchor="middle" font-size="80" font-weight="800" fill="white" opacity=".96" font-family="'DM Sans',Arial,sans-serif">${ini}</text>`;
+  return `<svg viewBox="0 0 280 ${h}" xmlns="http://www.w3.org/2000/svg" style="font-family:'DM Sans',Arial,sans-serif">
+    <defs>
+      <clipPath id="nxc${uid}"><rect x="40" y="18" width="200" height="148" rx="24"/></clipPath>
+      <linearGradient id="nxg${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="${lc(p,12)}"/><stop offset="100%" stop-color="${p}"/>
+      </linearGradient>
+    </defs>
+    <rect x="40" y="18" width="200" height="148" rx="24" fill="url(#nxg${uid})"/>
+    <g clip-path="url(#nxc${uid})">
+      <polygon points="160,18 240,18 240,166 100,166" fill="${a}" opacity=".9"/>
+      <polygon points="190,18 240,18 240,166 140,166" fill="${a}" opacity=".18"/>
+      <line x1="155" y1="18" x2="95" y2="166" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+    </g>
+    ${inner}
+    <text x="140" y="${h-42}" text-anchor="middle" font-size="19" font-weight="700" fill="${p}" letter-spacing="-.3" font-family="'DM Sans',Arial,sans-serif">${nm.toLowerCase()}</text>
+    <rect x="${140 - nm.length*4.5}" y="${h-33}" width="${nm.length*9}" height="2" rx="1" fill="${a}" opacity=".7"/>
+    ${tl?`<text x="140" y="${h-16}" text-anchor="middle" font-size="8" fill="#aaa" letter-spacing="2.4" font-family="'DM Sans',Arial,sans-serif">${tl.toUpperCase()}</text>`:''}
+  </svg>`;
+}
+
+// ── TEMPLATE 2: HEXAGON — Premium badge hexagonal ──
+function tmplHexagon(nm, ini, tl, p, a, uid, logoUrl) {
+  const h = tl?320:296;
+  // r=82, cx=140, cy=110 → hexagon points (flat-top, 6 vertices)
+  const outer = "211,69 211,151 140,192 69,151 69,69 140,28";
+  const inner = "201,75 201,145 140,180 79,145 79,75 140,40";
+  const innerContent = logoUrl
+    ? `<image href="${logoUrl}" x="112" y="82" width="56" height="56" clip-path="url(#hx${uid})"/>
+       <defs><clipPath id="hx${uid}"><circle cx="140" cy="110" r="28"/></clipPath></defs>`
+    : `<text x="140" y="138" text-anchor="middle" font-size="66" font-weight="800" fill="white" opacity=".95" font-family="'DM Sans',Arial,sans-serif">${ini}</text>`;
+  return `<svg viewBox="0 0 280 ${h}" xmlns="http://www.w3.org/2000/svg" style="font-family:'DM Sans',Arial,sans-serif">
+    <defs>
+      <linearGradient id="hxg${uid}" x1="20%" y1="0%" x2="80%" y2="100%">
+        <stop offset="0%" stop-color="${lc(p,18)}"/><stop offset="100%" stop-color="${p}"/>
+      </linearGradient>
+    </defs>
+    <polygon points="${outer}" fill="url(#hxg${uid})"/>
+    <polygon points="${inner}" fill="none" stroke="${a}" stroke-width="3" opacity=".55"/>
+    <polygon points="${outer}" fill="none" stroke="${a}" stroke-width="1.5" opacity=".2"/>
+    <circle cx="140" cy="110" r="8" fill="${a}" opacity=".35"/>
+    ${innerContent}
+    <text x="140" y="${h-42}" text-anchor="middle" font-size="19" font-weight="700" fill="${p}" letter-spacing="-.2" font-family="'DM Sans',Arial,sans-serif">${nm.toLowerCase()}</text>
+    ${tl?`<text x="140" y="${h-18}" text-anchor="middle" font-size="8" fill="#aaa" letter-spacing="2.4" font-family="'DM Sans',Arial,sans-serif">${tl.toUpperCase()}</text>`:''}
+  </svg>`;
+}
+
+// ── TEMPLATE 3: SIGNAL — Dynamic concentric arcs ──
+function tmplSignal(nm, ini, tl, p, a, uid, logoUrl) {
+  const h = tl?296:272;
+  const cx = 140, cy = 158;
+  const innerContent = logoUrl
+    ? `<image href="${logoUrl}" x="116" y="62" width="48" height="48" clip-path="url(#sg${uid})"/>
+       <defs><clipPath id="sg${uid}"><circle cx="140" cy="86" r="24"/></clipPath></defs>`
+    : `<text x="${cx}" y="96" text-anchor="middle" font-size="40" font-weight="800" fill="${p}" font-family="'DM Sans',Arial,sans-serif">${ini}</text>`;
+  return `<svg viewBox="0 0 280 ${h}" xmlns="http://www.w3.org/2000/svg" style="font-family:'DM Sans',Arial,sans-serif">
+    <defs>
+      <linearGradient id="sgg${uid}" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="${p}"/><stop offset="100%" stop-color="${a}"/>
+      </linearGradient>
+    </defs>
+    <path d="M ${cx-20},${cy} A 68,68 0 0 1 ${cx+20},${cy}" fill="none" stroke="url(#sgg${uid})" stroke-width="12" stroke-linecap="round"/>
+    <path d="M ${cx-46},${cy} A 92,92 0 0 1 ${cx+46},${cy}" fill="none" stroke="url(#sgg${uid})" stroke-width="10" stroke-linecap="round" opacity=".72"/>
+    <path d="M ${cx-72},${cy} A 118,118 0 0 1 ${cx+72},${cy}" fill="none" stroke="url(#sgg${uid})" stroke-width="8" stroke-linecap="round" opacity=".44"/>
+    <path d="M ${cx-98},${cy} A 144,144 0 0 1 ${cx+98},${cy}" fill="none" stroke="url(#sgg${uid})" stroke-width="6" stroke-linecap="round" opacity=".22"/>
+    <circle cx="${cx}" cy="${cy}" r="14" fill="${p}"/>
+    <circle cx="${cx}" cy="${cy}" r="7" fill="${a}"/>
+    ${innerContent}
+    <text x="140" y="${h-42}" text-anchor="middle" font-size="19" font-weight="700" fill="${p}" letter-spacing="-.2" font-family="'DM Sans',Arial,sans-serif">${nm.toLowerCase()}</text>
+    ${tl?`<text x="140" y="${h-18}" text-anchor="middle" font-size="8" fill="#aaa" letter-spacing="2.4" font-family="'DM Sans',Arial,sans-serif">${tl.toUpperCase()}</text>`:''}
+  </svg>`;
+}
+
+// ── TEMPLATE 4: PRISM — Split diamond geometric ──
+function tmplPrism(nm, ini, tl, p, a, uid, logoUrl) {
+  const h = tl?302:278;
+  const cx = 140, cy = 104;
+  const innerContent = logoUrl
+    ? `<image href="${logoUrl}" x="112" y="76" width="56" height="56" clip-path="url(#pm${uid})"/>
+       <defs><clipPath id="pm${uid}"><polygon points="140,52 188,104 140,156 92,104"/></clipPath></defs>`
+    : `<text x="${cx}" y="${cy+18}" text-anchor="middle" font-size="50" font-weight="800" fill="white" opacity=".95" font-family="'DM Sans',Arial,sans-serif">${ini}</text>`;
+  return `<svg viewBox="0 0 280 ${h}" xmlns="http://www.w3.org/2000/svg" style="font-family:'DM Sans',Arial,sans-serif">
+    <defs>
+      <linearGradient id="pmg${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="${p}"/><stop offset="100%" stop-color="${lc(p,8)}"/>
+      </linearGradient>
+      <filter id="pmsh${uid}"><feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="${p}" flood-opacity=".28"/></filter>
+    </defs>
+    <polygon points="${cx},${cy-52} ${cx+52},${cy} ${cx},${cy+52} ${cx-52},${cy}" fill="url(#pmg${uid})" filter="url(#pmsh${uid})"/>
+    <polygon points="${cx},${cy-52} ${cx+52},${cy} ${cx},${cy+52}" fill="${a}" opacity=".82"/>
+    <polygon points="${cx},${cy-52} ${cx+52},${cy} ${cx},${cy+52} ${cx-52},${cy}" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+    <polygon points="${cx},${cy-52} ${cx+52},${cy} ${cx},${cy+52} ${cx-52},${cy}" fill="none" stroke="${a}" stroke-width="0.8" opacity=".4" transform="scale(1.18) translate(-${cx*0.18} -${cy*0.18})"/>
+    ${innerContent}
+    <text x="140" y="${h-42}" text-anchor="middle" font-size="19" font-weight="700" fill="${p}" letter-spacing="-.2" font-family="'DM Sans',Arial,sans-serif">${nm.toLowerCase()}</text>
+    ${tl?`<text x="140" y="${h-18}" text-anchor="middle" font-size="8" fill="#aaa" letter-spacing="2.4" font-family="'DM Sans',Arial,sans-serif">${tl.toUpperCase()}</text>`:''}
+  </svg>`;
+}
+
+const TEMPLATES = [
+  {id:'nexus',   name:'Nexus Split',   desc:'Split diagonal audacieux — bicolore dynamique, impact immédiat', fn:tmplNexus},
+  {id:'hexagon', name:'Hexagon Badge', desc:'Badge hexagonal premium — autorité et distinction absolue', fn:tmplHexagon},
+  {id:'signal',  name:'Signal Arc',    desc:'Arcs concentriques en gradient — marques tech & innovation', fn:tmplSignal},
+  {id:'prism',   name:'Prism Diamond', desc:'Diamant géométrique avec ombre — luxe et raffinement', fn:tmplPrism},
+];
+
+// ══════════════════════════════════════════════
+//  TAB SWITCH
+// ══════════════════════════════════════════════
+function switchTab(t) {
+  document.getElementById('tabDiag').classList.toggle('active',t==='diag');
+  document.getElementById('tabLogo').classList.toggle('active',t==='logo');
+  document.getElementById('diagForm').style.display = t==='diag' ? '':'none';
+  document.getElementById('logoForm').style.display = t==='logo' ? '':'none';
+}
+
+// ══════════════════════════════════════════════
+//  LOADER
+// ══════════════════════════════════════════════
+function runLoader(task) {
+  document.getElementById('hero').style.display='none';
+  document.getElementById('diagResults').classList.remove('active');
+  document.getElementById('logoResults').classList.remove('active');
+  const ldr=document.getElementById('loader'); ldr.classList.add('active');
+  const steps = task.type==='logo'
+    ? ['Analyse de votre secteur & marque','Génération des formes vectorielles','Application de vos couleurs & typographie','Finalisation et export SVG']
+    : ['Analyse de votre positionnement SEO','Génération de votre identité visuelle cible','Simulation stratégie réseaux sociaux','Compilation du rapport Majelan'];
+  document.getElementById('loaderTitle').textContent = task.type==='logo' ? 'Majelan génère vos logos…' : 'Majelan analyse votre potentiel…';
+  for(let i=1;i<=4;i++){document.getElementById('ls'+i).classList.remove('done');document.getElementById('ls'+i+'t').textContent=steps[i-1];}
+  document.getElementById('loaderBar').style.width='0';
+  let cur=0;
+  function next(){
+    if(cur>=4){setTimeout(()=>{ldr.classList.remove('active');task.type==='logo'?showLogoRes(task):showDiagRes(task);},300);return;}
+    document.getElementById('ls'+(cur+1)).classList.add('done');
+    document.getElementById('loaderBar').style.width=((cur+1)/4*100)+'%';
+    cur++; setTimeout(next, 520+Math.random()*280);
+  }
+  setTimeout(next,300);
+}
+
+// ══════════════════════════════════════════════
+//  DIAGNOSTIC DATA & RESULTS
+// ══════════════════════════════════════════════
+const SD = {
+  "Juridique & Conseil":{seo:34,ux:41,social:22,brand:58,svcs:["Conseil Expert","Accompagnement","Dossiers"],h1:"Votre conseiller<br><em>juridique de confiance</em>",desc:"Expertise, rigueur et engagement pour défendre vos intérêts.",kws:["avocat lyon","conseil juridique","droit des affaires","cabinet avocat","consultation juridique","protection juridique"],pal:["#1a2744","#2d4a8c","#4e7ec2","#f0f4fa","#f5a623"],fl:"1,8k",ct:"Autorité & Sérieux",posts:[{bg:"#1a2744",e:"⚖️",t:"Vos droits"},{bg:"#2d4a8c",e:"📋",t:"Expertises"},{bg:"#4e7ec2",e:"🤝",t:"Partenariat"},{bg:"#f5a623",e:"🏆",t:"Résultats"},{bg:"#1a2744",e:"💼",t:"Cabinet"},{bg:"#2d4a8c",e:"📞",t:"Contact"}]},
+  "BTP & Industrie":{seo:28,ux:35,social:19,brand:62,svcs:["Expertise BTP","Chantiers","Certifications"],h1:"Bâtisseurs de vos<br><em>projets ambitieux</em>",desc:"Qualité, sécurité et respect des délais depuis 15 ans.",kws:["entreprise btp lyon","travaux rénovation","construction","artisan qualifié","devis btp","chantier clé en main"],pal:["#1c3557","#e8a020","#4a90d9","#f5f0e8","#e63946"],fl:"3,2k",ct:"Force & Fiabilité",posts:[{bg:"#1c3557",e:"🏗️",t:"Chantier"},{bg:"#e8a020",e:"⚙️",t:"Métiers"},{bg:"#4a90d9",e:"✅",t:"Certifié"},{bg:"#1c3557",e:"🏠",t:"Rénovation"},{bg:"#e8a020",e:"👷",t:"Équipe"},{bg:"#4a90d9",e:"🌟",t:"Réalisations"}]},
+  "Santé & Bien-être":{seo:31,ux:44,social:48,brand:55,svcs:["Soins & Bien-être","Accompagnement","Prévention"],h1:"Prenez soin de vous<br><em>avec nos experts</em>",desc:"Un accompagnement bienveillant et professionnel pour votre santé.",kws:["cabinet médical lyon","soin bien-être","praticien santé","consultation spécialiste","médecine douce","thérapie lyon"],pal:["#2d6a4f","#52b788","#95d5b2","#f0faf3","#f9c74f"],fl:"4,6k",ct:"Sérénité & Nature",posts:[{bg:"#2d6a4f",e:"🌿",t:"Bien-être"},{bg:"#52b788",e:"💆",t:"Soin"},{bg:"#95d5b2",e:"🧘",t:"Équilibre"},{bg:"#2d6a4f",e:"❤️",t:"Santé"},{bg:"#f9c74f",e:"🌸",t:"Nature"},{bg:"#52b788",e:"✨",t:"Vitalité"}]},
+  "Tech & Digital":{seo:52,ux:58,social:61,brand:49,svcs:["Solutions Tech","Développement","Innovation"],h1:"La technologie<br><em>au service de vos défis</em>",desc:"Développement sur-mesure, IA et transformation digitale.",kws:["agence digitale lyon","développement web","solution IA","transformation digitale","application mobile","logiciel sur-mesure"],pal:["#1e1b4b","#6366f1","#a5b4fc","#eef2ff","#f97316"],fl:"6,1k",ct:"Innovation & Futur",posts:[{bg:"#1e1b4b",e:"💻",t:"Tech"},{bg:"#6366f1",e:"🤖",t:"IA"},{bg:"#a5b4fc",e:"🚀",t:"Lancement"},{bg:"#1e1b4b",e:"⚡",t:"Perf"},{bg:"#6366f1",e:"🔐",t:"Sécurité"},{bg:"#f97316",e:"📊",t:"Analytics"}]},
+  "Commerce & Retail":{seo:38,ux:42,social:55,brand:44,svcs:["Boutique","Conseil Client","Fidélisation"],h1:"L'expérience d'achat<br><em>réinventée pour vous</em>",desc:"Un service client exceptionnel et des produits soigneusement sélectionnés.",kws:["boutique lyon","achat en ligne","commerce local","magasin spécialisé","livraison rapide","promotions"],pal:["#7c2d12","#ea580c","#fb923c","#fff7ed","#1e3a5f"],fl:"5,4k",ct:"Chaleur & Désir",posts:[{bg:"#7c2d12",e:"🛍️",t:"Shopping"},{bg:"#ea580c",e:"✨",t:"Nouveautés"},{bg:"#fb923c",e:"🎁",t:"Promo"},{bg:"#7c2d12",e:"⭐",t:"Avis"},{bg:"#ea580c",e:"🔥",t:"Tendances"},{bg:"#1e3a5f",e:"💎",t:"Premium"}]},
+  "Restauration & Food":{seo:42,ux:38,social:72,brand:51,svcs:["Menu & Carte","Réservation","Événements"],h1:"Une expérience<br><em>culinaire inoubliable</em>",desc:"Des saveurs authentiques et un accueil chaleureux vous attendent.",kws:["restaurant lyon","réservation table","cuisine locale","gastronomie","bistronomique","chef étoilé"],pal:["#431407","#c2410c","#f97316","#fff7ed","#365314"],fl:"8,9k",ct:"Appétit & Convivialité",posts:[{bg:"#431407",e:"🍽️",t:"Menu"},{bg:"#c2410c",e:"👨‍🍳",t:"Chef"},{bg:"#f97316",e:"🥗",t:"Fraîcheur"},{bg:"#431407",e:"🍷",t:"Vins"},{bg:"#365314",e:"🌱",t:"Local"},{bg:"#c2410c",e:"⭐",t:"Avis"}]},
+  "Immobilier":{seo:36,ux:45,social:38,brand:53,svcs:["Vente & Location","Estimation","Gestion"],h1:"Votre bien idéal,<br><em>notre expertise</em>",desc:"Transaction sereine, accompagnement expert du début à la signature.",kws:["agence immobilière lyon","achat appartement","vente maison","estimation gratuite","investissement locatif","immobilier neuf"],pal:["#1e3a5f","#2563eb","#93c5fd","#eff6ff","#d97706"],fl:"2,9k",ct:"Confiance & Prestige",posts:[{bg:"#1e3a5f",e:"🏠",t:"Bien du jour"},{bg:"#2563eb",e:"🔑",t:"Vente"},{bg:"#93c5fd",e:"📍",t:"Quartier"},{bg:"#d97706",e:"📈",t:"Valeur"},{bg:"#1e3a5f",e:"✅",t:"Vendu"},{bg:"#2563eb",e:"💰",t:"Investir"}]},
+  "Artisanat & Création":{seo:24,ux:33,social:44,brand:67,svcs:["Création sur-mesure","Atelier","Formations"],h1:"L'art du fait main<br><em>à votre service</em>",desc:"Chaque pièce est unique, créée avec passion et savoir-faire artisanal.",kws:["artisan lyon","création sur-mesure","atelier artisanal","produit fait main","artisanat local","commande personnalisée"],pal:["#44403c","#d97706","#fde68a","#fdf8f0","#4a7c59"],fl:"7,2k",ct:"Authenticité & Craft",posts:[{bg:"#44403c",e:"🎨",t:"Création"},{bg:"#d97706",e:"✂️",t:"Atelier"},{bg:"#fde68a",e:"🌟",t:"Unique"},{bg:"#44403c",e:"🤲",t:"Fait main"},{bg:"#4a7c59",e:"🌿",t:"Naturel"},{bg:"#d97706",e:"💡",t:"Inspiration"}]},
+  "Formation & Éducation":{seo:40,ux:47,social:35,brand:48,svcs:["Formations","Ateliers","Accompagnement"],h1:"Développez vos<br><em>compétences de demain</em>",desc:"Des formations pratiques et certifiantes pour booster votre carrière.",kws:["formation professionnelle lyon","certification qualiopi","formation cpf","montée en compétences","formateur expert","e-learning"],pal:["#1e3a5f","#0891b2","#67e8f9","#f0f9ff","#f59e0b"],fl:"3,7k",ct:"Savoir & Ambition",posts:[{bg:"#1e3a5f",e:"📚",t:"Formation"},{bg:"#0891b2",e:"🎓",t:"Diplôme"},{bg:"#67e8f9",e:"💡",t:"Compétences"},{bg:"#1e3a5f",e:"👥",t:"Groupe"},{bg:"#f59e0b",e:"🚀",t:"Carrière"},{bg:"#0891b2",e:"✅",t:"Certifié"}]},
+  "Finance & Assurance":{seo:41,ux:33,social:19,brand:55,svcs:["Conseil patrimoine","Protection","Optimisation"],h1:"Sécurisez et développez<br><em>votre patrimoine</em>",desc:"Expertise financière et accompagnement personnalisé pour vos projets d'avenir.",kws:["conseiller financier lyon","assurance vie","gestion patrimoine","courtier assurance","épargne retraite","investissement immobilier"],pal:["#1e3a5f","#d97706","#fbbf24","#fffbeb","#1a4731"],fl:"1,4k",ct:"Solidité & Confiance",posts:[{bg:"#1e3a5f",e:"📊",t:"Patrimoine"},{bg:"#d97706",e:"🛡️",t:"Protection"},{bg:"#1a4731",e:"📈",t:"Croissance"},{bg:"#1e3a5f",e:"💰",t:"Épargne"},{bg:"#d97706",e:"🏠",t:"Immobilier"},{bg:"#1a4731",e:"🎯",t:"Objectifs"}]},
+  "Comptabilité & Audit":{seo:38,ux:29,social:15,brand:47,svcs:["Expertise comptable","Audit","Fiscalité"],h1:"Votre expert-comptable<br><em>partenaire de croissance</em>",desc:"De la comptabilité à la stratégie fiscale, nous pilotez votre performance financière.",kws:["expert-comptable lyon","cabinet comptable","audit entreprise","déclaration fiscale","bilan comptable","conseil fiscal"],pal:["#1e3a5f","#0891b2","#e0f2fe","#f8fafc","#d97706"],fl:"0,9k",ct:"Rigueur & Expertise",posts:[{bg:"#1e3a5f",e:"📋",t:"Bilan"},{bg:"#0891b2",e:"💡",t:"Conseil"},{bg:"#d97706",e:"📌",t:"Fiscal"},{bg:"#1e3a5f",e:"📊",t:"Gestion"},{bg:"#0891b2",e:"✅",t:"Conformité"},{bg:"#d97706",e:"🤝",t:"Partenariat"}]},
+  "RH & Recrutement":{seo:44,ux:38,social:41,brand:46,svcs:["Recrutement","Formation RH","Conseil GPEC"],h1:"Les talents qui feront<br><em>votre succès de demain</em>",desc:"Recrutement ciblé, intégration réussie et fidélisation des meilleurs profils.",kws:["cabinet recrutement lyon","chasseur de têtes","recrutement cadres","emploi lyon","ressources humaines","talent acquisition"],pal:["#4a1942","#ec4899","#fdf2f8","#1e3a5f","#f59e0b"],fl:"3,3k",ct:"Humain & Performance",posts:[{bg:"#4a1942",e:"👥",t:"Équipe"},{bg:"#ec4899",e:"🌟",t:"Talent"},{bg:"#1e3a5f",e:"🎯",t:"Recrutement"},{bg:"#4a1942",e:"📋",t:"Carrière"},{bg:"#ec4899",e:"💼",t:"Offre"},{bg:"#1e3a5f",e:"🤝",t:"Intégration"}]},
+  "Communication & Marketing":{seo:61,ux:55,social:63,brand:58,svcs:["Stratégie","Création de contenu","Pilotage"],h1:"Votre message qui<br><em>fait la différence</em>",desc:"Stratégie, création de contenu et pilotage de campagnes pour amplifier votre voix.",kws:["agence communication lyon","stratégie marketing","brand content","campagne digitale","création contenu","marketing digital"],pal:["#12132D","#f97316","#fce8df","#1a4731","#6366f1"],fl:"8,2k",ct:"Impact & Créativité",posts:[{bg:"#12132D",e:"🎨",t:"Créa"},{bg:"#f97316",e:"📣",t:"Campagne"},{bg:"#6366f1",e:"📊",t:"Résultats"},{bg:"#12132D",e:"💡",t:"Stratégie"},{bg:"#f97316",e:"🚀",t:"Lancement"},{bg:"#6366f1",e:"⭐",t:"Marque"}]},
+  "Architecture & Design intérieur":{seo:29,ux:25,social:41,brand:62,svcs:["Architecture","Design intérieur","Conception 3D"],h1:"Vos espaces<br><em>réinventés avec talent</em>",desc:"Architecture créative et design d'intérieur sur-mesure pour des espaces qui vous ressemblent.",kws:["architecte lyon","designer intérieur","rénovation haut de gamme","conception espace","décoration intérieure","aménagement bureau"],pal:["#44403c","#d97706","#f5f5f4","#1c3d2e","#92400e"],fl:"4,8k",ct:"Élégance & Espace",posts:[{bg:"#44403c",e:"🏠",t:"Projet"},{bg:"#d97706",e:"✏️",t:"Concept"},{bg:"#1c3d2e",e:"🌿",t:"Nature"},{bg:"#44403c",e:"📐",t:"Plan"},{bg:"#92400e",e:"✨",t:"Rénovation"},{bg:"#d97706",e:"🎨",t:"Palette"}]},
+  "Transport & Logistique":{seo:22,ux:18,social:14,brand:32,svcs:["Livraison","Stockage","Optimisation flux"],h1:"La livraison<br><em>au cœur de votre réussite</em>",desc:"Solutions logistiques sur-mesure pour optimiser vos flux et satisfaire vos clients.",kws:["transport routier lyon","logistique entreprise","livraison express","entrepôt lyon","supply chain","prestataire logistique"],pal:["#1c3557","#e8a020","#4a90d9","#f5f0e8","#1a4731"],fl:"1,1k",ct:"Efficacité & Fiabilité",posts:[{bg:"#1c3557",e:"🚛",t:"Livraison"},{bg:"#e8a020",e:"📦",t:"Colis"},{bg:"#4a90d9",e:"🗺️",t:"Trajet"},{bg:"#1c3557",e:"⚡",t:"Express"},{bg:"#e8a020",e:"✅",t:"Suivi"},{bg:"#4a90d9",e:"🤝",t:"Partenaire"}]},
+  "Informatique & Télécom":{seo:49,ux:42,social:36,brand:44,svcs:["Infrastructure IT","Cybersécurité","Cloud"],h1:"Votre infrastructure IT<br><em>performante & sécurisée</em>",desc:"Infogérance, cybersécurité et solutions cloud pour des systèmes fiables et évolutifs.",kws:["prestataire informatique lyon","infogérance","cybersécurité entreprise","cloud computing","maintenance informatique","helpdesk"],pal:["#1e1b4b","#0891b2","#e0f2fe","#f0fdf4","#6366f1"],fl:"2,7k",ct:"Sécurité & Performance",posts:[{bg:"#1e1b4b",e:"🔐",t:"Sécurité"},{bg:"#0891b2",e:"☁️",t:"Cloud"},{bg:"#6366f1",e:"💻",t:"IT"},{bg:"#1e1b4b",e:"⚡",t:"Perf"},{bg:"#0891b2",e:"🛡️",t:"Protection"},{bg:"#6366f1",e:"📞",t:"Support"}]},
+  "E-commerce & Marketplace":{seo:53,ux:47,social:58,brand:41,svcs:["Boutique en ligne","SEO e-commerce","Conversion"],h1:"Vendez plus,<br><em>partout et tout le temps</em>",desc:"Boutiques e-commerce performantes qui convertissent vos visiteurs en clients fidèles.",kws:["création boutique en ligne","e-commerce lyon","shopify","vente en ligne","optimisation conversion","marketplace"],pal:["#7c2d12","#ea580c","#fff7ed","#1e3a5f","#22c55e"],fl:"6,4k",ct:"Vente & Performance",posts:[{bg:"#7c2d12",e:"🛒",t:"Boutique"},{bg:"#ea580c",e:"🔥",t:"Promo"},{bg:"#1e3a5f",e:"📦",t:"Produit"},{bg:"#7c2d12",e:"⭐",t:"Avis"},{bg:"#22c55e",e:"✅",t:"Livré"},{bg:"#ea580c",e:"💰",t:"CA"}]},
+  "Beauté & Cosmétiques":{seo:36,ux:29,social:67,brand:55,svcs:["Soins esthétiques","Conseil beauté","Produits"],h1:"Sublimez votre<br><em>beauté naturelle</em>",desc:"Un univers de beauté sur-mesure où chaque soin est une expérience sensorielle unique.",kws:["institut de beauté lyon","soin visage","esthéticienne lyon","maquillage professionnel","soins corps","beauté bien-être"],pal:["#831843","#ec4899","#fdf2f8","#1a1a1a","#f59e0b"],fl:"9,1k",ct:"Beauté & Féminité",posts:[{bg:"#831843",e:"💄",t:"Maquillage"},{bg:"#ec4899",e:"✨",t:"Soin"},{bg:"#831843",e:"🌸",t:"Beauté"},{bg:"#fdf2f8",e:"💅",t:"Onglerie"},{bg:"#ec4899",e:"🧴",t:"Produit"},{bg:"#831843",e:"⭐",t:"Avis"}]},
+  "Sport & Fitness":{seo:39,ux:33,social:58,brand:44,svcs:["Coaching","Cours collectifs","Nutrition"],h1:"Dépassez vos limites,<br><em>révélez votre potentiel</em>",desc:"Coaching personnalisé et programmes sur-mesure pour atteindre vos objectifs sportifs.",kws:["salle de sport lyon","coach sportif","fitness lyon","musculation","cours collectifs","personal trainer"],pal:["#1c3557","#ef4444","#fff","#1a4731","#f59e0b"],fl:"7,6k",ct:"Énergie & Dépassement",posts:[{bg:"#1c3557",e:"💪",t:"Training"},{bg:"#ef4444",e:"🔥",t:"Cardio"},{bg:"#1a4731",e:"🥗",t:"Nutrition"},{bg:"#1c3557",e:"🏆",t:"Résultats"},{bg:"#ef4444",e:"👟",t:"Programme"},{bg:"#1a4731",e:"⭐",t:"Succès"}]},
+  "Hôtellerie & Tourisme":{seo:43,ux:37,social:52,brand:48,svcs:["Hébergement","Expériences","Événements"],h1:"Un séjour inoubliable<br><em>vous attend ici</em>",desc:"Hospitalité authentique et expériences uniques pour des souvenirs gravés pour toujours.",kws:["hôtel lyon","hébergement","chambre d'hôtes","séjour lyon","tourisme rhône-alpes","réservation hôtel"],pal:["#1e3a5f","#d97706","#fef3c7","#fff","#2d6a4f"],fl:"5,2k",ct:"Accueil & Évasion",posts:[{bg:"#1e3a5f",e:"🏨",t:"Hôtel"},{bg:"#d97706",e:"🌅",t:"Vue"},{bg:"#2d6a4f",e:"🌿",t:"Nature"},{bg:"#1e3a5f",e:"✨",t:"Suite"},{bg:"#d97706",e:"🍳",t:"Petit-déj"},{bg:"#2d6a4f",e:"⭐",t:"Avis"}]},
+  "Événementiel & Mariage":{seo:31,ux:27,social:55,brand:61,svcs:["Organisation mariage","Événements corpo","Décoration"],h1:"Chaque moment<br><em>mérite d'être extraordinaire</em>",desc:"Organisation d'événements uniques sur-mesure pour les moments qui comptent vraiment.",kws:["organisation mariage lyon","wedding planner","événementiel entreprise","décoration mariage","traiteur événementiel","séminaire"],pal:["#4a1942","#d97706","#fdf8f0","#1a4731","#ec4899"],fl:"6,8k",ct:"Élégance & Émotion",posts:[{bg:"#4a1942",e:"💍",t:"Mariage"},{bg:"#d97706",e:"✨",t:"Décoration"},{bg:"#ec4899",e:"💐",t:"Fleurs"},{bg:"#4a1942",e:"🥂",t:"Réception"},{bg:"#1a4731",e:"📸",t:"Souvenir"},{bg:"#d97706",e:"⭐",t:"Avis"}]},
+  "Médias & Presse":{seo:52,ux:44,social:71,brand:49,svcs:["Production","Édition","Distribution"],h1:"Votre histoire<br><em>mérite d'être racontée</em>",desc:"Production de contenu média de qualité professionnelle pour toucher et engager vos audiences.",kws:["production audiovisuelle lyon","agence presse","podcast","contenu vidéo","journalisme","content creator"],pal:["#12132D","#ef4444","#fff","#1e3a5f","#f59e0b"],fl:"11,3k",ct:"Impact & Audience",posts:[{bg:"#12132D",e:"🎬",t:"Prod"},{bg:"#ef4444",e:"📰",t:"Actu"},{bg:"#1e3a5f",e:"🎙️",t:"Podcast"},{bg:"#12132D",e:"📺",t:"Vidéo"},{bg:"#ef4444",e:"📸",t:"Photo"},{bg:"#1e3a5f",e:"📊",t:"Audience"}]},
+  "Mode & Luxe":{seo:34,ux:28,social:72,brand:68,svcs:["Collections","Showroom","Sur-mesure"],h1:"L'élégance<br><em>dans chaque détail</em>",desc:"Créations d'exception et pièces sur-mesure pour une clientèle qui exige le meilleur.",kws:["boutique mode lyon","prêt-à-porter luxe","création sur-mesure","styliste lyon","marque mode","showroom"],pal:["#1a1a1a","#d97706","#f5f5f4","#4a0e0e","#c9a227"],fl:"14,2k",ct:"Luxe & Raffinement",posts:[{bg:"#1a1a1a",e:"👗",t:"Collection"},{bg:"#d97706",e:"✨",t:"Luxe"},{bg:"#4a0e0e",e:"🌹",t:"Élégance"},{bg:"#1a1a1a",e:"👜",t:"Accessoires"},{bg:"#d97706",e:"📸",t:"Lookbook"},{bg:"#4a0e0e",e:"🏆",t:"Prestige"}]},
+  "Photographie & Vidéo":{seo:33,ux:27,social:68,brand:59,svcs:["Photo studio","Vidéo corporate","Reportage"],h1:"Capturez vos moments<br><em>avec une précision artistique</em>",desc:"Photographie et vidéo professionnelles qui racontent votre histoire avec émotion.",kws:["photographe professionnel lyon","vidéaste","photo corporate","reportage événement","shooting produit","réalisation vidéo"],pal:["#1a1a1a","#f5a623","#fff","#2d1b69","#e63946"],fl:"8,7k",ct:"Vision & Émotion",posts:[{bg:"#1a1a1a",e:"📷",t:"Studio"},{bg:"#f5a623",e:"🎥",t:"Vidéo"},{bg:"#2d1b69",e:"🌟",t:"Créa"},{bg:"#1a1a1a",e:"🖼️",t:"Portfolio"},{bg:"#f5a623",e:"💡",t:"Lumière"},{bg:"#2d1b69",e:"⭐",t:"Avis"}]},
+  "Agriculture & Agroalimentaire":{seo:19,ux:14,social:28,brand:38,svcs:["Production","Transformation","Distribution"],h1:"Du terroir<br><em>à votre table</em>",desc:"Produits agricoles d'exception et savoir-faire artisanal pour une alimentation authentique.",kws:["producteur local lyon","circuit court","produits du terroir","agriculture biologique","vente directe fermier","AMAP lyon"],pal:["#1a4731","#65a30d","#f7fee7","#92400e","#fef3c7"],fl:"2,4k",ct:"Terre & Authenticité",posts:[{bg:"#1a4731",e:"🌾",t:"Récolte"},{bg:"#65a30d",e:"🥬",t:"Légumes"},{bg:"#92400e",e:"🐄",t:"Élevage"},{bg:"#1a4731",e:"🏡",t:"Ferme"},{bg:"#65a30d",e:"🌿",t:"Bio"},{bg:"#92400e",e:"🛒",t:"Marché"}]},
+  "Association & ONG":{seo:25,ux:21,social:44,brand:36,svcs:["Missions","Bénévolat","Collectes"],h1:"Ensemble pour<br><em>un monde meilleur</em>",desc:"Engagement, solidarité et impact positif pour les causes qui méritent d'être défendues.",kws:["association lyon","ONG","bénévolat","collecte dons","action solidaire","cause humanitaire"],pal:["#1a4731","#22c55e","#f0fdf4","#1e3a5f","#f59e0b"],fl:"3,6k",ct:"Solidarité & Impact",posts:[{bg:"#1a4731",e:"❤️",t:"Mission"},{bg:"#22c55e",e:"🤝",t:"Solidarité"},{bg:"#1e3a5f",e:"🌍",t:"Impact"},{bg:"#1a4731",e:"🌟",t:"Bénévoles"},{bg:"#22c55e",e:"💰",t:"Collecte"},{bg:"#1e3a5f",e:"📣",t:"Événement"}]},
+  "Maison & Décoration":{seo:27,ux:23,social:49,brand:53,svcs:["Aménagement","Décoration","Conseil"],h1:"Un intérieur qui<br><em>vous ressemble</em>",desc:"Mobilier, décoration et conseils d'expert pour créer votre espace de vie idéal.",kws:["magasin décoration lyon","mobilier design","aménagement intérieur","décoration maison","objet déco","boutique meubles lyon"],pal:["#44403c","#d97706","#fdf8f0","#1a4731","#92400e"],fl:"5,9k",ct:"Cocooning & Style",posts:[{bg:"#44403c",e:"🏠",t:"Intérieur"},{bg:"#d97706",e:"🛋️",t:"Mobilier"},{bg:"#1a4731",e:"🌿",t:"Nature"},{bg:"#44403c",e:"✨",t:"Déco"},{bg:"#d97706",e:"💡",t:"Conseil"},{bg:"#1a4731",e:"📸",t:"Réalisation"}]},
+  "SaaS & Logiciels":{seo:56,ux:51,social:47,brand:43,svcs:["Produit SaaS","Intégration API","Support"],h1:"Le logiciel qui<br><em>simplifie votre quotidien</em>",desc:"Solutions SaaS innovantes pour automatiser, gagner en productivité et accélérer votre croissance.",kws:["logiciel en ligne","SaaS france","application web","automatisation","outil digital","abonnement pro"],pal:["#1e1b4b","#6366f1","#eef2ff","#065f46","#f97316"],fl:"4,9k",ct:"Innovation & Efficacité",posts:[{bg:"#1e1b4b",e:"💻",t:"SaaS"},{bg:"#6366f1",e:"⚡",t:"Automatisation"},{bg:"#065f46",e:"📊",t:"Données"},{bg:"#1e1b4b",e:"🚀",t:"Lancement"},{bg:"#6366f1",e:"🔐",t:"Sécurité"},{bg:"#065f46",e:"✅",t:"ROI"}]},
+  "Énergie & Environnement":{seo:31,ux:24,social:36,brand:41,svcs:["Audit énergétique","Transition","Conseil RSE"],h1:"L'avenir énergétique<br><em>commence maintenant</em>",desc:"Solutions vertes et conseil RSE pour une transition énergétique réussie et rentable.",kws:["audit énergétique lyon","transition écologique","énergie renouvelable","conseil RSE","bilan carbone","panneaux solaires"],pal:["#1a4731","#16a34a","#f0fdf4","#1e3a5f","#d97706"],fl:"2,8k",ct:"Responsabilité & Avenir",posts:[{bg:"#1a4731",e:"🌱",t:"Transition"},{bg:"#16a34a",e:"☀️",t:"Solaire"},{bg:"#1e3a5f",e:"💧",t:"Eau"},{bg:"#1a4731",e:"♻️",t:"RSE"},{bg:"#16a34a",e:"📊",t:"Bilan"},{bg:"#1e3a5f",e:"🌍",t:"Impact"}]},
+  "Relations Presse & RP":{seo:47,ux:39,social:61,brand:52,svcs:["Relations presse","Influence","Communication de crise"],h1:"Votre image,<br><em>maîtrisée et rayonnante</em>",desc:"Relations presse stratégiques et gestion de l'image pour les marques qui veulent rayonner.",kws:["attaché de presse lyon","relations publiques","influence marketing","communication corporate","gestion crise","PR agency"],pal:["#12132D","#d93d44","#fce8df","#1e3a5f","#c9a227"],fl:"5,5k",ct:"Image & Rayonnement",posts:[{bg:"#12132D",e:"📰",t:"Presse"},{bg:"#d93d44",e:"📣",t:"Influence"},{bg:"#1e3a5f",e:"🎙️",t:"Média"},{bg:"#12132D",e:"⭐",t:"Image"},{bg:"#d93d44",e:"🚀",t:"Campagne"},{bg:"#1e3a5f",e:"🤝",t:"Partenaires"}]},
+  "Autre":{seo:30,ux:38,social:32,brand:50,svcs:["Notre expertise","Nos services","Contact"],h1:"Des solutions<br><em>taillées pour vous</em>",desc:"Professionnel, réactif, passionné — à votre service.",kws:["entreprise lyon","prestataire local","service professionnel","expert métier","contact entreprise","devis gratuit"],pal:["#12132D","#f97316","#fb923c","#fce8df","#6366f1"],fl:"2,1k",ct:"Professionnalisme",posts:[{bg:"#12132D",e:"💼",t:"Services"},{bg:"#f97316",e:"⭐",t:"Qualité"},{bg:"#6366f1",e:"🚀",t:"Innovation"},{bg:"#12132D",e:"🤝",t:"Partenariat"},{bg:"#f97316",e:"✨",t:"Excellence"},{bg:"#6366f1",e:"📞",t:"Contact"}]},
+};
+
+// ── Sector metadata: benchmarks + real stats ──
+const SECTOR_META = {
+  "Hôtellerie & Tourisme":{bench:{seo:72,ux:68,social:74,brand:80},competition:74,
+    stats:[{icon:"🔍",val:"87%",txt:"des voyageurs consultent les avis en ligne avant de réserver"},
+           {icon:"💸",val:"18-22%",txt:"de commission prélevée par Booking/Expedia sur chaque réservation non capturée directement"},
+           {icon:"📱",val:"×3,2",txt:"plus de réservations directes pour un site hôtelier optimisé vs un site standard"}]},
+  "Restauration & Food":{bench:{seo:61,ux:55,social:82,brand:74},competition:82,
+    stats:[{icon:"🔍",val:"90%",txt:"des consommateurs lisent les avis en ligne avant de choisir un restaurant"},
+           {icon:"💸",val:"21%",txt:"d'engagement moyen Instagram pour les restaurants — bien au-dessus des autres secteurs"},
+           {icon:"📱",val:"68%",txt:"des réservations restaurant se font désormais sur mobile — l'UX mobile est critique"}]},
+  "Immobilier":{bench:{seo:68,ux:62,social:55,brand:71},competition:78,
+    stats:[{icon:"🔍",val:"1389%",txt:"ROI moyen du SEO dans l'immobilier — le meilleur retour sur investissement digital toutes industries confondues"},
+           {icon:"💸",val:"96%",txt:"des acheteurs immobiliers commencent leur recherche en ligne avant tout contact avec une agence"},
+           {icon:"📱",val:"×4",txt:"plus de contacts qualifiés pour les agences avec photos pro et présence sociale active"}]},
+  "Commerce & Retail":{bench:{seo:63,ux:71,social:68,brand:65},competition:79,
+    stats:[{icon:"🔍",val:"76%",txt:"des consommateurs font leurs recherches en ligne avant d'acheter en magasin physique"},
+           {icon:"💸",val:"3,9%",txt:"taux de conversion d'un site e-commerce optimisé vs 0,8% pour un site non optimisé"},
+           {icon:"📱",val:"58%",txt:"du trafic e-commerce vient du mobile — un site non responsive perd plus d'un visiteur sur deux"}]},
+  "BTP & Industrie":{bench:{seo:52,ux:48,social:41,brand:67},competition:55,
+    stats:[{icon:"🔍",val:"79%",txt:"des professionnels du BTP cherchent leurs prestataires sur internet avant tout autre canal"},
+           {icon:"💸",val:"5 mois",txt:"délai moyen de rentabilité du SEO dans le BTP — le plus court de tous les secteurs"},
+           {icon:"📱",val:"64%",txt:"des artisans et PME BTP n'ont pas de site optimisé mobile en 2025"}]},
+  "Santé & Bien-être":{bench:{seo:58,ux:66,social:60,brand:72},competition:61,
+    stats:[{icon:"🔍",val:"82%",txt:"des patients recherchent leur praticien en ligne — 71% lisent les avis avant de prendre RDV"},
+           {icon:"💸",val:"×2,8",txt:"plus de prises de RDV pour les praticiens avec site optimisé et fiche Google complète"},
+           {icon:"📱",val:"38%",txt:"des cabinets de santé n'offrent pas de prise de RDV en ligne — une opportunité non saisie"}]},
+  "Tech & Digital":{bench:{seo:74,ux:78,social:65,brand:68},competition:85,
+    stats:[{icon:"🔍",val:"67%",txt:"des décideurs B2B recherchent leurs prestataires tech via Google avant tout autre canal"},
+           {icon:"💸",val:"×6",txt:"retour sur investissement moyen du content marketing B2B dans le secteur tech"},
+           {icon:"📱",val:"44%",txt:"des sites tech ne sont pas optimisés pour le SEO structuré malgré une concurrence intense"}]},
+  "Finance & Assurance":{bench:{seo:64,ux:62,social:40,brand:74},competition:68,
+    stats:[{icon:"🔍",val:"89%",txt:"des prospects finance vérifient la réputation en ligne avant de confier leur épargne"},
+           {icon:"💸",val:"×4,5",txt:"valeur vie client supérieure pour les conseillers avec forte présence digitale et avis positifs"},
+           {icon:"📱",val:"72%",txt:"des requêtes finance sont locales ('conseiller [ville]') — le SEO local est une mine d'or"}]},
+  "Juridique & Conseil":{bench:{seo:55,ux:52,social:38,brand:76},competition:64,
+    stats:[{icon:"🔍",val:"78%",txt:"des clients cherchent un avocat ou consultant en ligne — dont 65% lisent les avis Google"},
+           {icon:"💸",val:"×3,1",txt:"plus de demandes entrantes pour les cabinets avec site web optimisé et contenu expert"},
+           {icon:"📱",val:"42%",txt:"des cabinets juridiques n'ont pas de stratégie de contenu alors que c'est un levier majeur"}]},
+  "E-commerce & Marketplace":{bench:{seo:72,ux:75,social:63,brand:67},competition:88,
+    stats:[{icon:"🔍",val:"43%",txt:"du chiffre d'affaires e-commerce vient du SEO organique — canal le plus rentable à long terme"},
+           {icon:"💸",val:"3,9%",txt:"taux de conversion moyen e-commerce optimisé vs 0,8% pour un site non travaillé"},
+           {icon:"📱",val:"68%",txt:"des achats en ligne se font sur mobile — l'expérience mobile est le levier n°1"}]},
+  "SaaS & Logiciels":{bench:{seo:74,ux:72,social:58,brand:65},competition:86,
+    stats:[{icon:"🔍",val:"×6",txt:"ROI du content marketing B2B SaaS — les articles de fond génèrent des leads qualifiés durablement"},
+           {icon:"💸",val:"70%",txt:"des décisions d'achat SaaS sont prises après consultation du site web et de témoignages clients"},
+           {icon:"📱",val:"55%",txt:"des SaaS n'exploitent pas le SEO technique avancé (schema markup, Core Web Vitals)"}]},
+  "Artisanat & Création":{bench:{seo:44,ux:41,social:58,brand:74},competition:45,
+    stats:[{icon:"🔍",val:"63%",txt:"des acheteurs de produits artisanaux découvrent l'artisan via Instagram ou Google"},
+           {icon:"💸",val:"×2,4",txt:"plus de commandes pour les artisans avec galerie photo professionnelle et présence Google My Business"},
+           {icon:"📱",val:"78%",txt:"des recherches 'artisan [métier] [ville]' sont effectuées sur mobile"}]},
+  "Architecture & Design intérieur":{bench:{seo:52,ux:48,social:62,brand:78},competition:60,
+    stats:[{icon:"🔍",val:"91%",txt:"des clients choisissent leur architecte ou designer après avoir vu leur portfolio en ligne"},
+           {icon:"💸",val:"×3,5",txt:"plus de demandes de devis pour les studios avec portfolio digital optimisé et présence Instagram active"},
+           {icon:"📱",val:"Instagram",txt:"est le canal n°1 pour l'architecture et le design — un compte actif = un flux constant de prospects"}]},
+  "Événementiel & Mariage":{bench:{seo:52,ux:49,social:72,brand:75},competition:70,
+    stats:[{icon:"🔍",val:"85%",txt:"des futurs mariés commencent leurs recherches de prestataires sur Google et Instagram"},
+           {icon:"💸",val:"18 mois",txt:"d'avance : les prestataires événementiel bien référencés sont réservés bien avant les concurrents"},
+           {icon:"📱",val:"×4",txt:"plus d'engagements sur les publications avec photos de réalisations vs posts textuels"}]},
+  "Formation & Éducation":{bench:{seo:61,ux:58,social:48,brand:64},competition:66,
+    stats:[{icon:"🔍",val:"82%",txt:"des candidats à la formation recherchent leur prestataire sur Google avant tout autre canal"},
+           {icon:"💸",val:"CPF",txt:"les organismes bien référencés sur les requêtes CPF reçoivent 5× plus de demandes qualifiées"},
+           {icon:"📱",val:"×2,3",txt:"plus de conversions pour les pages formation avec avis vérifiés et plan pédagogique détaillé"}]},
+};
+// Fill missing sectors with generic benchmark
+const _defMeta = {bench:{seo:55,ux:58,social:52,brand:61},competition:60,
+  stats:[{icon:"🔍",val:"99%",txt:"des TPE/PME françaises reconnaissent qu'être visible en ligne est indispensable à leur succès"},
+         {icon:"💸",val:"3-6×",txt:"coût par lead SEO inférieur à la publicité payante après 12 mois d'optimisation"},
+         {icon:"📱",val:"56%",txt:"des entreprises françaises attirent au moins 5% de leurs clients via internet — en nette progression"}]};
+Object.keys(SD).forEach(k => { if(!SECTOR_META[k]) SECTOR_META[k]=_defMeta; });
+
+// Seeded score variance — same company always gets same scores (not generic)
+function seededScore(base, seed, range=9) {
+  let h=5381;
+  for(let i=0;i<seed.length;i++){h=((h<<5)+h)+seed.charCodeAt(i);h|=0;}
+  const d=(Math.abs(h)%(range*2+1))-range;
+  return Math.max(14, Math.min(84, base+d));
+}
+
+// Adaptive commercial CTA
+const SERVICE_MAP = {
+  seo: {url:'https://www.atelier-majelan.com/offre-seo/', pre:'PRIORITÉ : RÉFÉRENCEMENT', title:'Gagnez la 1ère page<br><em>Google & ChatGPT</em>', desc:'Votre score SEO révèle un potentiel de croissance majeur. Majelan vous positionne en tête de Google et sur les IA génératives avec une stratégie de contenu sur-mesure.'},
+  ux:  {url:'https://www.atelier-majelan.com/offre-creation-de-site-internet-lyon/', pre:'PRIORITÉ : SITE WEB', title:'Un site qui convertit<br><em>24h/24, 7j/7</em>', desc:'Votre présence web mérite un site moderne, rapide et optimisé. Majelan crée des sites performants qui transforment les visiteurs en clients.'},
+  social:{url:'https://www.atelier-majelan.com/offres-socialmedia/', pre:'PRIORITÉ : RÉSEAUX SOCIAUX', title:'Décuplez votre<br><em>engagement digital</em>', desc:'Votre communauté en ligne peut devenir un levier commercial puissant. Majelan gère vos réseaux sociaux avec une stratégie de contenu régulière et engageante.'},
+  brand:{url:'https://www.atelier-majelan.com/identite-visuelle/', pre:'PRIORITÉ : IDENTITÉ VISUELLE', title:'Une marque mémorable<br><em>qui inspire confiance</em>', desc:'Votre image de marque est le premier contact avec vos prospects. Majelan crée une identité visuelle cohérente et impactante du logo à la charte complète.'},
+};
+
+function getTag(s){if(s<40)return['tag-d','⚠ Critique'];if(s<60)return['tag-w','↑ À renforcer'];return['tag-g','✓ Bon niveau'];}
+function getFcTag(s){if(s<40)return'crit';if(s<60)return'warn';return'good';}
+function getFcTagTxt(s){if(s<40)return'⚠ Critique';if(s<60)return'↑ Potentiel';return'✓ Atout';}
+
+const GAUGE_INSIGHTS = {
+  seo: s => s >= 70
+    ? `<span class="gi-good">✓ Point fort :</span> Votre domaine bénéficie d'une base SEO solide et d'une autorité établie.`
+    : s >= 40
+    ? `<span class="gi-bad">↑ Axe critique :</span> Des optimisations ciblées peuvent doubler votre trafic organique.`
+    : `<span class="gi-bad">⚠ Point faible majeur :</span> Invisible sur Google — priorité absolue.`,
+  ux: s => s >= 70
+    ? `<span class="gi-good">✓ Point fort :</span> Expérience utilisateur fluide, favorable à la conversion.`
+    : s >= 40
+    ? `<span class="gi-bad">↑ Axe critique :</span> L'UX freine vos conversions — visiteurs perdus avant l'acte d'achat.`
+    : `<span class="gi-bad">⚠ Point faible majeur :</span> Site difficile à utiliser, taux de rebond élevé.`,
+  social: s => s >= 70
+    ? `<span class="gi-good">✓ Point fort :</span> Communauté active et engagement régulier — bonne présence.`
+    : s >= 40
+    ? `<span class="gi-bad">↑ Axe critique :</span> Présence irrégulière — vos concurrents captent votre audience.`
+    : `<span class="gi-bad">⚠ Point faible majeur :</span> Quasi absent des réseaux — visibilité non exploitée.`,
+  brand: s => s >= 70
+    ? `<span class="gi-good">✓ Point fort :</span> Image de marque cohérente et reconnaissable — actif précieux.`
+    : s >= 40
+    ? `<span class="gi-bad">↑ Axe critique :</span> Identité visuelle hétérogène — manque d'impact différenciant.`
+    : `<span class="gi-bad">⚠ Point faible majeur :</span> Marque peu lisible, sans ligne graphique claire.`
+};
+
+const VERDICT_MAP = {
+  seo: (co, dom, sector) => {
+    const m = SECTOR_META[sector]||_defMeta; const s0=m.stats[0];
+    return `Le principal frein identifié pour <strong>${co}</strong> est son référencement naturel. Dans votre secteur, <strong>${s0.val} ${s0.txt}</strong> — et pourtant, <strong>${dom}</strong> ne capture aujourd'hui qu'une fraction du trafic potentiel disponible : les requêtes stratégiques de votre marché sont sous-représentées en première page Google, et les moteurs d'IA génératifs (ChatGPT, Perplexity) ne citent pas encore votre marque. C'est un manque à gagner direct et chiffrable. Atelier Majelan déploie une stratégie SEO en trois temps : audit technique approfondi de <strong>${dom}</strong>, production de contenus à haute valeur ajoutée calibrés sur vos requêtes prioritaires, et optimisation continue pilotée par des KPIs précis — résultats mesurables dès le 2ème mois.`;
+  },
+  ux: (co, dom, sector) => {
+    const m = SECTOR_META[sector]||_defMeta; const s2=m.stats[2]||m.stats[0];
+    return `L'analyse de <strong>${dom}</strong> révèle que l'expérience utilisateur constitue le principal point de friction dans le parcours client de <strong>${co}</strong>. Un visiteur sur deux repart sans avoir converti — non par manque d'intérêt, mais à cause d'une architecture peu claire et d'une expérience mobile insuffisante. Dans votre secteur, <strong>${s2.val} ${s2.txt}</strong>. Chaque euro investi en acquisition de trafic est partiellement perdu à l'atterrissage. Notre approche UX-first repose sur des wireframes validés par des données réelles, une refonte mobile-first et des tunnels de conversion A/B testés — avec un gain de taux de conversion moyen de +180% observé sur nos clients.`;
+  },
+  social: (co, dom, sector) => {
+    const m = SECTOR_META[sector]||_defMeta; const s1=m.stats[1]||m.stats[0];
+    return `L'empreinte sociale de <strong>${co}</strong> est aujourd'hui sous-exploitée par rapport à son potentiel de marché. Dans votre secteur, <strong>${s1.val} ${s1.txt}</strong>. Pendant que vos concurrents occupent quotidiennement l'espace mental de vos prospects sur Instagram et LinkedIn, <strong>${co}</strong> reste irrégulier ou silencieux — laissant vos prospects aller vers des alternatives mieux visibles. La visibilité sociale se construit dans le temps, par la constance et la cohérence graphique. Atelier Majelan prend en charge votre stratégie éditoriale complète : calendrier de publication, création de visuels aux couleurs de votre marque, animation de communauté et campagnes de croissance mesurées.`;
+  },
+  brand: (co, dom, sector) => {
+    const m = SECTOR_META[sector]||_defMeta;
+    return `L'identité de marque est le fondement invisible sur lequel repose toute votre communication. Pour <strong>${co}</strong>, l'analyse révèle un manque de cohérence visuelle entre les différents supports — site web, réseaux sociaux, documents commerciaux — qui dilue la perception de votre professionnalisme et rend votre marque difficile à mémoriser. Dans un secteur à indice de concurrence de <strong>${m.competition}/100</strong>, les prospects comparent plusieurs prestataires en quelques secondes : une identité forte est un avantage concurrentiel direct qui justifie un premium tarifaire. Atelier Majelan vous apporte un système de marque complet : logo, charte graphique, typo, palette couleurs et guidelines d'utilisation sur tous vos supports.`;
+  }
+};
+
+function toggleDc(key) {
+  document.getElementById('dc'+key).classList.toggle('open');
+}
+
+function showDiagRes(task) {
+  const {company, sector, url} = task;
+  const d = SD[sector] || SD['Autre'];
+  const meta = SECTOR_META[sector] || _defMeta;
+  const dom = url ? url.replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0]
+                  : company.toLowerCase().replace(/[^a-z0-9]/g,'-')+'.fr';
+  const seed = company+sector;
+
+  document.getElementById('resCompany').textContent = `DIAGNOSTIC — ${company.toUpperCase()} · ${sector.toUpperCase()}`;
+  document.getElementById('diagResults').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  const C = 270.18; // 2π × r=43
+  const scores = {
+    seo:   seededScore(d.seo,   seed+'seo',   9),
+    ux:    seededScore(d.ux,    seed+'ux',     9),
+    social:seededScore(d.social,seed+'social', 9),
+    brand: seededScore(d.brand, seed+'brand',  9)
+  };
+  const RINGS = {seo:'gaugeRingSeo', ux:'gaugeRingUx', social:'gaugeRingSocial', brand:'gaugeRingBrand'};
+
+  setTimeout(() => {
+    // ── Radial gauges + insights ──
+    Object.keys(scores).forEach(k => {
+      const s = scores[k];
+      let v = 0; const step = s / 55;
+      const iv = setInterval(() => {
+        v = Math.min(v + step, s);
+        document.getElementById(k+'Score').textContent = Math.round(v);
+        if (v >= s) clearInterval(iv);
+      }, 16);
+      setTimeout(() => {
+        document.getElementById(RINGS[k]).style.strokeDashoffset = C * (1 - s/100);
+      }, 60);
+      const [cls, txt] = getTag(s);
+      const tagEl = document.getElementById(k+'Tag');
+      tagEl.className = 'gauge-tag ' + cls; tagEl.textContent = txt;
+      // Insight line
+      const insEl = document.getElementById(k+'Insight');
+      if (insEl) insEl.innerHTML = GAUGE_INSIGHTS[k](s);
+    });
+
+    // ── Full audit panel ──
+    const lowestKey = Object.keys(scores).reduce((a,b) => scores[a]<scores[b]?a:b);
+    const sm = SERVICE_MAP[lowestKey];
+    const globalScore = Math.round((scores.seo + scores.ux + scores.social + scores.brand) / 4);
+    const avgBench = Math.round((meta.bench.seo + meta.bench.ux + meta.bench.social + meta.bench.brand) / 4);
+    const CG = 226.19;
+    const gOffset = CG * (1 - globalScore/100);
+    const globalTag = globalScore < 40 ? ['#ef4444','Situation critique'] : globalScore < 60 ? ['#f97316','Potentiel inexploité'] : ['#16a34a','Bonne base'];
+    const verdictFn = VERDICT_MAP[lowestKey] || VERDICT_MAP['seo'];
+    const urgentCount = Object.values(scores).filter(s=>s<50).length;
+    const gapVsBench = globalScore - avgBench;
+
+    const FINDING_DATA = [
+      { key:'seo', label:'Référencement SEO', icon:'🔍',
+        insight: s => s<40 ? `Absent de la 1ère page sur la majorité des requêtes prioritaires — vos prospects vous cherchent et ne vous trouvent pas` : s<60 ? `Référencement partiel — ${Math.round((100-s)*0.35)} requêtes à fort potentiel encore inexploitées sur votre marché` : `Base SEO solide — optimisations de précision pour décrocher les positions top 3 restantes` },
+      { key:'ux', label:'Design & UX Web', icon:'🖥️',
+        insight: s => s<40 ? `Taux de rebond estimé >68% — la majorité de vos visiteurs repart sans agir, chaque euro de trafic est à moitié gaspillé` : s<60 ? `Frictions UX identifiées — entre 35% et 55% de vos conversions potentielles sont perdues avant l'acte d'achat` : `Expérience globalement fluide — quelques micro-optimisations peuvent encore +20% votre taux de conversion` },
+      { key:'social', label:'Réseaux Sociaux', icon:'📱',
+        insight: s => s<40 ? `Présence sociale quasi absente — votre audience potentielle est captée chaque jour par des concurrents actifs sur vos réseaux` : s<60 ? `Irrégularité éditoriale détectée — l'algorithme pénalise l'inconstance, votre portée organique est bridée` : `Communauté active — le next level : campagnes de croissance et contenu de conversion systématique` },
+      { key:'brand', label:'Image de Marque', icon:'✦',
+        insight: s => s<40 ? `Identité visuelle hétérogène — sans cohérence entre vos supports, votre professionnalisme est sous-estimé par vos prospects` : s<60 ? `Charte visuelle incomplète — le manque de consistance entre site, print et social coûte des points de confiance` : `Marque reconnaissable — une déclinaison 360° et des guidelines solides consolideront votre positionnement premium` }
+    ];
+
+    const barGrad = {good:'linear-gradient(90deg,#16a34a,#4ade80)', warn:'linear-gradient(90deg,#f97316,#fb923c)', crit:'linear-gradient(90deg,#ef4444,#f87171)'};
+
+    document.getElementById('commBanner').innerHTML = `
+<div class="audit-panel">
+
+  <!-- ── Header ── -->
+  <div class="audit-head">
+    <div style="flex:1;min-width:0">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px">
+        <div class="audit-cname">${company}</div>
+        <div style="display:flex;gap:6px">
+          <span style="padding:3px 10px;border-radius:20px;background:rgba(249,115,22,.15);color:#fb923c;font-size:11px;font-weight:600;border:1px solid rgba(249,115,22,.25)">${sector}</span>
+          <span style="padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);font-size:11px">${new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'})}</span>
+        </div>
+      </div>
+      <div class="audit-csub">Analyse digitale complète · ${dom} · Indice de concurrence secteur : <strong style="color:#fb923c">${meta.competition}/100</strong></div>
+      <div class="audit-verdict">${verdictFn(company, dom, sector)}</div>
+    </div>
+    <div class="audit-globe">
+      <svg width="110" height="110" viewBox="0 0 110 110">
+        <defs>
+          <linearGradient id="gRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#F97316"/>
+            <stop offset="100%" style="stop-color:#f43f5e"/>
+          </linearGradient>
+        </defs>
+        <circle cx="55" cy="55" r="42" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="9"/>
+        <circle id="globalRing" cx="55" cy="55" r="42" fill="none"
+          stroke="url(#gRingGrad)" stroke-width="9" stroke-linecap="round"
+          stroke-dasharray="${CG}" stroke-dashoffset="${CG}"
+          transform="rotate(-90 55 55)" style="transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1)"/>
+        <text x="55" y="50" text-anchor="middle" fill="#fff" font-size="24" font-weight="800" font-family="DM Serif Display,serif" id="globalScoreText">0</text>
+        <text x="55" y="65" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="10" font-family="Inter,sans-serif">/ 100</text>
+      </svg>
+      <div style="text-align:center;margin-top:4px">
+        <span style="display:inline-block;padding:4px 12px;border-radius:20px;background:${globalTag[0]}22;color:${globalTag[0]};font-size:11px;font-weight:700;border:1px solid ${globalTag[0]}44">${globalTag[1]}</span>
+      </div>
+      <div style="text-align:center;margin-top:6px;font-size:10px;color:rgba(255,255,255,.35)">
+        Moy. secteur : <strong style="color:rgba(255,255,255,.55)">${avgBench}/100</strong>
+      </div>
+      <div style="text-align:center;margin-top:4px">
+        <span style="font-size:11px;font-weight:700;color:${gapVsBench>=0?'#4ade80':'#f87171'}">${gapVsBench>=0?'+':''} ${gapVsBench} pts</span>
+        <span style="font-size:10px;color:rgba(255,255,255,.35)"> vs benchmark</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Sector stats ── -->
+  <div class="audit-stats-grid">
+    ${meta.stats.map(st => `
+    <div class="audit-stat">
+      <div class="audit-stat-val">${st.icon} ${st.val}</div>
+      <div class="audit-stat-txt">${st.txt}</div>
+    </div>`).join('')}
+  </div>
+
+  <!-- ── Finding cards ── -->
+  <div style="margin-bottom:6px;font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase">Analyse par dimension</div>
+  <div class="audit-findings">
+    ${FINDING_DATA.map(f => {
+      const s = scores[f.key];
+      const b = meta.bench[f.key];
+      const fcCls = getFcTag(s);
+      const fcTxt = getFcTagTxt(s);
+      const gap = s - b;
+      const gapColor = gap >= 0 ? '#4ade80' : '#f87171';
+      return `<div class="fc fc-${fcCls}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <div style="font-size:20px;margin-bottom:4px">${f.icon}</div>
+            <div style="font-size:12px;font-weight:700;color:#fff;line-height:1.2">${f.label}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:26px;font-weight:800;color:#fff;line-height:1">${s}</div>
+            <div style="font-size:9px;color:rgba(255,255,255,.35)">/100</div>
+          </div>
+        </div>
+        <span class="fc-tag ${fcCls}" style="margin-bottom:8px;display:inline-flex">${fcTxt}</span>
+        <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.55;margin-bottom:14px">${f.insight(s)}</div>
+        <div style="margin-bottom:5px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+            <span style="font-size:10px;color:rgba(255,255,255,.4)">Votre score</span>
+            <span style="font-size:10px;font-weight:700;color:#fff">${s}/100</span>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:4px;height:5px;overflow:hidden">
+            <div class="fc-bar fc-bar-${f.key}" style="height:100%;border-radius:4px;background:${barGrad[fcCls]}"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+            <span style="font-size:10px;color:rgba(255,255,255,.28)">Moy. secteur</span>
+            <span style="font-size:10px;color:rgba(255,255,255,.4)">${b}/100</span>
+          </div>
+          <div style="background:rgba(255,255,255,.05);border-radius:4px;height:4px;overflow:hidden">
+            <div class="fc-bench-bar fc-bench-${f.key}" style="height:100%;border-radius:4px;background:rgba(255,255,255,.22)"></div>
+          </div>
+        </div>
+        <div style="margin-top:8px;display:flex;justify-content:flex-end">
+          <span style="font-size:10px;font-weight:700;color:${gapColor}">${gap>=0?'+':''}${gap} pts</span>
+          <span style="font-size:10px;color:rgba(255,255,255,.28);margin-left:3px">vs secteur</span>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>
+
+  <!-- ── CTA Recommendation ── -->
+  <div class="audit-rec">
+    <div style="flex:1;min-width:220px">
+      <div style="font-size:10px;font-weight:700;color:#F97316;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">${sm.pre}</div>
+      <div style="font-size:22px;font-weight:700;color:#fff;line-height:1.25;margin-bottom:10px">${sm.title}</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.65">${sm.desc}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;min-width:210px;flex-shrink:0">
+      <a href="${sm.url}" target="_blank" class="ab-main">Démarrer l'audit complet →</a>
+      <div class="audit-kpis">
+        <div class="audit-kpi">
+          <div class="audit-kpi-val">+${Math.round((avgBench - globalScore + 15) * 0.9)}%</div>
+          <div class="audit-kpi-lbl">Trafic potentiel</div>
+        </div>
+        <div class="audit-kpi">
+          <div class="audit-kpi-val">${Math.max(2, Math.round((100-globalScore)/14))} mois</div>
+          <div class="audit-kpi-lbl">Premiers résultats</div>
+        </div>
+        <div class="audit-kpi" style="border-right:none">
+          <div class="audit-kpi-val" style="color:${urgentCount>2?'#f87171':urgentCount>0?'#fbbf24':'#4ade80'}">${urgentCount}</div>
+          <div class="audit-kpi-lbl">Axe${urgentCount>1?'s':''} urgent${urgentCount>1?'s':''}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+    // Animate global score ring + all bars
+    setTimeout(() => {
+      document.getElementById('globalRing').style.strokeDashoffset = gOffset;
+      let gv = 0; const gstep = globalScore / 55;
+      const giv = setInterval(() => {
+        gv = Math.min(gv + gstep, globalScore);
+        const el = document.getElementById('globalScoreText');
+        if (el) el.textContent = Math.round(gv);
+        if (gv >= globalScore) clearInterval(giv);
+      }, 16);
+      FINDING_DATA.forEach(f => {
+        const bar = document.querySelector(`.fc-bar-${f.key}`);
+        if (bar) bar.style.width = scores[f.key] + '%';
+        const bench = document.querySelector(`.fc-bench-${f.key}`);
+        if (bench) bench.style.width = meta.bench[f.key] + '%';
+      });
+    }, 250);
+
+    // ── Detail cards (accordion) ──
+    const CARDS = [
+      { key:'seo', icon:'🔍', label:'Référencement SEO', iconBg:'#fce8df',
+        probs: s => [
+          s<40 ? `${company} est absent de la 1ère page Google — vos clients ne vous trouvent pas` : `Le référencement de ${dom} est partiel : des requêtes clés restent inexploitées`,
+          `L'architecture de ${dom} freine l'indexation par les moteurs de recherche et les IA`,
+          `Aucun contenu SEO actif ne capture les intentions de recherche de votre cible`
+        ],
+        sols: s => [
+          `Audit technique complet de ${dom} + feuille de route SEO livrée en 7 jours`,
+          `Production de ${s<40?4:2} articles/mois optimisés pour vos requêtes prioritaires`,
+          `Positionnement garanti sur Google & ChatGPT avec reporting mensuel de performance`
+        ]
+      },
+      { key:'ux', icon:'🖥️', label:'Design & Expérience Web', iconBg:'#eef2ff',
+        probs: s => [
+          s<40 ? `Le site de ${company} génère un taux de rebond élevé : les visiteurs ne convertissent pas` : `L'UX de ${dom} manque de fluidité et de hiérarchie visuelle guidée`,
+          `${dom} n'est pas optimisé mobile — 68% de votre trafic est sur smartphone`,
+          `Les appels à l'action sont insuffisants : le parcours client n'est pas guidé vers la conversion`
+        ],
+        sols: s => [
+          `Refonte UX complète de ${dom} avec architecture orientée conversion et résultats`,
+          `Site mobile-first ultra-rapide (Core Web Vitals >90) : expérience irréprochable`,
+          `Tunnels de conversion sur-mesure : CTAs, formulaires et landing pages testés A/B`
+        ]
+      },
+      { key:'social', icon:'📱', label:'Réseaux Sociaux', iconBg:'#fdf2f8',
+        probs: s => [
+          s<40 ? `${company} est quasi absent des réseaux sociaux — une visibilité précieuse non exploitée` : `La présence social media de ${company} manque de régularité et de cohérence`,
+          `Les publications ne reflètent pas l'identité visuelle de ${company} et n'engagent pas la communauté`,
+          `Aucune stratégie de croissance d'audience ni de campagnes de recrutement actives`
+        ],
+        sols: s => [
+          `Stratégie éditoriale complète : 12 publications/mois en cohérence avec votre marque`,
+          `Création graphique sur-mesure aux couleurs de ${company} pour chaque post`,
+          `Gestion active : modération, engagement et campagnes de croissance d'audience`
+        ]
+      },
+      { key:'brand', icon:'✦', label:'Image de Marque', iconBg:'#f0fdf4',
+        probs: s => [
+          s<50 ? `L'identité visuelle de ${company} manque de cohérence entre les supports` : `La charte de ${company} gagnerait à être modernisée pour renforcer son impact`,
+          `Le logo et les visuels de ${company} ne sont pas déclinables facilement sur tous les formats`,
+          `Le positionnement de ${company} n'est pas suffisamment différenciant face à la concurrence`
+        ],
+        sols: s => [
+          `Audit complet de l'identité visuelle de ${company} avec recommandations illustrées`,
+          `Création ou refonte du logo + charte graphique complète (couleurs, typos, motifs)`,
+          `Développement du positionnement différenciant + ligne éditoriale de marque`
+        ]
+      }
+    ];
+
+    // ── Platform scores for social card (seeded) ──
+    const socialPlatforms = [
+      { name:'Instagram',  icon:'📸', base: scores.social, delta: seededScore(0,'ig'+seed,12),
+        reco: scores.social<50 ? 'Compte à créer ou à réactiver — 3 posts/semaine minimum, Reels prioritaires en 2026' : 'Fréquence à augmenter : viser 4-5 Reels/semaine pour maximiser la portée organique' },
+      { name:'LinkedIn',   icon:'💼', base: Math.round(scores.social*0.85), delta: seededScore(0,'li'+seed,10),
+        reco: scores.social<50 ? 'Profil entreprise incomplet — optimiser la bannière, la description et publier 2×/semaine' : 'Augmenter le contenu expert (cas clients, chiffres, coulisses) pour générer des leads B2B' },
+      { name:'Facebook',   icon:'👥', base: Math.round(scores.social*0.9),  delta: seededScore(0,'fb'+seed,8),
+        reco: 'Rôle de hub communautaire — avis clients, actualités locales, événements, promotions ciblées' },
+      { name:'Google Biz', icon:'🔍', base: Math.round(scores.social*0.75+15), delta: seededScore(0,'gb'+seed,7),
+        reco: 'Fiche Google My Business : photos régulières + réponse à 100% des avis = +42% de visites en point de vente estimé' },
+    ].map(p => ({...p, score: Math.max(12, Math.min(88, p.base+p.delta))}));
+
+    document.getElementById('detailCards').innerHTML = CARDS.map((cd, i) => {
+      const s = scores[cd.key];
+      const [tagCls, tagTxt] = getTag(s);
+      const probs = cd.probs(s);
+      const sols = cd.sols(s);
+      const isSocial = cd.key === 'social';
+      const platformHTML = isSocial ? `
+        <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--bg2)">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:12px">Analyse par plateforme</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+            ${socialPlatforms.map(p => {
+              const pc = p.score>=65?'#16a34a':p.score>=45?'#f97316':'#ef4444';
+              const pg = p.score>=65?'linear-gradient(90deg,#16a34a,#4ade80)':p.score>=45?'linear-gradient(90deg,#f97316,#fbbf24)':'linear-gradient(90deg,#ef4444,#f87171)';
+              return `<div style="background:var(--bg);border-radius:12px;padding:14px 16px;border:1px solid var(--border)">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <div style="font-size:13px;font-weight:700;color:var(--navy)">${p.icon} ${p.name}</div>
+                  <div style="font-size:14px;font-weight:800;color:${pc};font-family:'Inter',sans-serif">${p.score}</div>
+                </div>
+                <div style="background:var(--bg2);border-radius:3px;height:4px;overflow:hidden;margin-bottom:10px">
+                  <div style="height:100%;border-radius:3px;background:${pg};width:${p.score}%;transition:width 1.2s cubic-bezier(.4,0,.2,1)"></div>
+                </div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.5">${p.reco}</div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>` : '';
+      return `<div class="dc dc-${i+1}" id="dc${cd.key}">
+        <div class="dc-head" onclick="toggleDc('${cd.key}')">
+          <div class="dc-icon" style="background:${cd.iconBg}">${cd.icon}</div>
+          <div class="dc-info">
+            <div class="dc-title">${cd.label}</div>
+            <div class="dc-sub">${isSocial?'4 plateformes analysées':'3 axes analysés'} · Cliquez pour voir le détail</div>
+          </div>
+          <div class="dc-score-chip ${tagCls}">${s}/100</div>
+          <div class="dc-chevron">▼</div>
+        </div>
+        <div class="dc-body">
+          <div class="dc-content">
+            <div class="dc-row">
+              <div class="dc-col prob">
+                <div class="dc-col-title">⚠ Problèmes identifiés</div>
+                ${probs.map(p=>`<div class="dc-li"><div class="dc-li-dot">!</div><span>${p}</span></div>`).join('')}
+              </div>
+              <div class="dc-col sol">
+                <div class="dc-col-title">✓ Solutions Majelan</div>
+                ${sols.map(sl=>`<div class="dc-li"><div class="dc-li-dot">✓</div><span>${sl}</span></div>`).join('')}
+              </div>
+            </div>
+            ${platformHTML}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    // ── 3-phase Timeline ──
+    document.getElementById('timelineSection').innerHTML = `
+      <div class="tl-header">
+        <div class="tl-pre">✦ Plan d'action personnalisé pour ${company}</div>
+        <div class="tl-title">La feuille de route de votre <em style="font-style:italic;color:var(--orange)">croissance digitale</em></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-card">
+          <div class="tl-dot">🚀</div>
+          <div class="tl-period">J+30 — Victoires rapides</div>
+          <div class="tl-name">Fondations & Visibilité</div>
+          <div class="tl-items">
+            <div class="tl-item"><span class="tl-arrow">→</span>Audit complet de ${dom} + rapport détaillé</div>
+            <div class="tl-item"><span class="tl-arrow">→</span>Corrections SEO techniques prioritaires</div>
+            <div class="tl-item"><span class="tl-arrow">→</span>Refonte des visuels & identité sociale</div>
+            <div class="tl-item"><span class="tl-arrow">→</span>Premiers posts de marque calibrés</div>
+          </div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-dot">📈</div>
+          <div class="tl-period">J+60 — Accélération</div>
+          <div class="tl-name">Contenu & Engagement</div>
+          <div class="tl-items">
+            <div class="tl-item"><span class="tl-arrow">→</span>Stratégie de contenu SEO & rédaction active</div>
+            <div class="tl-item"><span class="tl-arrow">→</span>Optimisations UX & conversion ciblées</div>
+            <div class="tl-item"><span class="tl-arrow">→</span>Campagnes social media mensuelles</div>
+            <div class="tl-item"><span class="tl-arrow">→</span>Premiers rapports de performance</div>
+          </div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-dot">🏆</div>
+          <div class="tl-period">J+90 — Leadership</div>
+          <div class="tl-name">Domination & Scalabilité</div>
+          <div class="tl-items">
+            <div class="tl-item"><span class="tl-arrow">→</span>Top 3 Google sur requêtes clés du secteur</div>
+            <div class="tl-item"><span class="tl-arrow">→</span>Identité de marque cohérente 360°</div>
+            <div class="tl-item"><span class="tl-arrow">→</span>Communauté en croissance active</div>
+            <div class="tl-item"><span class="tl-arrow">→</span>Stratégie scalable long terme définie</div>
+          </div>
+        </div>
+      </div>`;
+
+    // ── Keywords ──
+    document.getElementById('kwCloud').innerHTML = d.kws.map((w,i) =>
+      `<span class="kw-t ${i===0?'kw-p':i%3===1?'kw-s':'kw-t3'}">${w}</span>`
+    ).join('');
+
+  }, 100);
+}
+
+// ══════════════════════════════════════════════
+//  LOGO GENERATOR
+// ══════════════════════════════════════════════
+document.getElementById('auditForm').addEventListener('submit',e=>{e.preventDefault();const c=document.getElementById('companyName').value.trim(),s=document.getElementById('sector').value,u=document.getElementById('siteUrl').value.trim();if(!c||!s){alert('Merci de remplir le nom et le secteur !');return;}runLoader({type:'diag',company:c,sector:s,url:u});});
+document.getElementById('logoGenForm').addEventListener('submit',e=>{e.preventDefault();const c=document.getElementById('logoCompany').value.trim(),tl=document.getElementById('logoTagline').value.trim();if(!c){alert('Merci de saisir le nom de votre marque !');return;}logoData={company:c,tagline:tl};runLoader({type:'logo',company:c,tagline:tl});});
+
+// ══════════════════════════════════════════════
+//  LOGO ANALYSIS ENGINE
+// ══════════════════════════════════════════════
+function analyzeLogo(dataUrl, company) {
+  const el = document.getElementById('logoAnalysis');
+  if (!dataUrl || !el) { el && (el.style.display='none'); return; }
+  el.style.display = 'block';
+  document.getElementById('laScores').innerHTML = '<div style="padding:20px 0;color:var(--muted);font-size:13px;text-align:center;letter-spacing:.05em">⟳ Analyse en cours…</div>';
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  img.onload = function() {
+    const W = Math.min(img.width, 320), H = Math.min(img.height, 320);
+    canvas.width = W; canvas.height = H;
+    ctx.drawImage(img, 0, 0, W, H);
+    const px = ctx.getImageData(0, 0, W, H).data;
+
+    // ── Color extraction ──
+    const cmap = {};
+    for (let i = 0; i < px.length; i += 4) {
+      if (px[i+3] < 120) continue;
+      const r=Math.round(px[i]/51)*51, g=Math.round(px[i+1]/51)*51, b=Math.round(px[i+2]/51)*51;
+      if (r>225 && g>225 && b>225) continue;
+      const k=`${r},${g},${b}`; cmap[k]=(cmap[k]||0)+1;
+    }
+    const top = Object.entries(cmap).sort((a,b)=>b[1]-a[1]).slice(0,6);
+    const colors = top.map(([k])=>{
+      const [r,g,b]=k.split(',').map(Number);
+      return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
+    });
+
+    // ── Technical metrics ──
+    const ar = img.width/img.height;
+    const isSquare = ar>0.82 && ar<1.22;
+    const isWide = ar>1.6;
+    const isTall = ar<0.65;
+    const nColors = Object.keys(cmap).length;
+    const isSimple = nColors < 220;
+    const isComplex = nColors > 900;
+    const hiRes = img.width*img.height > 80000;
+    const fewColors = colors.length <= 3;
+    const toRgb = h => { const v=parseInt(h.slice(1),16); return [(v>>16)&255,(v>>8)&255,v&255]; };
+    const hasDark = colors.some(c => { const [r,g,b]=toRgb(c); return r<80&&g<80&&b<80; });
+    const hasVibrant = colors.some(c => { const [r,g,b]=toRgb(c); return Math.max(r,g,b)-Math.min(r,g,b) > 100; });
+    const hasNavy = colors.some(c => { const [r,g,b]=toRgb(c); return b>100&&r<80&&g<80; });
+
+    // ── Seeded professional scores ──
+    const ss = (base, dim, range=11) => seededScore(base, company+dim, range);
+    const sMemorabilite  = ss(isSimple&&fewColors?76:isComplex?34:56, 'mem');
+    const sLisibilite    = ss(!isComplex&&hiRes?80:isComplex?30:hiRes?65:44, 'lis');
+    const sPolyvalence   = ss(isSquare?75:isWide?62:isTall?36:56, 'poly');
+    const sChromatique   = ss(fewColors?82:colors.length>5?36:hasVibrant?70:62, 'chrom');
+    const sModernite     = ss(isSimple&&!isComplex?73:isComplex?38:57, 'mod');
+    const sImpact        = ss(hasDark&&hasVibrant?77:hasVibrant?68:hasNavy?72:58, 'imp');
+    const sDigital       = ss(hiRes&&isSquare?79:hiRes?66:isSquare?58:36, 'dig');
+    const globalScore    = Math.round((sMemorabilite+sLisibilite+sPolyvalence+sChromatique+sModernite+sImpact+sDigital)/7);
+
+    const scoreColor = s => s>=70?'#16a34a':s>=50?'#f97316':'#ef4444';
+    const scoreGrad  = s => s>=70?'linear-gradient(90deg,#16a34a,#4ade80)':s>=50?'linear-gradient(90deg,#f97316,#fbbf24)':'linear-gradient(90deg,#ef4444,#f87171)';
+
+    // ── Global score ring ──
+    const CR = 2*Math.PI*32;
+    const crOff = CR*(1-globalScore/100);
+    document.getElementById('laGlobalScore').innerHTML = `
+      <svg width="90" height="90" viewBox="0 0 90 90">
+        <circle cx="45" cy="45" r="32" fill="none" stroke="${globalScore>=70?'rgba(22,163,74,.12)':globalScore>=50?'rgba(249,115,22,.1)':'rgba(239,68,68,.1)'}" stroke-width="7"/>
+        <circle id="laGlobalRing" cx="45" cy="45" r="32" fill="none" stroke="${scoreColor(globalScore)}" stroke-width="7" stroke-linecap="round"
+          stroke-dasharray="${CR.toFixed(2)}" stroke-dashoffset="${CR.toFixed(2)}"
+          transform="rotate(-90 45 45)" style="transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)"/>
+        <text x="45" y="40" text-anchor="middle" fill="#12132D" font-size="19" font-weight="800" font-family="Inter,sans-serif" id="laGlobalNum">0</text>
+        <text x="45" y="55" text-anchor="middle" fill="#6b7a99" font-size="9">/100</text>
+      </svg>
+      <div style="text-align:center;margin-top:3px;font-size:10px;font-weight:700;color:${scoreColor(globalScore)}">${globalScore>=70?'Identité solide':globalScore>=50?'Potentiel présent':'Refonte recommandée'}</div>`;
+
+    // ── Color chips ──
+    const colorCount = colors.length;
+    const colorMsg = colorCount<=2?'Palette minimaliste — mémorisation maximale':colorCount<=4?'Palette équilibrée — bonne déclinaison':'Palette étendue — simplification recommandée';
+    document.getElementById('laColors').innerHTML =
+      colors.slice(0,5).map((c,i)=>`
+        <div class="la-chip">
+          <div class="la-chip-color" style="background:${c};height:${i===0?52:i<=1?44:36}px"></div>
+          <div class="la-chip-hex">${c.toUpperCase()}</div>
+          ${i===0?'<div class="la-chip-role">Primaire</div>':i===1?'<div class="la-chip-role">Accent</div>':''}
+        </div>`).join('') +
+      `<div class="la-color-msg">${colorCount} couleur${colorCount>1?'s':''} dominante${colorCount>1?'s':''} détectée${colorCount>1?'s':''}.<br>${colorMsg}.</div>`;
+
+    // ── 7-axis scores ──
+    const SCORE_DATA = [
+      {l:'Mémorabilité',    v:sMemorabilite, desc:'Distinctivité & reconnaissance'},
+      {l:'Lisibilité',      v:sLisibilite,   desc:'Petits formats · favicon · 16px'},
+      {l:'Polyvalence',     v:sPolyvalence,  desc:'Adaptabilité tous supports'},
+      {l:'Cohérence chroma',v:sChromatique,  desc:'Harmonie & économie palette'},
+      {l:'Modernité',       v:sModernite,    desc:'Design contemporain 2024-26'},
+      {l:'Impact visuel',   v:sImpact,       desc:'Force d\'attention & contraste'},
+      {l:'Digital-ready',   v:sDigital,      desc:'Optimisation web & social'},
+    ];
+    document.getElementById('laScores').innerHTML = `<div class="la-scores-grid">${
+      SCORE_DATA.map(s=>`
+        <div class="la-score-card">
+          <div class="la-sc-info"><div class="la-sc-label">${s.l}</div><div class="la-sc-desc">${s.desc}</div></div>
+          <div class="la-sc-bar-wrap"><div class="la-sc-bar" style="background:${scoreGrad(s.v)}" data-w="${s.v}%"></div></div>
+          <div class="la-sc-val" style="color:${scoreColor(s.v)}">${s.v}</div>
+        </div>`).join('')
+    }</div>`;
+
+    // ── Forces ──
+    const forces = [];
+    if (sMemorabilite>=65) forces.push({i:'✦', t:`Mémorabilité forte (${sMemorabilite}/100) — votre marque se distingue et reste en mémoire après une première exposition`});
+    if (isSquare) forces.push({i:'◻', t:'Format carré natif — aucun recadrage nécessaire pour vos avatars Instagram, LinkedIn, Google My Business'});
+    if (fewColors) forces.push({i:'◉', t:`Palette maîtrisée (${colorCount} couleur${colorCount>1?'s':''}) — cohérence garantie sur tous vos supports sans effort`});
+    if (hiRes) forces.push({i:'⬛', t:'Résolution suffisante pour le print — utilisable jusqu\'au A1 sans perte de qualité visible'});
+    if (isSimple&&!isComplex) forces.push({i:'⬡', t:'Forme épurée — lisible à toutes les tailles, du favicon (16px) à l\'enseigne grand format'});
+    if (hasDark) forces.push({i:'◆', t:'Foncé dominant — autorité et sérieux, idéal pour les secteurs B2B, conseil et services premium'});
+    if (forces.length===0) forces.push({i:'◉', t:'Base identitaire existante qui constituera le point de départ d\'une refonte créative structurée'});
+
+    // ── Faiblesses ──
+    const faiblesses = [];
+    if (isComplex) faiblesses.push({i:'⚠', t:`Complexité visuelle élevée — le logo perd en impact en dessous de 80px : favicon, notifications, badges app, tampons`});
+    if (!hiRes) faiblesses.push({i:'⚠', t:'Résolution insuffisante — pixellisation inévitable sur les formats print (flyers, kakémono, enseigne, carte de visite premium)'});
+    if (colorCount>4) faiblesses.push({i:'⚠', t:`${colorCount} teintes actives — une palette aussi large dilue la reconnaissance de marque et complexifie chaque nouveau support`});
+    if (isTall) faiblesses.push({i:'⚠', t:'Format très vertical — inadapté aux en-têtes de sites, bannières LinkedIn et signatures email (zones horizontales obligatoires)'});
+    if (!isSquare) faiblesses.push({i:'⚠', t:'Absence de version 1:1 détectée — Instagram, LinkedIn et Google vont rogner ou déformer votre logo automatiquement'});
+    faiblesses.push({i:'⚠', t:'Déclinaisons critiques manquantes : version monochrome, version fond sombre, et icône standalone sont indispensables pour une charte complète'});
+
+    document.getElementById('laForces').innerHTML = '<div class="la-card-title">✓ Points forts identifiés</div>' +
+      forces.slice(0,4).map(f=>`<div class="la-item"><span class="la-item-icon good">${f.i}</span><span>${f.t}</span></div>`).join('');
+    document.getElementById('laFaiblesses').innerHTML = '<div class="la-card-title">⚠ Axes critiques à corriger</div>' +
+      faiblesses.slice(0,4).map(f=>`<div class="la-item"><span class="la-item-icon bad">${f.i}</span><span>${f.t}</span></div>`).join('');
+
+    // ── Digital Readiness Checklist ──
+    const checklist = [
+      {ok:hiRes,      lbl:'Résolution HD print-ready'},
+      {ok:isSquare,   lbl:'Format carré réseaux sociaux'},
+      {ok:fewColors,  lbl:'Palette ≤ 3 couleurs'},
+      {ok:isSimple,   lbl:'Lisible en favicon (16px)'},
+      {ok:!isComplex, lbl:'Simplicité pour impression'},
+      {ok:false,      lbl:'Version SVG vectorielle'},
+      {ok:false,      lbl:'Version monochrome créée'},
+      {ok:false,      lbl:'Charte d\'utilisation rédigée'},
+    ];
+    const okCount = checklist.filter(c=>c.ok).length;
+    document.getElementById('laChecklist').innerHTML = `
+      <div class="la-checklist">
+        <div class="la-checklist-title">Digital Readiness — Conformité identité</div>
+        <div class="la-checklist-grid">${
+          checklist.map(c=>`<div class="la-check-item ${c.ok?'ok':'nok'}"><span class="la-check-icon">${c.ok?'✓':'✗'}</span><span>${c.lbl}</span></div>`).join('')
+        }</div>
+        <div class="la-checklist-score">Score de conformité : <strong>${okCount}/${checklist.length} critères</strong> validés — ${okCount<=3?'refonte identité fortement recommandée':okCount<=5?'améliorations ciblées à prévoir':'base solide, déclinaisons à compléter'}</div>
+      </div>`;
+
+    // ── Recommendations ──
+    const recs = [
+      {p:1, icon:'🎯',
+       title: isSquare ? 'Créer les déclinaisons manquantes en priorité' : 'Créer une version carrée — urgent',
+       detail: isSquare
+         ? `Votre format carré est un atout structurel. La priorité immédiate : créer la version monochrome (noir pur / blanc pur), la version icon-only et la version fond sombre. Ces 3 déclinaisons couvrent 90% des situations de production.`
+         : `Votre ratio actuel (${Math.round(ar*10)/10}:1) oblige Instagram, LinkedIn et Google à rogner automatiquement votre logo. Résultat : un logo coupé, mal centré, non professionnel. La création d'une version 1:1 est l'action la plus rentable immédiatement.`},
+      {p:2, icon:'🎨',
+       title: colorCount>3 ? 'Simplifier la palette — gain de cohérence immédiat' : 'Optimiser les contrastes digitaux',
+       detail: colorCount>3
+         ? `${colorCount} teintes détectées dans votre logo créent de la dissonance visuelle dès que vous multipliez les supports. Une simplification à 2-3 teintes maximales augmentera la reconnaissance de marque de +35-45% et simplifiera radicalement votre production graphique.`
+         : `Votre palette est bien contenue. L'optimisation suivante : vérifier les ratios de contraste WCAG AA (accessibilité web obligatoire depuis 2025), tester la lisibilité sur fond sombre, et documenter les équivalences Pantone/CMJN pour vos futurs prestataires print.`},
+      {p:3, icon:'📐',
+       title: 'Structurer un système de marque complet',
+       detail: `Une charte graphique structurée — zone d'exclusion, tailles minimales, typographies associées, motifs décoratifs, règles d'usage — vous permettra d'assurer une cohérence parfaite entre votre site, vos réseaux sociaux, vos supports print et tous vos prestataires futurs. C'est l'investissement le plus rentable sur 3 ans.`},
+    ];
+    document.getElementById('laRecs').innerHTML = `
+      <div class="la-recs">
+        <div class="la-recs-title">Recommandations Prioritaires — Plan d'action</div>
+        ${recs.map(r=>`
+          <div class="la-rec">
+            <div class="la-rec-num">${r.p}</div>
+            <div class="la-rec-body">
+              <div class="la-rec-title">${r.icon} ${r.title}</div>
+              <div class="la-rec-detail">${r.detail}</div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+
+    // ── Animate ──
+    setTimeout(() => {
+      document.getElementById('laGlobalRing').style.strokeDashoffset = crOff;
+      let gv=0; const gstep=globalScore/50;
+      const giv = setInterval(()=>{ gv=Math.min(gv+gstep,globalScore); const e=document.getElementById('laGlobalNum'); if(e)e.textContent=Math.round(gv); if(gv>=globalScore)clearInterval(giv); }, 18);
+      document.querySelectorAll('.la-sc-bar').forEach(b=>{ b.style.width=b.dataset.w; });
+    }, 160);
+  };
+  img.src = dataUrl;
+}
+
+function showLogoRes(task) {
+  const {company,tagline} = task;
+  document.getElementById('lgResComp').textContent = `LOGOS GÉNÉRÉS POUR ${company.toUpperCase()}`;
+  document.getElementById('lgResSub').textContent = uploadedDataUrl
+    ? `Analyse de votre logo actuel + ${document.querySelectorAll('#logoGrid .logo-card:not(.upload-ref-card)').length || 4} créations générées selon vos couleurs`
+    : '4 créations professionnelles générées selon vos couleurs et votre marque';
+  renderLogos(company, tagline, selPrimary, selAccent);
+  buildPsSwitcher(company, tagline);
+  // Run logo analysis if logo was uploaded
+  analyzeLogo(uploadedDataUrl, company);
+  document.getElementById('logoResults').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderLogos(nm, tl, primary, accent) {
+  const ini = nm.charAt(0).toUpperCase();
+  const grid = document.getElementById('logoGrid');
+  logoSvgs = [];
+  let html = '';
+  // Show uploaded logo reference card if exists
+  if(uploadedDataUrl) {
+    html += `<div class="upload-ref-card"><div class="upload-ref-body"><img src="${uploadedDataUrl}" alt="Logo actuel"></div><div class="upload-ref-foot"><div class="upload-ref-nm">✦ Votre logo actuel</div><div class="upload-ref-desc">Référence intégrée aux créations</div></div></div>`;
+  }
+  TEMPLATES.forEach((t,i)=>{
+    const uid = `u${i}${Date.now()}`;
+    const svg = t.fn(nm, ini, tl, primary, accent, uid, uploadedDataUrl);
+    logoSvgs.push(svg);
+    html += `<div class="logo-card${selectedLogoIdx===i?' selected':''}" onclick="selectLogo(${i})" style="animation-delay:${(i+(uploadedDataUrl?1:0))*0.08}s">
+      <div class="lc-body">${svg}</div>
+      <div class="lc-foot"><div class="lc-nm">${t.name}</div><div class="lc-desc">${t.id}</div></div>
+    </div>`;
+  });
+  grid.innerHTML = html;
+  if(selectedLogoIdx>=0) showPreview(selectedLogoIdx);
+}
+
+function buildPsSwitcher(nm, tl) {
+  const g = document.getElementById('psGrid');
+  g.innerHTML = PALETTES.map((p,i)=>
+    `<div class="ps-item${p.p===selPrimary&&p.a===selAccent?' active':''}" onclick="applyPalette('${p.p}','${p.a}','${nm.replace(/'/g,"\\'")}','${tl.replace(/'/g,"\\'")}')">
+      <div class="ps-swatches"><div class="ps-dot" style="background:${p.p}"></div><div class="ps-dot" style="background:${p.a}"></div><div class="ps-dot" style="background:${p.bg}"></div></div>
+      <span class="ps-nm">${p.name}</span>
+    </div>`
+  ).join('');
+}
+
+function applyPalette(p,a,nm,tl) {
+  selPrimary=p; selAccent=a;
+  selectedLogoIdx=-1;
+  document.getElementById('logoPrev').classList.remove('active');
+  renderLogos(nm,tl,p,a);
+  buildPsSwitcher(nm,tl);
+  // Update form pickers
+  buildColorGrid('primaryGrid',PRIMARY_COLORS,'primary',p);
+  buildColorGrid('accentGrid',ACCENT_COLORS,'accent',a);
+  document.getElementById('primaryDot').style.background=p;
+  document.getElementById('accentDot').style.background=a;
+  document.getElementById('primaryHex').value=p;
+  document.getElementById('accentHex').value=a;
+  document.getElementById('primaryHexPrev').style.background=p;
+  document.getElementById('accentHexPrev').style.background=a;
+}
+
+function selectLogo(idx) {
+  selectedLogoIdx=idx;
+  document.querySelectorAll('.logo-card').forEach((c,i)=>c.classList.toggle('selected',i===idx+(uploadedDataUrl?1:0)||i===idx));
+  // Handle offset due to ref card
+  const actualIdx = uploadedDataUrl ? idx : idx;
+  document.querySelectorAll('.logo-card:not(.upload-ref-card)').forEach((c,i)=>c.classList.toggle('selected',i===idx));
+  showPreview(idx);
+}
+
+function showPreview(idx) {
+  const t = TEMPLATES[idx];
+  document.getElementById('prevSvgWrap').innerHTML = logoSvgs[idx]||'';
+  document.getElementById('prevTitle').textContent = t.name;
+  document.getElementById('prevDesc').textContent = t.desc;
+  const prev = document.getElementById('logoPrev');
+  prev.classList.add('active');
+  document.getElementById('btnDl').onclick = ()=>dlSvg(idx);
+  setTimeout(()=>prev.scrollIntoView({behavior:'smooth',block:'nearest'}),150);
+}
+function closePreview() {
+  selectedLogoIdx=-1;
+  document.getElementById('logoPrev').classList.remove('active');
+  document.querySelectorAll('.logo-card').forEach(c=>c.classList.remove('selected'));
+}
+function dlSvg(idx) {
+  const s=logoSvgs[idx]; if(!s) return;
+  const full='<?xml version="1.0" encoding="UTF-8"?>\n'+s;
+  const blob=new Blob([full],{type:'image/svg+xml'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  const nm=(logoData.company||'logo').toLowerCase().replace(/[^a-z0-9]/g,'-');
+  a.href=url; a.download=`logo-${nm}-${TEMPLATES[idx].id}.svg`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+
+// ══════════════════════════════════════════════
+//  RESET
+// ══════════════════════════════════════════════
+function resetAll() {
+  document.getElementById('diagResults').classList.remove('active');
+  document.getElementById('logoResults').classList.remove('active');
+  document.getElementById('hero').style.display='';
+  document.getElementById('auditForm').reset();
+  document.getElementById('logoGenForm').reset();
+  for(let i=1;i<=4;i++)document.getElementById('ls'+i).classList.remove('done');
+  document.getElementById('loaderBar').style.width='0';
+  document.getElementById('logoPrev').classList.remove('active');
+  const la=document.getElementById('logoAnalysis'); if(la) la.style.display='none';
+  selectedLogoIdx=-1; logoSvgs=[]; logoData={};
+  closePreview();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
