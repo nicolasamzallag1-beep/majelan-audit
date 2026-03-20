@@ -5,469 +5,658 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Atelier Majelan — Diagnostic Digital & Générateur de Logo</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap');
-:root{--navy:#12132D;--navy2:#1e2044;--orange:#F97316;--bg:#EBF0F7;--bg2:#DDE6F0;--pink:#FCE8DF;--blue-c:#DDEAFF;--green:#22c55e;--muted:#6b7a99;--border:#cdd5e0}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);overflow-x:hidden;min-height:100vh}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(235,240,247,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(205,213,224,.4);padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between}
-.logo-wrap{display:flex;align-items:center;gap:11px;text-decoration:none;cursor:pointer}
-.logo-text-block{display:flex;flex-direction:column;gap:1px}
-.logo-name{font-size:16px;font-weight:500;color:var(--navy);letter-spacing:-.3px;line-height:1}
-.logo-tagline{font-size:7.5px;font-weight:600;color:var(--muted);letter-spacing:2.2px;text-transform:uppercase}
-.nav-cta{background:var(--navy);color:#fff;padding:10px 22px;border-radius:100px;font-size:14px;font-weight:500;cursor:pointer;border:none;text-decoration:none;transition:background .2s,transform .15s}
-.nav-cta:hover{background:var(--navy2);transform:translateY(-1px)}
+/* ══════════════════════════════════════════════
+   DESIGN SYSTEM — ATELIER MAJELAN 2026
+══════════════════════════════════════════════ */
+:root {
+  --navy:    #0D0F2A;
+  --navy2:   #171A3E;
+  --navy3:   #1F2352;
+  --orange:  #F97316;
+  --orange2: #EA580C;
+  --gold:    #F5A623;
+  --purple:  #6366F1;
+  --bg:      #EEF2FA;
+  --bg2:     #E2E8F3;
+  --bg3:     #D4DCF0;
+  --card:    #FFFFFF;
+  --green:   #22C55E;
+  --red:     #EF4444;
+  --amber:   #F59E0B;
+  --muted:   #64748B;
+  --muted2:  #94A3B8;
+  --border:  #CBD5E1;
+  --border2: #E2E8F0;
+  --shadow-sm: 0 1px 3px rgba(13,15,42,.06), 0 1px 2px rgba(13,15,42,.04);
+  --shadow-md: 0 4px 24px rgba(13,15,42,.08), 0 2px 8px rgba(13,15,42,.05);
+  --shadow-lg: 0 12px 48px rgba(13,15,42,.12), 0 4px 16px rgba(13,15,42,.08);
+  --shadow-xl: 0 24px 80px rgba(13,15,42,.16), 0 8px 24px rgba(13,15,42,.1);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--navy); overflow-x: hidden; min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
-/* ── HERO ── */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 40px 60px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,#b8c8d8 1px,transparent 1px);background-size:32px 32px;opacity:.45;pointer-events:none}
-.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.16;pointer-events:none;animation:floatBlob 12s ease-in-out infinite alternate}
-.blob-1{width:600px;height:600px;background:var(--orange);top:-200px;right:-200px}
-.blob-2{width:500px;height:500px;background:#6366f1;bottom:-150px;left:-150px;animation-delay:-4s}
-.blob-3{width:300px;height:300px;background:#F5A623;top:40%;left:5%;animation-delay:-8s}
-@keyframes floatBlob{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,30px) scale(1.08)}}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:100px;padding:6px 16px 6px 8px;font-size:13px;font-weight:500;margin-bottom:24px;animation:fadeUp .8s ease both;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.25);animation:pulse 2s ease infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.25)}50%{box-shadow:0 0 0 6px rgba(34,197,94,.1)}}
-.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(34px,5.5vw,72px);line-height:1.08;text-align:center;max-width:860px;margin-bottom:18px;animation:fadeUp .8s ease .1s both}
-.hero-title em{font-style:italic;color:var(--orange)}
-.hero-sub{font-size:15.5px;color:var(--muted);text-align:center;max-width:680px;line-height:1.72;margin-bottom:32px;animation:fadeUp .8s ease .2s both}
-.hero-sub strong{color:var(--navy);font-weight:600}
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted2); }
+
+/* ══════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 68px; padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(238,242,250,.88);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(203,213,225,.4);
+}
+.logo-wrap { display: flex; align-items: center; gap: 11px; text-decoration: none; cursor: pointer; }
+.logo-text-block { display: flex; flex-direction: column; gap: 1px; }
+.logo-name { font-size: 15.5px; font-weight: 600; color: var(--navy); letter-spacing: -.4px; line-height: 1; }
+.logo-tagline { font-size: 7px; font-weight: 700; color: var(--muted); letter-spacing: 2.4px; text-transform: uppercase; }
+.nav-pill { display: flex; align-items: center; gap: 4px; background: rgba(249,115,22,.1); border: 1px solid rgba(249,115,22,.25); border-radius: 100px; padding: 4px 12px; font-size: 11px; font-weight: 600; color: var(--orange); margin-right: 12px; }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.nav-cta { background: var(--navy); color: #fff; padding: 9px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 500; cursor: pointer; border: none; text-decoration: none; transition: background .2s, transform .15s, box-shadow .2s; box-shadow: 0 2px 12px rgba(13,15,42,.2); }
+.nav-cta:hover { background: var(--navy2); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(13,15,42,.28); }
+
+
+
+/* ══════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 100px 40px 60px; position: relative; overflow: hidden;
+}
+/* Dot grid background */
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(13,15,42,.09) 1px, transparent 1px);
+  background-size: 30px 30px; pointer-events: none;
+}
+/* Gradient mesh overlay */
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 10%, rgba(249,115,22,.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 15% 80%, rgba(99,102,241,.06) 0%, transparent 48%),
+    radial-gradient(ellipse at 50% 50%, rgba(245,166,35,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+/* Animated blobs */
+.blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .13; pointer-events: none; animation: floatBlob 14s ease-in-out infinite alternate; }
+.blob-1 { width: 640px; height: 640px; background: var(--orange); top: -220px; right: -220px; }
+.blob-2 { width: 540px; height: 540px; background: var(--purple); bottom: -160px; left: -160px; animation-delay: -5s; }
+.blob-3 { width: 320px; height: 320px; background: var(--gold); top: 42%; left: 6%; animation-delay: -9s; }
+@keyframes floatBlob { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(50px,35px) scale(1.1); } }
+
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border2); border-radius: 100px; padding: 5px 16px 5px 8px; font-size: 12.5px; font-weight: 500; color: var(--muted); margin-bottom: 22px; animation: fadeUp .7s ease both; box-shadow: var(--shadow-sm); position: relative; z-index: 1; }
+.eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(34,197,94,.22); animation: pulse 2.2s ease infinite; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,.22); } 50% { box-shadow: 0 0 0 7px rgba(34,197,94,.07); } }
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 5.8vw, 74px);
+  line-height: 1.06; text-align: center; max-width: 880px;
+  margin-bottom: 16px; animation: fadeUp .7s ease .1s both;
+  color: var(--navy); position: relative; z-index: 1;
+  letter-spacing: -.02em;
+}
+.hero-title em { font-style: italic; color: var(--orange); }
+.hero-title .u-line { position: relative; display: inline-block; }
+.hero-title .u-line::after { content: ''; position: absolute; bottom: 2px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--gold)); border-radius: 3px; opacity: .55; }
+
+.hero-sub { font-size: 15.5px; color: var(--muted); text-align: center; max-width: 600px; line-height: 1.75; margin-bottom: 28px; animation: fadeUp .7s ease .18s both; position: relative; z-index: 1; font-weight: 400; }
+.hero-sub strong { color: var(--navy); font-weight: 600; }
 
 /* ── TABS ── */
-.tool-tabs{display:flex;gap:5px;background:#fff;border-radius:13px;padding:5px;border:1px solid var(--border);margin-bottom:22px;animation:fadeUp .8s ease .25s both;box-shadow:0 2px 12px rgba(0,0,0,.05)}
-.tool-tab{padding:10px 22px;border-radius:9px;font-size:14px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif}
-.tool-tab.active{background:var(--navy);color:#fff;box-shadow:0 2px 10px rgba(18,19,45,.18)}
-.tool-tab:hover:not(.active){background:var(--bg);color:var(--navy)}
+.tool-tabs { display: flex; gap: 4px; background: var(--card); border-radius: 14px; padding: 5px; border: 1px solid var(--border2); margin-bottom: 18px; animation: fadeUp .7s ease .24s both; box-shadow: var(--shadow-sm); position: relative; z-index: 1; }
+.tool-tab { padding: 10px 24px; border-radius: 10px; font-size: 13.5px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--muted); transition: all .22s; font-family: 'DM Sans', sans-serif; letter-spacing: -.01em; }
+.tool-tab.active { background: var(--navy); color: #fff; box-shadow: 0 3px 14px rgba(13,15,42,.22); }
+.tool-tab:hover:not(.active) { background: var(--bg); color: var(--navy); }
+
+/* ── WELCOME STRIP ── */
+.welcome-strip {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 55%, #271A52 100%);
+  border-radius: var(--radius-lg); padding: 26px 34px; margin-bottom: 18px;
+  position: relative; overflow: hidden; animation: fadeUp .7s ease .28s both;
+  box-shadow: var(--shadow-lg); max-width: 620px; width: 100%;
+}
+.welcome-strip::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,.022) 1px, transparent 1px); background-size: 22px 22px; pointer-events: none; }
+.welcome-strip::after { content: ''; position: absolute; top: -80px; right: -80px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(249,115,22,.13), transparent 65%); pointer-events: none; }
+.ws-inner { display: flex; align-items: flex-start; gap: 22px; position: relative; z-index: 1; }
+.ws-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(249,115,22,.15); border: 1px solid rgba(249,115,22,.28); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.ws-content { flex: 1; }
+.ws-pre { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 2.2px; color: var(--orange); margin-bottom: 5px; }
+.ws-title { font-family: 'DM Serif Display', serif; font-size: 17px; color: #fff; line-height: 1.32; margin-bottom: 5px; }
+.ws-title em { font-style: italic; color: var(--gold); }
+.ws-sub { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.65; margin-bottom: 11px; }
+.ws-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.ws-pill { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 3px 10px; font-size: 10.5px; color: rgba(255,255,255,.6); }
 
 /* ── FORM CARD ── */
-.form-card{background:#fff;border-radius:22px;padding:34px 42px;width:100%;max-width:620px;box-shadow:0 4px 40px rgba(18,19,45,.09);position:relative;z-index:1;animation:fadeUp .8s ease .3s both}
-.form-title{font-size:18px;font-weight:600;color:var(--navy);margin-bottom:22px;text-align:center}
-.form-row{display:flex;gap:13px;margin-bottom:13px}
-.form-group{flex:1;display:flex;flex-direction:column;gap:5px}
-.form-group.full{flex:0 0 100%}
-label{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.7px}
-input,select{border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--navy);background:var(--bg);transition:border-color .2s,box-shadow .2s;outline:none;width:100%}
-input:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(249,115,22,.1);background:#fff}
-.btn-main{width:100%;padding:14px;background:linear-gradient(135deg,var(--orange),#ea580c);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:5px;transition:transform .15s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 18px rgba(249,115,22,.28);position:relative;overflow:hidden}
-.btn-main::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);transition:left .5s}
-.btn-main:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(249,115,22,.38)}
-.btn-main:hover::before{left:100%}
+.form-card {
+  background: var(--card); border-radius: var(--radius-xl); padding: 30px 36px;
+  width: 100%; max-width: 620px;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(203,213,225,.45);
+  position: relative; z-index: 1; animation: fadeUp .7s ease .32s both;
+}
+.form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--gold), var(--purple)); border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
+.form-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 20px; text-align: center; letter-spacing: -.02em; }
+.form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.form-group { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { flex: 0 0 100%; }
+label { font-size: 10.5px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .8px; }
+label .opt { font-weight: 400; color: var(--muted2); text-transform: none; letter-spacing: 0; font-size: 10px; }
+input, select {
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px;
+  font-family: 'DM Sans', sans-serif; font-size: 13.5px; color: var(--navy);
+  background: var(--bg); transition: border-color .2s, box-shadow .2s, background .2s; outline: none; width: 100%;
+}
+input::placeholder { color: var(--muted2); font-weight: 400; }
+input:focus, select:focus { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(249,115,22,.1); background: var(--card); }
+select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px; padding-right: 36px; }
+
+.btn-main {
+  width: 100%; padding: 15px; margin-top: 6px;
+  background: linear-gradient(135deg, var(--orange), var(--orange2));
+  color: #fff; border: none; border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  box-shadow: 0 6px 24px rgba(249,115,22,.32); position: relative; overflow: hidden;
+  transition: transform .15s, box-shadow .2s;
+}
+.btn-main::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent); animation: shimmer 3.5s ease 2s infinite; }
+.btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(249,115,22,.42); }
+@keyframes shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+
+/* ── OBJECTIVE GRID ── */
+.obj-section-label { font-size: 10.5px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; display: block; }
+.obj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-bottom: 13px; }
+.obj-card {
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 8px;
+  cursor: pointer; text-align: center; background: var(--card);
+  transition: all .18s; user-select: none;
+}
+.obj-card:hover { border-color: var(--muted2); background: var(--bg); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.obj-card.active { border-color: var(--orange); background: linear-gradient(135deg, #FFF7ED, #FFF); box-shadow: 0 0 0 3px rgba(249,115,22,.12); }
+.obj-icon { font-size: 19px; display: block; margin-bottom: 4px; line-height: 1; }
+.obj-lbl { font-size: 10.5px; font-weight: 600; color: var(--navy); line-height: 1.2; }
 
 /* ── LOGO UPLOAD ── */
-.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:18px 16px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:var(--bg);margin-bottom:13px}
-.upload-zone:hover{border-color:var(--orange);background:var(--pink)}
-.upload-icon{font-size:22px;margin-bottom:5px}
-.upload-text{font-size:13px;font-weight:600;color:var(--navy)}
-.upload-sub{font-size:11px;color:var(--muted);margin-top:2px}
-.upload-preview{display:none;align-items:center;gap:12px;padding:10px 14px;background:var(--bg);border-radius:10px;border:1.5px solid var(--border);margin-bottom:13px}
-.upload-preview img{max-height:44px;max-width:80px;object-fit:contain;border-radius:4px}
-.upload-preview-text{flex:1;font-size:12px;font-weight:600;color:var(--navy)}
-.upload-clear{background:none;border:1px solid var(--border);border-radius:100px;width:22px;height:22px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;transition:border-color .2s,color .2s}
-.upload-clear:hover{border-color:#ef4444;color:#ef4444}
+.upload-zone { border: 2px dashed var(--border); border-radius: var(--radius-sm); padding: 18px 14px; text-align: center; cursor: pointer; transition: all .2s; background: var(--bg); margin-bottom: 12px; }
+.upload-zone:hover { border-color: var(--orange); background: #FFF7ED; }
+.upload-icon { font-size: 20px; margin-bottom: 5px; }
+.upload-text { font-size: 13px; font-weight: 600; color: var(--navy); }
+.upload-sub { font-size: 11px; color: var(--muted2); margin-top: 2px; }
+.upload-preview { display: none; align-items: center; gap: 12px; padding: 10px 14px; background: var(--bg); border-radius: var(--radius-sm); border: 1.5px solid var(--border); margin-bottom: 12px; }
+.upload-preview img { max-height: 44px; max-width: 80px; object-fit: contain; border-radius: 4px; }
+.upload-preview-text { flex: 1; font-size: 12px; font-weight: 600; color: var(--navy); }
+.upload-clear { background: none; border: 1px solid var(--border); border-radius: 100px; width: 22px; height: 22px; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0; transition: all .2s; }
+.upload-clear:hover { border-color: var(--red); color: var(--red); }
 
 /* ── COLOR PICKERS ── */
-.color-section{margin-bottom:14px}
-.color-section-label{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.color-preview-dot{width:18px;height:18px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px var(--border);flex-shrink:0;transition:background .2s}
-.color-grid{display:flex;flex-wrap:wrap;gap:6px}
-.color-swatch{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:transform .12s,border-color .12s;flex-shrink:0}
-.color-swatch:hover{transform:scale(1.15)}
-.color-swatch.active{border-color:var(--navy);transform:scale(1.18);box-shadow:0 0 0 2px #fff inset}
-.custom-hex{display:flex;align-items:center;gap:6px;margin-top:6px}
-.custom-hex input{flex:1;padding:6px 10px;font-size:12px;border-radius:8px;width:auto}
-.hex-preview{width:22px;height:22px;border-radius:5px;border:1px solid var(--border);flex-shrink:0}
+.color-section { margin-bottom: 13px; }
+.color-section-label { font-size: 10.5px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.color-preview-dot { width: 17px; height: 17px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1.5px var(--border); flex-shrink: 0; transition: background .2s; }
+.color-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+.color-swatch { width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: 2.5px solid transparent; transition: transform .12s, border-color .12s; flex-shrink: 0; }
+.color-swatch:hover { transform: scale(1.18); }
+.color-swatch.active { border-color: var(--navy); transform: scale(1.2); box-shadow: 0 0 0 2px #fff inset; }
+.custom-hex { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+.custom-hex input { flex: 1; padding: 6px 10px; font-size: 12px; border-radius: 8px; width: auto; }
+.hex-preview { width: 22px; height: 22px; border-radius: 5px; border: 1px solid var(--border); flex-shrink: 0; }
+.combo-grid { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 13px; }
+.combo-card { border: 1.5px solid var(--border); border-radius: 9px; padding: 6px 10px; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: all .18s; background: var(--card); }
+.combo-card:hover { border-color: var(--muted2); transform: translateY(-1px); }
+.combo-card.active { border-color: var(--orange); background: #FFF7ED; }
+.combo-dots { display: flex; gap: 3px; }
+.combo-dot { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.5); }
+.combo-nm { font-size: 10.5px; font-weight: 600; color: var(--navy); }
 
-/* ── STATS ── */
-.stats-bar{display:flex;justify-content:center;gap:40px;padding:20px 0;animation:fadeUp .8s ease .5s both}
-.stat-item{text-align:center}
-.stat-num{font-size:24px;font-weight:700;color:var(--navy);line-height:1}
-.stat-lbl{font-size:11px;color:var(--muted);margin-top:3px}
-.stat-sep{width:1px;background:var(--border)}
+/* ── STATS BAR ── */
+.stats-bar { display: flex; justify-content: center; gap: 36px; padding: 18px 0; animation: fadeUp .7s ease .45s both; position: relative; z-index: 1; }
+.stat-item { text-align: center; }
+.stat-num { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -.03em; }
+.stat-lbl { font-size: 10.5px; color: var(--muted); margin-top: 3px; font-weight: 400; }
+.stat-sep { width: 1px; background: var(--border2); }
 
-/* ── LOADER ── */
-#loader{display:none;position:fixed;inset:0;z-index:300;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:26px}
-#loader.active{display:flex}
-.loader-title{font-family:'DM Serif Display',serif;font-size:30px;color:var(--navy);text-align:center}
-.loader-steps{display:flex;flex-direction:column;gap:11px;width:320px}
-.loader-step{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);opacity:0;transform:translateX(-18px);transition:opacity .5s,transform .5s}
-.loader-step.done{opacity:1;transform:translateX(0)}
-.step-icon{width:28px;height:28px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:background .3s}
-.loader-step.done .step-icon{background:var(--green);color:#fff}
-.loader-bar-wrap{width:320px;height:5px;background:var(--bg2);border-radius:10px;overflow:hidden}
-.loader-bar{height:100%;width:0;background:linear-gradient(90deg,var(--orange),#F5A623);border-radius:10px;transition:width .4s ease}
+/* ── FEATURE STRIP ── */
+.feature-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; max-width: 620px; margin: 14px auto 0; animation: fadeUp .7s ease .52s both; position: relative; z-index: 1; }
+.feat-card { background: rgba(255,255,255,.76); backdrop-filter: blur(8px); border-radius: var(--radius-sm); padding: 13px 16px; border: 1px solid rgba(203,213,225,.55); display: flex; gap: 11px; align-items: flex-start; }
+.feat-icon { width: 32px; height: 32px; border-radius: 8px; background: #FFF7ED; border: 1px solid rgba(249,115,22,.18); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.feat-text { font-size: 11px; font-weight: 700; color: var(--navy); line-height: 1.4; }
+.feat-sub { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 400; }
 
-/* ── RESULTS COMMON ── */
-.res-section{display:none;padding:100px 40px 80px;max-width:1160px;margin:0 auto}
-.res-section.active{display:block}
-.results-header{text-align:center;margin-bottom:50px;animation:fadeUp .7s ease both}
-.res-company{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--orange);margin-bottom:10px}
-.res-title{font-family:'DM Serif Display',serif;font-size:clamp(26px,3.8vw,48px);color:var(--navy);line-height:1.15;margin-bottom:12px}
-.res-sub{font-size:15px;color:var(--muted)}
+/* ══════════════════════════════════════════════
+   LOADER
+══════════════════════════════════════════════ */
+#loader { display: none; position: fixed; inset: 0; z-index: 300; background: var(--bg); flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
+#loader.active { display: flex; }
+.loader-logo-ring { position: relative; display: flex; align-items: center; justify-content: center; }
+.loader-logo-ring::before { content: ''; position: absolute; width: 80px; height: 80px; border-radius: 50%; border: 2.5px solid transparent; border-top-color: var(--orange); border-right-color: var(--gold); animation: spin 1.1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-title { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--navy); text-align: center; letter-spacing: -.02em; }
+.loader-subtitle { font-size: 13px; color: var(--muted); text-align: center; max-width: 340px; line-height: 1.6; }
+.loader-bar-wrap { width: 300px; height: 4px; background: var(--bg2); border-radius: 10px; overflow: hidden; }
+.loader-bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--orange), var(--gold)); border-radius: 10px; transition: width .45s ease; }
+.loader-steps { display: flex; flex-direction: column; gap: 10px; width: 320px; }
+.loader-step { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); opacity: 0; transform: translateX(-14px); transition: opacity .5s, transform .5s; }
+.loader-step.done { opacity: 1; transform: translateX(0); }
+.step-icon { width: 30px; height: 30px; border-radius: 50%; background: var(--bg2); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; transition: background .35s, transform .35s; }
+.loader-step.done .step-icon { background: var(--green); color: #fff; transform: scale(1.08); }
 
-/* ── SCORE TAGS (used in gauges & detail cards) ── */
-.tag-d{background:#fee2e2;color:#dc2626}.tag-w{background:#fef3c7;color:#d97706}.tag-g{background:#dcfce7;color:#16a34a}
+/* ══════════════════════════════════════════════
+   RESULTS — COMMON
+══════════════════════════════════════════════ */
+.res-section { display: none; padding: 90px 40px 80px; max-width: 1180px; margin: 0 auto; }
+.res-section.active { display: block; }
 
-/* ── KEYWORDS PANEL ── */
-.ph{padding:16px 20px 13px;border-bottom:1px solid var(--bg2);display:flex;align-items:center;justify-content:space-between}
-.ph-title{font-size:13px;font-weight:600;color:var(--navy)}
-.ph-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px;background:var(--pink);color:var(--orange)}
-.kw-panel{padding:20px}
-.kw-cloud{display:flex;flex-wrap:wrap;gap:6px}
-.kw-t{padding:5px 12px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;transition:transform .15s}
-.kw-t:hover{transform:scale(1.05)}
-.kw-p{background:var(--navy);color:#fff;font-size:13px;font-weight:700}
-.kw-s{background:var(--pink);color:var(--orange)}
-.kw-t3{background:var(--blue-c);color:#3b5bdb}
+/* Results header */
+.results-header { text-align: center; margin-bottom: 44px; animation: fadeUp .7s ease both; }
+.res-company { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.6px; color: var(--orange); margin-bottom: 10px; }
+.res-title { font-family: 'DM Serif Display', serif; font-size: clamp(26px,3.8vw,48px); color: var(--navy); line-height: 1.14; margin-bottom: 10px; letter-spacing: -.02em; }
+.res-sub { font-size: 14.5px; color: var(--muted); }
 
-/* ── CTA PANEL ── */
-.cta-panel{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:13px;animation:fadeUp .7s ease .3s both;box-shadow:0 4px 26px rgba(18,19,45,.2);position:relative;overflow:hidden}
-.cta-panel::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:20px 20px}
-.cta-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(249,115,22,.2);border:1px solid rgba(249,115,22,.3);border-radius:100px;padding:3px 11px;font-size:11px;font-weight:700;color:var(--orange);width:fit-content}
-.cta-title{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1.25}
-.cta-title em{color:var(--orange);font-style:italic}
-.cta-list{display:flex;flex-direction:column;gap:8px}
-.cta-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.8)}
-.cta-check{width:16px;height:16px;border-radius:50%;background:rgba(249,115,22,.2);border:1px solid var(--orange);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--orange);flex-shrink:0}
-.btn-big{background:linear-gradient(135deg,var(--orange),#ea580c);color:#fff;border:none;border-radius:11px;padding:12px 22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;box-shadow:0 4px 16px rgba(249,115,22,.32);transition:transform .15s,box-shadow .2s;width:100%;justify-content:center}
-.btn-big:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(249,115,22,.42)}
-.btn-sub-s{font-size:10px;color:rgba(255,255,255,.38);text-align:center;margin-top:2px}
-.btn-reset{display:flex;align-items:center;gap:7px;margin:0 auto 40px;background:none;border:1.5px solid var(--border);border-radius:100px;padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;transition:all .2s}
-.btn-reset:hover{border-color:var(--navy);color:var(--navy)}
-
-/* ── LOGO RESULTS ── */
-.logo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
-.logo-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);cursor:pointer;border:2.5px solid transparent;transition:all .2s;animation:fadeUp .6s ease both}
-.logo-card:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(0,0,0,.1)}
-.logo-card.selected{border-color:var(--orange);box-shadow:0 0 0 4px rgba(249,115,22,.12)}
-.lc-body{padding:18px;display:flex;align-items:center;justify-content:center;background:var(--bg);min-height:155px}
-.lc-body svg{max-width:115px;max-height:125px}
-.lc-foot{padding:9px 13px;border-top:1px solid var(--bg2)}
-.lc-nm{font-size:12px;font-weight:700;color:var(--navy)}
-.lc-desc{font-size:10px;color:var(--muted)}
-/* Upload ref card */
-.upload-ref-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06);border:2.5px solid var(--blue-c);animation:fadeUp .6s ease both}
-.upload-ref-body{padding:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#DDEAFF,#EBF4FF);min-height:155px}
-.upload-ref-body img{max-width:100px;max-height:100px;object-fit:contain}
-.upload-ref-foot{padding:9px 13px;border-top:1px solid var(--blue-c)}
-.upload-ref-nm{font-size:12px;font-weight:700;color:#3b5bdb}
-.upload-ref-desc{font-size:10px;color:var(--muted)}
-/* Preview section */
-.logo-preview-section{background:#fff;border-radius:18px;padding:36px;margin-bottom:24px;box-shadow:0 2px 16px rgba(0,0,0,.05);display:none;animation:fadeUp .5s ease both}
-.logo-preview-section.active{display:block}
-.lps-inner{display:flex;align-items:center;gap:40px;flex-wrap:wrap;justify-content:center}
-.lps-svg{background:var(--bg);border-radius:12px;padding:30px;flex:0 0 240px;display:flex;align-items:center;justify-content:center}
-.lps-svg svg{max-width:180px;max-height:200px}
-.lps-info{flex:1;min-width:220px}
-.lps-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);margin-bottom:8px}
-.lps-sub{font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.6}
-.preview-btns{display:flex;gap:10px;flex-wrap:wrap}
-.btn-dl{background:var(--navy);color:#fff;padding:10px 22px;border-radius:100px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;gap:7px}
-.btn-dl:hover{background:var(--navy2);transform:translateY(-1px)}
-.btn-ol{background:none;border:1.5px solid var(--border);color:var(--muted);padding:10px 18px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
-.btn-ol:hover{border-color:var(--navy);color:var(--navy)}
-/* Palette selector in results */
-.pal-selector{background:#fff;border-radius:16px;padding:22px 26px;margin-bottom:20px;box-shadow:0 2px 16px rgba(0,0,0,.05)}
-.ps-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:14px}
-.ps-grid{display:flex;gap:10px;flex-wrap:wrap}
-.ps-item{border:2px solid var(--border);border-radius:11px;padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .2s}
-.ps-item:hover{border-color:var(--muted);background:var(--bg)}
-.ps-item.active{border-color:var(--orange);background:var(--pink)}
-.ps-swatches{display:flex;gap:4px}
-.ps-dot{width:14px;height:14px;border-radius:50%}
-.ps-nm{font-size:11px;font-weight:600;color:var(--navy)}
-
-/* ── COMMERCIAL BANNER ── */
-.commercial-banner{border-radius:16px;overflow:hidden;margin-bottom:20px;box-shadow:0 4px 24px rgba(0,0,0,.08);animation:fadeUp .7s ease .25s both}
-.cb-inner{background:linear-gradient(135deg,var(--navy),#1e2044);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.cb-content{flex:1;min-width:220px}
-.cb-pre{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--orange);margin-bottom:8px}
-.cb-title{font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1.2;margin-bottom:8px}
-.cb-title em{color:var(--orange);font-style:italic}
-.cb-desc{font-size:13px;color:rgba(255,255,255,.65);line-height:1.55}
-.cb-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
-.cb-btn{display:flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;white-space:nowrap}
-.cb-btn-main{background:var(--orange);color:#fff;box-shadow:0 4px 14px rgba(249,115,22,.35)}
-.cb-btn-main:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(249,115,22,.45)}
-.cb-btn-sec{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2)}
-.cb-btn-sec:hover{background:rgba(255,255,255,.18)}
-
-.footer-hint{text-align:center;padding:32px 20px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);margin-top:10px}
-
-/* ── LOGO ANALYSIS ── */
-/* ══ PREMIUM LOGO ANALYSIS — 2026 ══ */
-.logo-analysis{background:#fff;border-radius:24px;padding:34px 38px;margin-bottom:24px;box-shadow:0 6px 40px rgba(18,19,45,.1),0 0 0 1px rgba(205,213,224,.4);animation:fadeUp .6s ease both}
-.la-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--bg2);gap:20px;flex-wrap:wrap}
-.la-title{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:5px;letter-spacing:-.3px}
-.la-sub{font-size:12px;color:var(--muted);line-height:1.55}
-.la-global-score{flex-shrink:0;display:flex;flex-direction:column;align-items:center}
-.la-section-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:12px}
-/* Score cards — horizontal bars */
-.la-scores-grid{display:flex;flex-direction:column;gap:7px;margin-bottom:26px}
-.la-score-card{display:flex;align-items:center;gap:14px;padding:11px 16px;background:var(--bg);border-radius:12px;border:1px solid var(--border);transition:background .15s}
-.la-score-card:hover{background:#f0f4fb}
-.la-sc-bar-wrap{flex:1;height:5px;background:var(--bg2);border-radius:3px;overflow:hidden;min-width:60px}
-.la-sc-bar{height:100%;border-radius:3px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-.la-sc-info{width:116px;flex-shrink:0}
-.la-sc-label{font-size:11.5px;font-weight:700;color:var(--navy);line-height:1}
-.la-sc-desc{font-size:9.5px;color:var(--muted);margin-top:2px}
-.la-sc-val{font-size:16px;font-weight:800;font-family:'Inter',sans-serif;width:28px;text-align:right;flex-shrink:0;letter-spacing:-.5px}
-/* Color palette */
-.la-palette-row{display:flex;gap:16px;align-items:flex-start;margin-bottom:26px;flex-wrap:wrap}
-.la-colors{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
-.la-chip{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:44px}
-.la-chip-color{width:44px;border-radius:10px;border:2px solid rgba(255,255,255,.7);box-shadow:0 3px 12px rgba(0,0,0,.15)}
-.la-chip-hex{font-size:9px;color:var(--muted);font-weight:700;font-family:'Inter',monospace;letter-spacing:-.2px}
-.la-chip-role{font-size:8px;color:var(--orange);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.la-color-msg{font-size:11.5px;color:var(--muted);line-height:1.55;max-width:280px;padding:10px 14px;background:var(--bg);border-radius:10px;border-left:3px solid var(--orange);margin-left:6px;align-self:center}
-/* Strategic grid */
-.la-strategic-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
-.la-card{border-radius:14px;padding:20px 22px;border:1px solid}
-.la-card-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;margin-bottom:13px}
-.la-card.forces{background:#f0fdf4;border-color:#bbf7d0}.la-card.forces .la-card-title{color:#16a34a}
-.la-card.faiblesses{background:#fef2f2;border-color:#fecaca}.la-card.faiblesses .la-card-title{color:#dc2626}
-.la-item{font-size:12px;line-height:1.6;margin-bottom:10px;color:#374151;display:flex;gap:10px;align-items:flex-start}
-.la-item:last-child{margin-bottom:0}
-.la-item-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;margin-top:1px;font-weight:700}
-.la-item-icon.good{background:rgba(22,163,74,.12);color:#16a34a}
-.la-item-icon.bad{background:rgba(239,68,68,.1);color:#dc2626}
-/* Digital readiness checklist */
-.la-checklist{background:var(--bg);border-radius:16px;padding:20px 24px;margin-bottom:22px;border:1px solid var(--border)}
-.la-checklist-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:var(--navy);margin-bottom:14px}
-.la-checklist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
-.la-check-item{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;padding:8px 10px;border-radius:9px;line-height:1.3}
-.la-check-item.ok{background:#f0fdf4;color:#15803d}
-.la-check-item.nok{background:#fef2f2;color:#dc2626}
-.la-check-icon{font-size:10px;font-weight:900;flex-shrink:0}
-.la-checklist-score{font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;margin-top:4px}
-.la-checklist-score strong{color:var(--navy)}
-/* Recommendations */
-.la-recs{margin-bottom:22px}
-.la-recs-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.9px;color:var(--navy);margin-bottom:14px}
-.la-rec{display:flex;gap:14px;margin-bottom:12px;padding:16px 20px;background:#fff;border-radius:14px;border:1px solid var(--border);box-shadow:0 2px 12px rgba(18,19,45,.04);transition:box-shadow .15s}
-.la-rec:hover{box-shadow:0 4px 20px rgba(18,19,45,.09)}
-.la-rec-num{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;font-family:'Inter',sans-serif;flex-shrink:0;margin-top:2px}
-.la-rec-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px}
-.la-rec-detail{font-size:12px;color:var(--muted);line-height:1.65}
-/* CTA bar */
-.la-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,var(--navy) 0%,#1a1f4a 100%);border-radius:16px;padding:20px 26px;flex-wrap:wrap;position:relative;overflow:hidden}
-.la-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(249,115,22,.2),transparent 65%);pointer-events:none}
-.la-cta-text{font-size:13.5px;color:rgba(255,255,255,.8);max-width:360px;line-height:1.55;position:relative;z-index:1}
-.la-cta-text strong{color:#fff}
-.la-cta-btn{background:linear-gradient(135deg,var(--orange),#ea580c);color:#fff;padding:12px 24px;border-radius:100px;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:transform .15s,box-shadow .2s;box-shadow:0 4px 18px rgba(249,115,22,.35);position:relative;z-index:1}
-.la-cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(249,115,22,.45)}
-@media(max-width:900px){.la-strategic-grid{grid-template-columns:1fr}.la-checklist-grid{grid-template-columns:repeat(2,1fr)}}
-
-/* ── RADIAL GAUGES ── */
-.gauges-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:36px}
-.gauge-wrap{background:#fff;border-radius:20px;padding:26px 20px 22px;box-shadow:0 2px 20px rgba(0,0,0,.06);display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;overflow:hidden;animation:fadeUp .7s ease both}
-.gauge-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0}
-.gw-seo::before{background:linear-gradient(90deg,#f97316,#ea580c)}
-.gw-ux::before{background:linear-gradient(90deg,#6366f1,#8b5cf6)}
-.gw-social::before{background:linear-gradient(90deg,#ec4899,#f43f5e)}
-.gw-brand::before{background:linear-gradient(90deg,#22c55e,#16a34a)}
-.gauge-svg-wrap{position:relative;width:110px;height:110px}
-.gauge-bg{fill:none;stroke:var(--bg2);stroke-width:10;stroke-linecap:round}
-.gauge-ring{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);transform:rotate(-90deg);transform-origin:50% 50%}
-.gauge-center-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
-.gauge-num{font-size:26px;font-weight:700;color:var(--navy);line-height:1}
-.gauge-denom{font-size:10px;color:var(--muted);font-weight:600}
-.gauge-icon{font-size:20px}
-.gauge-label{font-size:12px;font-weight:700;color:var(--navy);text-align:center}
-.gauge-tag{padding:4px 11px;border-radius:100px;font-size:10px;font-weight:700}
-.gw-1{animation-delay:.04s}.gw-2{animation-delay:.1s}.gw-3{animation-delay:.16s}.gw-4{animation-delay:.22s}
-
-/* ── DETAIL CARDS (accordion) ── */
-.detail-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:36px}
-.dc{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.05);animation:fadeUp .7s ease both}
-.dc-1{animation-delay:.12s}.dc-2{animation-delay:.18s}.dc-3{animation-delay:.24s}.dc-4{animation-delay:.30s}
-.dc-head{display:flex;align-items:center;gap:12px;padding:18px 20px;cursor:pointer;user-select:none;transition:background .15s;border-bottom:1px solid transparent}
-.dc-head:hover{background:var(--bg)}
-.dc.open .dc-head{border-bottom-color:var(--bg2)}
-.dc-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.dc-info{flex:1}
-.dc-title{font-size:13px;font-weight:700;color:var(--navy)}
-.dc-sub{font-size:11px;color:var(--muted)}
-.dc-score-chip{padding:5px 13px;border-radius:100px;font-size:13px;font-weight:700;flex-shrink:0}
-.dc-chevron{font-size:11px;color:var(--muted);transition:transform .25s;flex-shrink:0;margin-left:4px}
-.dc.open .dc-chevron{transform:rotate(180deg)}
-.dc-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
-.dc.open .dc-body{max-height:700px}
-.dc-content{padding:0 20px 20px}
-.dc-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-.dc-col{border-radius:12px;padding:14px 16px}
-.dc-col.prob{background:#fef2f2;border:1px solid #fecaca}
-.dc-col.sol{background:#f0fdf4;border:1px solid #bbf7d0}
-.dc-col-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
-.dc-col.prob .dc-col-title{color:#dc2626}
-.dc-col.sol .dc-col-title{color:#16a34a}
-.dc-li{display:flex;gap:7px;align-items:flex-start;font-size:11.5px;color:#374151;line-height:1.5;margin-bottom:8px}
-.dc-li-dot{width:16px;height:16px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;margin-top:1px}
-.dc-col.prob .dc-li-dot{background:#fee2e2;color:#dc2626}
-.dc-col.sol .dc-li-dot{background:#dcfce7;color:#16a34a}
-
-/* ── TIMELINE ── */
-.timeline-section{background:#fff;border-radius:20px;padding:32px 36px;margin-bottom:28px;box-shadow:0 2px 16px rgba(0,0,0,.05);animation:fadeUp .7s ease .36s both}
-.tl-header{text-align:center;margin-bottom:28px}
-.tl-pre{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--orange);margin-bottom:6px}
-.tl-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);line-height:1.2}
-.tl-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
-.tl-row::before{content:'';position:absolute;top:20px;left:16%;right:16%;height:2px;background:linear-gradient(90deg,var(--orange),#6366f1,#22c55e);border-radius:10px;z-index:0}
-.tl-card{border-radius:16px;padding:22px 20px;text-align:center;position:relative;z-index:1}
-.tl-card:nth-child(1){background:linear-gradient(135deg,#fff7ed,#fff);border:1px solid #fed7aa}
-.tl-card:nth-child(2){background:linear-gradient(135deg,#eef2ff,#fff);border:1px solid #c7d2fe}
-.tl-card:nth-child(3){background:linear-gradient(135deg,#f0fdf4,#fff);border:1px solid #bbf7d0}
-.tl-dot{width:40px;height:40px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
-.tl-card:nth-child(1) .tl-dot{background:#fce8df;border:2px solid var(--orange)}
-.tl-card:nth-child(2) .tl-dot{background:#eef2ff;border:2px solid #6366f1}
-.tl-card:nth-child(3) .tl-dot{background:#dcfce7;border:2px solid #22c55e}
-.tl-period{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.tl-card:nth-child(1) .tl-period{color:var(--orange)}
-.tl-card:nth-child(2) .tl-period{color:#6366f1}
-.tl-card:nth-child(3) .tl-period{color:#22c55e}
-.tl-name{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:10px}
-.tl-items{text-align:left;display:flex;flex-direction:column;gap:6px}
-.tl-item{font-size:11px;color:#4b5563;line-height:1.5;display:flex;gap:5px;align-items:flex-start}
-.tl-arrow{color:var(--muted);flex-shrink:0;font-size:9px;margin-top:2px;font-weight:700}
-
-/* ── KEYWORDS SOLO ── */
-.kw-solo{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.05);margin-bottom:24px;animation:fadeUp .7s ease .4s both}
-
-/* ── GAUGE INSIGHT ── */
-.gauge-insight{font-size:10.5px;color:var(--muted);text-align:center;line-height:1.5;min-height:28px;padding:0 4px}
-.gi-good{color:#16a34a;font-weight:600}.gi-bad{color:#dc2626;font-weight:600}
-
-/* ── AUDIT PANEL (replaces commercial banner) ── */
-.audit-panel{background:linear-gradient(135deg,#0f1229 0%,#1a1f4a 55%,#251840 100%);border-radius:22px;padding:36px 40px;margin-bottom:36px;box-shadow:0 12px 60px rgba(18,19,45,.28);position:relative;overflow:hidden;animation:fadeUp .7s ease .22s both}
-.audit-panel::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.022) 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
-.audit-panel::after{content:'';position:absolute;top:-100px;right:-100px;width:380px;height:380px;background:radial-gradient(circle,rgba(249,115,22,.11),transparent 68%);pointer-events:none;z-index:0}
-.audit-panel>*{position:relative;z-index:1}
-.audit-head{display:flex;align-items:flex-start;gap:32px;margin-bottom:30px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.07);flex-wrap:wrap}
-.audit-head-left{flex:1;min-width:260px}
-.audit-over{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:2.2px;color:var(--orange);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.audit-over::before{content:'';width:24px;height:2px;background:var(--orange);border-radius:2px;flex-shrink:0}
-.audit-cname{font-family:'DM Serif Display',serif;font-size:30px;color:#fff;line-height:1.1;margin-bottom:12px}
-.audit-csub{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:14px;letter-spacing:.04em}
-.audit-verdict{font-size:13.5px;color:rgba(255,255,255,.6);line-height:1.75;max-width:600px;margin-top:14px}
-.audit-verdict strong{color:rgba(255,255,255,.9);font-weight:600}
-.audit-globe{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px}
-/* Sector stats grid */
-.audit-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px}
-.audit-stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;transition:background .2s}
-.audit-stat:hover{background:rgba(255,255,255,.07)}
-.audit-stat-val{font-size:18px;font-weight:800;color:#F97316;margin-bottom:5px;line-height:1.1}
-.audit-stat-txt{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5}
-/* Finding cards — benchmark bar */
-.fc-bench-bar{transition:width 1.8s cubic-bezier(.4,0,.2,1);width:0}
-/* KPI metrics row */
-.audit-kpis{display:flex;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(255,255,255,.08);overflow:hidden}
-.audit-kpi{flex:1;padding:12px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
-.audit-kpi-val{font-size:17px;font-weight:800;color:#F97316;margin-bottom:3px;line-height:1}
-.audit-kpi-lbl{font-size:9px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.04em;line-height:1.3}
-@media(max-width:700px){.audit-stats-grid{grid-template-columns:1fr}.audit-kpis{flex-wrap:wrap}}
-.audit-global{display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 28px;flex-shrink:0;backdrop-filter:blur(4px)}
-.audit-global-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:rgba(255,255,255,.45)}
-.audit-global-wrap{position:relative;width:88px;height:88px}
-.audit-global-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0}
-.agn-val{font-size:30px;font-weight:700;color:#fff;line-height:1}
-.agn-denom{font-size:9px;color:rgba(255,255,255,.45)}
-.audit-findings{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.fc{border-radius:14px;padding:16px 14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);transition:background .2s,transform .2s;cursor:default}
-.fc:hover{background:rgba(255,255,255,.08);transform:translateY(-2px)}
-.fc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.fc-icon{font-size:17px}.fc-score{font-size:24px;font-weight:700;color:#fff;line-height:1}
-.fc-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:rgba(255,255,255,.45);margin-bottom:8px}
-.fc-bar-wrap{height:3px;background:rgba(255,255,255,.1);border-radius:10px;overflow:hidden;margin-bottom:10px}
-.fc-bar{height:100%;border-radius:10px;transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0}
-.fc-tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-size:9px;font-weight:700;margin-bottom:8px}
-.fc-tag.crit{background:rgba(239,68,68,.2);color:#f87171;border:1px solid rgba(239,68,68,.3)}
-.fc-tag.warn{background:rgba(245,158,11,.18);color:#fbbf24;border:1px solid rgba(245,158,11,.3)}
-.fc-tag.good{background:rgba(34,197,94,.18);color:#4ade80;border:1px solid rgba(34,197,94,.3)}
-.fc-insight{font-size:11px;color:rgba(255,255,255,.52);line-height:1.55}
-.audit-rec{display:flex;align-items:center;gap:28px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,.07)}
-.audit-rec-left{flex:1;min-width:240px}
-.ar-pre{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.6px;color:var(--orange);margin-bottom:9px;display:flex;align-items:center;gap:8px}
-.ar-pre::before{content:'▲';font-size:8px;opacity:.7}
-.ar-title{font-family:'DM Serif Display',serif;font-size:23px;color:#fff;line-height:1.22;margin-bottom:8px}
-.ar-title em{color:var(--orange);font-style:italic}
-.ar-desc{font-size:12.5px;color:rgba(255,255,255,.56);line-height:1.68;max-width:500px}
-.audit-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
-.ab-main{background:linear-gradient(135deg,var(--orange),#ea580c);color:#fff;border:none;border-radius:100px;padding:13px 26px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;box-shadow:0 4px 22px rgba(249,115,22,.35);white-space:nowrap}
-.ab-main:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(249,115,22,.45)}
-.ab-sec{background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.15);border-radius:100px;padding:12px 26px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;white-space:nowrap}
-.ab-sec:hover{background:rgba(255,255,255,.15)}
-
-/* ── COMBO PICKER (logo form) ── */
-.combo-grid{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.combo-card{border:2px solid var(--border);border-radius:10px;padding:7px 12px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .18s;background:#fff}
-.combo-card:hover{border-color:var(--muted);transform:translateY(-1px)}
-.combo-card.active{border-color:var(--orange);background:var(--pink)}
-.combo-dots{display:flex;gap:3px}
-.combo-dot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5)}
-.combo-nm{font-size:11px;font-weight:600;color:var(--navy)}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes shimmer{0%{left:-100%}100%{left:200%}}
-
-/* ══ PREMIUM 2026 OVERRIDES ══ */
-/* Nav — glass refinement */
-nav{background:rgba(235,240,247,.88);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid rgba(205,213,224,.35)}
-
-/* Hero — gradient mesh overlay */
-.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 20%,rgba(249,115,22,.06) 0%,transparent 55%),radial-gradient(ellipse at 20% 80%,rgba(99,102,241,.05) 0%,transparent 50%);pointer-events:none;z-index:0}
-
-/* Form card — refined */
-.form-card{border:1px solid rgba(205,213,224,.5);box-shadow:0 6px 40px rgba(18,19,45,.08),0 1px 0 rgba(255,255,255,.9) inset}
-input:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(249,115,22,.08);background:#fff}
-
-/* Gauge cards — elevated premium */
-.gauge-wrap{box-shadow:0 4px 28px rgba(18,19,45,.08),0 0 0 1px rgba(205,213,224,.4);transition:transform .2s,box-shadow .2s}
-.gauge-wrap:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(18,19,45,.13),0 0 0 1px rgba(205,213,224,.5)}
-.gauge-num{font-family:'Inter',sans-serif;font-weight:800;letter-spacing:-1px}
-
-/* Detail cards — premium */
-.dc{border:1px solid rgba(205,213,224,.6);box-shadow:0 2px 16px rgba(18,19,45,.05);transition:box-shadow .2s}
-.dc:hover>.dc-head{background:rgba(249,115,22,.02)}
-.dc.open{box-shadow:0 6px 32px rgba(18,19,45,.1)}
-.dc-head{transition:background .15s}
-
-/* Timeline — premium */
-.tl-card{border:1px solid rgba(205,213,224,.5);box-shadow:0 2px 16px rgba(18,19,45,.04);transition:transform .2s,box-shadow .2s}
-.tl-card:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(18,19,45,.1)}
-
-/* Keyword cloud — refined */
-.kw-t{transition:transform .15s,box-shadow .15s;cursor:default}
-.kw-t:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.1)}
-
-/* Logo cards — premium */
-.logo-card{box-shadow:0 4px 24px rgba(18,19,45,.08),0 0 0 1px rgba(205,213,224,.4);transition:transform .2s,box-shadow .2s}
-.logo-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(18,19,45,.14)}
-
-/* Number typography — Inter throughout */
-.tl-card,.dc-score-chip,.stats-bar,.gauge-num{font-family:'Inter',sans-serif}
-
-/* Btn shimmer refinement */
-.btn-main::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);animation:shimmer 3s ease 2s infinite}
-
-/* Scrollbar */
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px}
-::-webkit-scrollbar-thumb:hover{background:var(--muted)}
-
-/* Embeddable iframe-safe */
-body{min-height:100vh;width:100%}
-
-@media(max-width:900px){
-  .gauges-row{grid-template-columns:repeat(2,1fr)}.detail-cards{grid-template-columns:1fr}.tl-row{grid-template-columns:1fr}
-  .logo-grid{grid-template-columns:repeat(2,1fr)}.form-row{flex-direction:column}
-  .form-card{padding:24px 20px}.stats-bar{gap:18px}.nav{padding:0 18px}
-  .lps-inner{flex-direction:column}.cb-inner{flex-direction:column}
+/* Report summary strip */
+.report-strip {
+  background: var(--card); border-radius: var(--radius-md); padding: 16px 24px; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  border: 1px solid var(--border2); box-shadow: var(--shadow-sm);
+  animation: fadeUp .6s ease .05s both;
 }
+.rs-item { display: flex; align-items: center; gap: 8px; }
+.rs-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+.rs-label { font-size: 11px; color: var(--muted); font-weight: 500; }
+.rs-val { font-size: 12px; font-weight: 700; color: var(--navy); }
+.rs-sep { width: 1px; height: 22px; background: var(--border2); }
+
+/* Score tags */
+.tag-d { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+.tag-w { background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; }
+.tag-g { background: #F0FDF4; color: #16A34A; border: 1px solid #BBF7D0; }
+
+/* ══════════════════════════════════════════════
+   RADIAL GAUGES
+══════════════════════════════════════════════ */
+.gauges-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-bottom: 32px; }
+.gauge-wrap {
+  background: var(--card); border-radius: var(--radius-lg); padding: 28px 18px 22px;
+  box-shadow: var(--shadow-md); border: 1px solid rgba(203,213,225,.5);
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  position: relative; overflow: hidden; animation: fadeUp .7s ease both;
+  transition: transform .22s, box-shadow .22s; cursor: default;
+}
+.gauge-wrap:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.gauge-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+.gw-seo::before  { background: linear-gradient(90deg, #F97316, #EA580C); }
+.gw-ux::before   { background: linear-gradient(90deg, #6366F1, #8B5CF6); }
+.gw-social::before { background: linear-gradient(90deg, #EC4899, #F43F5E); }
+.gw-brand::before  { background: linear-gradient(90deg, #22C55E, #16A34A); }
+.gauge-svg-wrap { position: relative; width: 112px; height: 112px; }
+.gauge-bg { fill: none; stroke: var(--bg2); stroke-width: 9; stroke-linecap: round; }
+.gauge-ring { fill: none; stroke-width: 9; stroke-linecap: round; transition: stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1); transform: rotate(-90deg); transform-origin: 50% 50%; }
+.gauge-center-txt { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; }
+.gauge-num { font-family: 'Inter', sans-serif; font-size: 27px; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -1.5px; }
+.gauge-denom { font-size: 10px; color: var(--muted2); font-weight: 500; }
+.gauge-icon { font-size: 19px; }
+.gauge-label { font-size: 12.5px; font-weight: 700; color: var(--navy); text-align: center; letter-spacing: -.01em; }
+.gauge-tag { padding: 4px 12px; border-radius: 100px; font-size: 10.5px; font-weight: 700; }
+.gauge-insight { font-size: 10.5px; color: var(--muted); text-align: center; line-height: 1.55; min-height: 28px; padding: 0 2px; }
+.gi-good { color: #16A34A; font-weight: 600; }
+.gi-bad { color: #DC2626; font-weight: 600; }
+.gw-1 { animation-delay: .04s; } .gw-2 { animation-delay: .1s; } .gw-3 { animation-delay: .16s; } .gw-4 { animation-delay: .22s; }
+
+/* ══════════════════════════════════════════════
+   AUDIT PANEL (dark premium)
+══════════════════════════════════════════════ */
+.audit-panel {
+  background: linear-gradient(135deg, #08091E 0%, #0E1232 45%, #13093A 100%);
+  border-radius: var(--radius-xl); padding: 38px 42px; margin-bottom: 32px;
+  box-shadow: var(--shadow-xl); position: relative; overflow: hidden;
+  animation: fadeUp .7s ease .18s both;
+  border: 1px solid rgba(255,255,255,.05);
+}
+.audit-panel::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; }
+.audit-panel::after { content: ''; position: absolute; top: -120px; right: -120px; width: 420px; height: 420px; background: radial-gradient(circle, rgba(249,115,22,.1), transparent 65%); pointer-events: none; z-index: 0; }
+.audit-panel > * { position: relative; z-index: 1; }
+.audit-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; padding-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,.07); gap: 20px; flex-wrap: wrap; }
+.audit-cname { font-family: 'DM Serif Display', serif; font-size: 32px; color: #fff; line-height: 1.1; margin-bottom: 10px; letter-spacing: -.02em; }
+.audit-csub { font-size: 11.5px; color: rgba(255,255,255,.38); margin-bottom: 14px; letter-spacing: .02em; }
+.audit-over { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 2.4px; color: var(--orange); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.audit-over::before { content: ''; width: 22px; height: 2px; background: var(--orange); border-radius: 2px; }
+.audit-verdict { font-size: 13.5px; color: rgba(255,255,255,.6); line-height: 1.78; max-width: 620px; }
+.audit-verdict strong { color: rgba(255,255,255,.88); }
+.audit-global { display: flex; flex-direction: column; align-items: center; gap: 7px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-md); padding: 22px 26px; flex-shrink: 0; backdrop-filter: blur(4px); }
+.audit-global-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.6px; color: rgba(255,255,255,.38); }
+.audit-global-wrap { position: relative; width: 90px; height: 90px; }
+.audit-global-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.agn-val { font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -1.5px; }
+.agn-denom { font-size: 9.5px; color: rgba(255,255,255,.38); }
+.audit-stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 26px; }
+.audit-stat { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: 12px; padding: 14px 16px; transition: background .2s; }
+.audit-stat:hover { background: rgba(255,255,255,.07); }
+.audit-stat-val { font-size: 17px; font-weight: 700; color: var(--gold); margin-bottom: 5px; line-height: 1.1; }
+.audit-stat-txt { font-size: 11px; color: rgba(255,255,255,.45); line-height: 1.55; }
+.audit-findings { display: grid; grid-template-columns: repeat(4,1fr); gap: 11px; margin-bottom: 26px; }
+.fc { border-radius: 13px; padding: 16px 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); transition: background .2s, transform .2s; cursor: default; }
+.fc:hover { background: rgba(255,255,255,.08); transform: translateY(-2px); }
+.fc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
+.fc-icon { font-size: 17px; }
+.fc-label { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; color: rgba(255,255,255,.4); margin-bottom: 7px; }
+.fc-bar-wrap { height: 3px; background: rgba(255,255,255,.1); border-radius: 10px; overflow: hidden; margin-bottom: 9px; }
+.fc-bar { height: 100%; border-radius: 10px; transition: width 1.5s cubic-bezier(.4,0,.2,1); width: 0; }
+.fc-bench-bar { transition: width 1.8s cubic-bezier(.4,0,.2,1); width: 0; }
+.fc-tag { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 100px; font-size: 9px; font-weight: 700; margin-bottom: 7px; }
+.fc-tag.crit { background: rgba(239,68,68,.18); color: #F87171; border: 1px solid rgba(239,68,68,.28); }
+.fc-tag.warn { background: rgba(245,158,11,.16); color: #FCD34D; border: 1px solid rgba(245,158,11,.28); }
+.fc-tag.good { background: rgba(34,197,94,.16); color: #4ADE80; border: 1px solid rgba(34,197,94,.28); }
+.fc-insight { font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.6; }
+.audit-rec { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.07); }
+.ar-pre { font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.6px; color: var(--orange); margin-bottom: 8px; }
+.ar-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: #fff; line-height: 1.22; margin-bottom: 8px; letter-spacing: -.02em; }
+.ar-title em { color: var(--orange); font-style: italic; }
+.ar-desc { font-size: 12.5px; color: rgba(255,255,255,.52); line-height: 1.72; max-width: 520px; }
+.audit-actions { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+.ab-main { background: linear-gradient(135deg, var(--orange), var(--orange2)); color: #fff; border: none; border-radius: 100px; padding: 13px 26px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; text-decoration: none; display: flex; align-items: center; gap: 8px; justify-content: center; box-shadow: 0 5px 22px rgba(249,115,22,.38); white-space: nowrap; }
+.ab-main:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(249,115,22,.48); }
+.ab-sec { background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.15); border-radius: 100px; padding: 12px 22px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s; text-decoration: none; display: flex; align-items: center; gap: 8px; justify-content: center; white-space: nowrap; }
+.ab-sec:hover { background: rgba(255,255,255,.15); color: #fff; }
+.audit-kpis { display: flex; background: rgba(255,255,255,.04); border-radius: 10px; border: 1px solid rgba(255,255,255,.07); overflow: hidden; }
+.audit-kpi { flex: 1; padding: 11px 8px; text-align: center; border-right: 1px solid rgba(255,255,255,.06); }
+.audit-kpi:last-child { border-right: none; }
+.audit-kpi-val { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 800; color: var(--orange); margin-bottom: 3px; line-height: 1; }
+.audit-kpi-lbl { font-size: 8.5px; color: rgba(255,255,255,.35); text-transform: uppercase; letter-spacing: .05em; line-height: 1.3; }
+
+/* ══════════════════════════════════════════════
+   DETAIL CARDS — ACCORDION
+══════════════════════════════════════════════ */
+.detail-cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-bottom: 32px; }
+.dc { background: var(--card); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid rgba(203,213,225,.55); animation: fadeUp .7s ease both; transition: box-shadow .2s; }
+.dc:hover > .dc-head { background: rgba(249,115,22,.02); }
+.dc.open { box-shadow: var(--shadow-md); }
+.dc-1 { animation-delay: .1s; } .dc-2 { animation-delay: .16s; } .dc-3 { animation-delay: .22s; } .dc-4 { animation-delay: .28s; }
+.dc-head { display: flex; align-items: center; gap: 12px; padding: 18px 20px; cursor: pointer; user-select: none; transition: background .15s; border-bottom: 1px solid transparent; }
+.dc.open .dc-head { border-bottom-color: var(--bg2); }
+.dc-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.dc-info { flex: 1; }
+.dc-title { font-size: 13px; font-weight: 700; color: var(--navy); letter-spacing: -.01em; }
+.dc-sub { font-size: 10.5px; color: var(--muted2); margin-top: 1px; }
+.dc-score-chip { padding: 5px 12px; border-radius: 100px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+.dc-chevron { font-size: 11px; color: var(--muted2); transition: transform .25s; flex-shrink: 0; margin-left: 4px; }
+.dc.open .dc-chevron { transform: rotate(180deg); }
+.dc-body { max-height: 0; overflow: hidden; transition: max-height .48s cubic-bezier(.4,0,.2,1); }
+.dc.open .dc-body { max-height: 900px; }
+.dc-content { padding: 0 20px 20px; }
+.dc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.dc-col { border-radius: 11px; padding: 14px 16px; }
+.dc-col.prob { background: #FEF2F2; border: 1px solid #FECACA; }
+.dc-col.sol { background: #F0FDF4; border: 1px solid #BBF7D0; }
+.dc-col-title { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .9px; margin-bottom: 10px; }
+.dc-col.prob .dc-col-title { color: #DC2626; }
+.dc-col.sol .dc-col-title { color: #16A34A; }
+.dc-li { display: flex; gap: 7px; align-items: flex-start; font-size: 11.5px; color: #374151; line-height: 1.55; margin-bottom: 8px; }
+.dc-li:last-child { margin-bottom: 0; }
+.dc-li-dot { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; margin-top: 1px; }
+.dc-col.prob .dc-li-dot { background: #FEE2E2; color: #DC2626; }
+.dc-col.sol .dc-li-dot { background: #DCFCE7; color: #16A34A; }
+
+/* ══════════════════════════════════════════════
+   TIMELINE — 3 PHASES
+══════════════════════════════════════════════ */
+.timeline-section { background: var(--card); border-radius: var(--radius-xl); padding: 34px 38px; margin-bottom: 26px; box-shadow: var(--shadow-sm); animation: fadeUp .7s ease .32s both; border: 1px solid rgba(203,213,225,.45); }
+.tl-header { text-align: center; margin-bottom: 26px; }
+.tl-pre { font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.6px; color: var(--orange); margin-bottom: 6px; }
+.tl-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); line-height: 1.2; letter-spacing: -.02em; }
+.tl-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; position: relative; }
+.tl-row::before { content: ''; position: absolute; top: 22px; left: 18%; right: 18%; height: 2px; background: linear-gradient(90deg, var(--orange), var(--purple), var(--green)); border-radius: 10px; z-index: 0; opacity: .45; }
+.tl-card { border-radius: var(--radius-md); padding: 22px 18px; text-align: center; position: relative; z-index: 1; transition: transform .2s, box-shadow .2s; }
+.tl-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.tl-card:nth-child(1) { background: linear-gradient(155deg,#FFF7ED,#fff); border: 1px solid #FED7AA; }
+.tl-card:nth-child(2) { background: linear-gradient(155deg,#EEF2FF,#fff); border: 1px solid #C7D2FE; }
+.tl-card:nth-child(3) { background: linear-gradient(155deg,#F0FDF4,#fff); border: 1px solid #BBF7D0; }
+.tl-dot { width: 42px; height: 42px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 19px; box-shadow: var(--shadow-sm); }
+.tl-card:nth-child(1) .tl-dot { background: #FEE0C5; border: 2px solid var(--orange); }
+.tl-card:nth-child(2) .tl-dot { background: #EEF2FF; border: 2px solid var(--purple); }
+.tl-card:nth-child(3) .tl-dot { background: #DCFCE7; border: 2px solid var(--green); }
+.tl-period { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.tl-card:nth-child(1) .tl-period { color: var(--orange); }
+.tl-card:nth-child(2) .tl-period { color: var(--purple); }
+.tl-card:nth-child(3) .tl-period { color: var(--green); }
+.tl-name { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; letter-spacing: -.01em; }
+.tl-items { text-align: left; display: flex; flex-direction: column; gap: 6px; }
+.tl-item { font-size: 11px; color: #4B5563; line-height: 1.55; display: flex; gap: 6px; align-items: flex-start; }
+.tl-arrow { color: var(--muted2); flex-shrink: 0; font-size: 9px; margin-top: 2px; font-weight: 700; }
+
+/* ══════════════════════════════════════════════
+   KEYWORDS
+══════════════════════════════════════════════ */
+.kw-solo { background: var(--card); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); margin-bottom: 22px; animation: fadeUp .7s ease .38s both; border: 1px solid rgba(203,213,225,.45); }
+.ph { padding: 15px 20px; border-bottom: 1px solid var(--bg2); display: flex; align-items: center; justify-content: space-between; }
+.ph-title { font-size: 13px; font-weight: 700; color: var(--navy); }
+.ph-badge { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 100px; background: #FFF7ED; color: var(--orange); border: 1px solid rgba(249,115,22,.2); }
+.kw-panel { padding: 18px 20px; }
+.kw-cloud { display: flex; flex-wrap: wrap; gap: 7px; }
+.kw-t { padding: 6px 14px; border-radius: 100px; font-size: 12.5px; font-weight: 500; cursor: default; transition: transform .15s, box-shadow .15s; }
+.kw-t:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.kw-p { background: var(--navy); color: #fff; font-size: 13px; font-weight: 700; }
+.kw-s { background: #FFF7ED; color: var(--orange); border: 1px solid rgba(249,115,22,.2); }
+.kw-t3 { background: #EEF2FF; color: var(--purple); border: 1px solid rgba(99,102,241,.2); }
+
+/* ══════════════════════════════════════════════
+   CTA PANEL — FINAL
+══════════════════════════════════════════════ */
+.cta-panel {
+  background: linear-gradient(135deg, var(--navy), var(--navy2));
+  border-radius: var(--radius-xl); padding: 32px 36px;
+  display: flex; flex-direction: column; gap: 16px;
+  animation: fadeUp .7s ease .42s both;
+  box-shadow: var(--shadow-xl);
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.04);
+}
+.cta-panel::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 22px 22px; }
+.cta-panel::after { content: ''; position: absolute; bottom: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(249,115,22,.1), transparent 65%); pointer-events: none; }
+.cta-panel > * { position: relative; z-index: 1; }
+.cta-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(249,115,22,.15); border: 1px solid rgba(249,115,22,.28); border-radius: 100px; padding: 4px 14px; font-size: 10.5px; font-weight: 700; color: var(--orange); width: fit-content; }
+.cta-title { font-family: 'DM Serif Display', serif; font-size: 24px; color: #fff; line-height: 1.25; letter-spacing: -.02em; }
+.cta-title em { color: var(--orange); font-style: italic; }
+.cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cta-item { display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,.75); line-height: 1.5; }
+.cta-check { width: 18px; height: 18px; border-radius: 50%; background: rgba(249,115,22,.18); border: 1px solid rgba(249,115,22,.35); display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--orange); flex-shrink: 0; margin-top: 1px; font-weight: 700; }
+.btn-big { background: linear-gradient(135deg, var(--orange), var(--orange2)); color: #fff; border: none; border-radius: 12px; padding: 14px 24px; font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 6px 28px rgba(249,115,22,.38); transition: transform .15s, box-shadow .2s; width: 100%; justify-content: center; }
+.btn-big:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(249,115,22,.5); }
+.btn-sub-s { font-size: 10px; color: rgba(255,255,255,.35); text-align: center; margin-top: 2px; }
+
+.btn-reset { display: flex; align-items: center; gap: 7px; margin: 0 auto 40px; background: none; border: 1.5px solid var(--border); border-radius: 100px; padding: 9px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--muted); cursor: pointer; transition: all .2s; }
+.btn-reset:hover { border-color: var(--navy); color: var(--navy); background: var(--bg2); }
+
+.footer-hint { text-align: center; padding: 28px 20px; font-size: 11.5px; color: var(--muted2); border-top: 1px solid var(--border2); margin-top: 8px; }
+
+/* ══════════════════════════════════════════════
+   LOGO RESULTS
+══════════════════════════════════════════════ */
+.logo-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 26px; }
+.logo-card { background: var(--card); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); cursor: pointer; border: 2px solid transparent; transition: all .22s; animation: fadeUp .6s ease both; }
+.logo-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.logo-card.selected { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(249,115,22,.14); }
+.lc-body { padding: 16px; display: flex; align-items: center; justify-content: center; background: var(--bg); min-height: 148px; }
+.lc-body svg { max-width: 112px; max-height: 120px; }
+.lc-foot { padding: 9px 12px; border-top: 1px solid var(--bg2); }
+.lc-nm { font-size: 11.5px; font-weight: 700; color: var(--navy); }
+.lc-desc { font-size: 10px; color: var(--muted2); }
+.upload-ref-card { background: var(--card); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 2px solid #DDEAFF; animation: fadeUp .6s ease both; }
+.upload-ref-body { padding: 16px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg,#DDEAFF,#EBF4FF); min-height: 148px; }
+.upload-ref-body img { max-width: 96px; max-height: 96px; object-fit: contain; }
+.upload-ref-foot { padding: 9px 12px; border-top: 1px solid #DDEAFF; }
+.upload-ref-nm { font-size: 11.5px; font-weight: 700; color: #3B5BDB; }
+.upload-ref-desc { font-size: 10px; color: var(--muted2); }
+.logo-preview-section { background: var(--card); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 22px; box-shadow: var(--shadow-sm); display: none; animation: fadeUp .5s ease both; border: 1px solid var(--border2); }
+.logo-preview-section.active { display: block; }
+.lps-inner { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; justify-content: center; }
+.lps-svg { background: var(--bg); border-radius: var(--radius-sm); padding: 28px; flex: 0 0 220px; display: flex; align-items: center; justify-content: center; }
+.lps-svg svg { max-width: 172px; max-height: 190px; }
+.lps-info { flex: 1; min-width: 200px; }
+.lps-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); margin-bottom: 8px; }
+.lps-sub { font-size: 13.5px; color: var(--muted); margin-bottom: 18px; line-height: 1.65; }
+.preview-btns { display: flex; gap: 9px; flex-wrap: wrap; }
+.btn-dl { background: var(--navy); color: #fff; padding: 10px 20px; border-radius: 100px; border: none; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 7px; text-decoration: none; }
+.btn-dl:hover { background: var(--navy2); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-ol { background: none; border: 1.5px solid var(--border); color: var(--muted); padding: 10px 16px; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s; }
+.btn-ol:hover { border-color: var(--navy); color: var(--navy); }
+.pal-selector { background: var(--card); border-radius: var(--radius-md); padding: 20px 24px; margin-bottom: 18px; box-shadow: var(--shadow-sm); border: 1px solid var(--border2); }
+.ps-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 13px; }
+.ps-grid { display: flex; gap: 9px; flex-wrap: wrap; }
+.ps-item { border: 1.5px solid var(--border); border-radius: 10px; padding: 8px 12px; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: all .2s; }
+.ps-item:hover { border-color: var(--muted2); background: var(--bg); }
+.ps-item.active { border-color: var(--orange); background: #FFF7ED; }
+.ps-swatches { display: flex; gap: 4px; }
+.ps-dot { width: 13px; height: 13px; border-radius: 50%; }
+.ps-nm { font-size: 11px; font-weight: 600; color: var(--navy); }
+.commercial-banner { border-radius: var(--radius-md); overflow: hidden; margin-bottom: 18px; box-shadow: var(--shadow-md); animation: fadeUp .7s ease .2s both; }
+.cb-inner { background: linear-gradient(135deg, var(--navy), var(--navy2)); padding: 26px 30px; display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap; }
+.cb-content { flex: 1; min-width: 200px; }
+.cb-pre { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px; color: var(--orange); margin-bottom: 7px; }
+.cb-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: #fff; line-height: 1.22; margin-bottom: 7px; }
+.cb-title em { color: var(--orange); font-style: italic; }
+.cb-desc { font-size: 12.5px; color: rgba(255,255,255,.55); line-height: 1.6; }
+.cb-actions { display: flex; flex-direction: column; gap: 7px; flex-shrink: 0; }
+.cb-btn { display: flex; align-items: center; gap: 7px; padding: 11px 20px; border-radius: 100px; border: none; font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 600; cursor: pointer; transition: all .2s; text-decoration: none; white-space: nowrap; }
+.cb-btn-main { background: var(--orange); color: #fff; box-shadow: 0 4px 14px rgba(249,115,22,.38); }
+.cb-btn-main:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(249,115,22,.48); }
+.cb-btn-sec { background: rgba(255,255,255,.1); color: rgba(255,255,255,.75); border: 1px solid rgba(255,255,255,.18); }
+.cb-btn-sec:hover { background: rgba(255,255,255,.18); color: #fff; }
+
+/* ══════════════════════════════════════════════
+   LOGO ANALYSIS
+══════════════════════════════════════════════ */
+.logo-analysis { background: var(--card); border-radius: var(--radius-xl); padding: 32px 36px; margin-bottom: 22px; box-shadow: var(--shadow-md); border: 1px solid rgba(203,213,225,.5); animation: fadeUp .6s ease both; }
+.la-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 26px; padding-bottom: 22px; border-bottom: 1px solid var(--bg2); gap: 18px; flex-wrap: wrap; }
+.la-title { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 5px; letter-spacing: -.02em; }
+.la-sub { font-size: 11.5px; color: var(--muted); line-height: 1.55; }
+.la-global-score { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+.la-section-label { font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 11px; }
+.la-scores-grid { display: flex; flex-direction: column; gap: 7px; margin-bottom: 24px; }
+.la-score-card { display: flex; align-items: center; gap: 14px; padding: 11px 16px; background: var(--bg); border-radius: 11px; border: 1px solid var(--border2); transition: background .15s; }
+.la-score-card:hover { background: #F0F4FB; }
+.la-sc-bar-wrap { flex: 1; height: 5px; background: var(--bg2); border-radius: 3px; overflow: hidden; min-width: 60px; }
+.la-sc-bar { height: 100%; border-radius: 3px; width: 0; transition: width 1.3s cubic-bezier(.4,0,.2,1); }
+.la-sc-info { width: 118px; flex-shrink: 0; }
+.la-sc-label { font-size: 11.5px; font-weight: 700; color: var(--navy); line-height: 1; }
+.la-sc-desc { font-size: 9px; color: var(--muted2); margin-top: 2px; }
+.la-sc-val { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 800; width: 28px; text-align: right; flex-shrink: 0; letter-spacing: -.5px; }
+.la-palette-row { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; }
+.la-colors { display: flex; gap: 7px; align-items: flex-end; flex-wrap: wrap; }
+.la-chip { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 44px; }
+.la-chip-color { width: 44px; border-radius: 9px; border: 2px solid rgba(255,255,255,.7); box-shadow: 0 3px 12px rgba(0,0,0,.12); }
+.la-chip-hex { font-size: 8.5px; color: var(--muted); font-weight: 700; font-family: 'Inter', monospace; letter-spacing: -.2px; }
+.la-chip-role { font-size: 7.5px; color: var(--orange); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+.la-color-msg { font-size: 11.5px; color: var(--muted); line-height: 1.6; max-width: 260px; padding: 10px 14px; background: var(--bg); border-radius: 10px; border-left: 3px solid var(--orange); margin-left: 6px; align-self: center; }
+.la-strategic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+.la-card { border-radius: var(--radius-sm); padding: 18px 20px; border: 1px solid; }
+.la-card-title { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .9px; margin-bottom: 12px; }
+.la-card.forces { background: #F0FDF4; border-color: #BBF7D0; }
+.la-card.forces .la-card-title { color: #16A34A; }
+.la-card.faiblesses { background: #FEF2F2; border-color: #FECACA; }
+.la-card.faiblesses .la-card-title { color: #DC2626; }
+.la-item { font-size: 11.5px; line-height: 1.6; margin-bottom: 9px; color: #374151; display: flex; gap: 9px; align-items: flex-start; }
+.la-item:last-child { margin-bottom: 0; }
+.la-item-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; flex-shrink: 0; margin-top: 1px; font-weight: 700; }
+.la-item-icon.good { background: rgba(22,163,74,.12); color: #16A34A; }
+.la-item-icon.bad { background: rgba(239,68,68,.1); color: #DC2626; }
+.la-checklist { background: var(--bg); border-radius: var(--radius-md); padding: 18px 22px; margin-bottom: 20px; border: 1px solid var(--border2); }
+.la-checklist-title { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .9px; color: var(--navy); margin-bottom: 12px; }
+.la-checklist-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin-bottom: 11px; }
+.la-check-item { display: flex; align-items: center; gap: 7px; font-size: 10.5px; font-weight: 600; padding: 7px 9px; border-radius: 8px; line-height: 1.3; }
+.la-check-item.ok { background: #F0FDF4; color: #15803D; }
+.la-check-item.nok { background: #FEF2F2; color: #DC2626; }
+.la-check-icon { font-size: 9px; font-weight: 900; flex-shrink: 0; }
+.la-checklist-score { font-size: 11.5px; color: var(--muted); border-top: 1px solid var(--border2); padding-top: 11px; margin-top: 4px; }
+.la-checklist-score strong { color: var(--navy); }
+.la-recs { margin-bottom: 20px; }
+.la-recs-title { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .9px; color: var(--navy); margin-bottom: 12px; }
+.la-rec { display: flex; gap: 14px; margin-bottom: 11px; padding: 15px 18px; background: var(--card); border-radius: var(--radius-sm); border: 1px solid var(--border2); box-shadow: var(--shadow-sm); transition: box-shadow .15s; }
+.la-rec:hover { box-shadow: var(--shadow-md); }
+.la-rec-num { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; font-family: 'Inter', sans-serif; flex-shrink: 0; margin-top: 2px; }
+.la-rec-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.la-rec-detail { font-size: 11.5px; color: var(--muted); line-height: 1.68; }
+.la-cta { display: flex; align-items: center; justify-content: space-between; gap: 16px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); border-radius: var(--radius-md); padding: 20px 24px; flex-wrap: wrap; position: relative; overflow: hidden; }
+.la-cta::before { content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle,rgba(249,115,22,.18),transparent 65%); pointer-events: none; }
+.la-cta-text { font-size: 13px; color: rgba(255,255,255,.75); max-width: 360px; line-height: 1.6; position: relative; z-index: 1; }
+.la-cta-text strong { color: #fff; }
+.la-cta-btn { background: linear-gradient(135deg, var(--orange), var(--orange2)); color: #fff; padding: 11px 22px; border-radius: 100px; font-size: 12.5px; font-weight: 600; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: all .2s; box-shadow: 0 4px 16px rgba(249,115,22,.35); position: relative; z-index: 1; }
+.la-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(249,115,22,.48); }
+
+/* ══════════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════════ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { padding: 0 18px; }
+  .hero { padding: 90px 20px 50px; }
+  .tool-tabs .tool-tab { padding: 9px 14px; font-size: 12.5px; }
+  .form-card { padding: 22px 20px; }
+  .form-row { flex-direction: column; }
+  .obj-grid { grid-template-columns: repeat(3,1fr); }
+  .stats-bar { gap: 18px; }
+  .feature-strip { grid-template-columns: 1fr; }
+  .gauges-row { grid-template-columns: repeat(2,1fr); }
+  .audit-panel { padding: 26px 20px; }
+  .audit-findings { grid-template-columns: repeat(2,1fr); }
+  .audit-stats-grid { grid-template-columns: 1fr; }
+  .detail-cards { grid-template-columns: 1fr; }
+  .dc-row { grid-template-columns: 1fr; }
+  .tl-row { grid-template-columns: 1fr; }
+  .tl-row::before { display: none; }
+  .logo-grid { grid-template-columns: repeat(2,1fr); }
+  .la-strategic-grid { grid-template-columns: 1fr; }
+  .la-checklist-grid { grid-template-columns: repeat(2,1fr); }
+  .lps-inner { flex-direction: column; }
+  .cb-inner { flex-direction: column; }
+  .res-section { padding: 80px 18px 60px; }
+  .welcome-strip { padding: 20px 22px; }
+  .ws-inner { gap: 14px; }
+}
+
+/* textarea */
+textarea.form-ta { border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 13.5px; color: var(--navy); background: var(--bg); transition: border-color .2s, box-shadow .2s; outline: none; width: 100%; resize: vertical; min-height: 56px; line-height: 1.55; }
+textarea.form-ta:focus { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(249,115,22,.1); background: var(--card); }
+
+/* ── AUDIT GLOBE (JS-generated class fix) ── */
+.audit-globe {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius-md); padding: 22px 26px; flex-shrink: 0;
+  backdrop-filter: blur(4px);
+}
+
+/* ── PINK var fallback (obj-card, feat-icon fallback) ── */
+:root { --pink: #FFF7ED; }
+
+/* ── HERO BADGE (old name kept for safety) ── */
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border2); border-radius: 100px; padding: 5px 16px 5px 8px; font-size: 12.5px; font-weight: 500; color: var(--muted); margin-bottom: 22px; animation: fadeUp .7s ease both; box-shadow: var(--shadow-sm); position: relative; z-index: 1; }
+.badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(34,197,94,.22); animation: pulse 2.2s ease infinite; flex-shrink: 0; }
+
+/* ── NAV RIGHT GROUP ── */
+.nav-right { display: flex; align-items: center; gap: 10px; }
+
 </style>
 </head>
+
 <body>
 
 <!-- ═══ NAV ═══ -->
@@ -488,19 +677,16 @@ body{min-height:100vh;width:100%}
       <span class="logo-tagline">Créateur de communication sur-mesure</span>
     </div>
   </a>
-  <a class="nav-cta" href="https://www.atelier-majelan.com/contact" target="_blank">Contactez-nous</a>
+  <div class="nav-right"><span class="nav-pill">✦ Gratuit</span><a class="nav-cta" href="https://www.atelier-majelan.com/contact" target="_blank">Contactez-nous</a></div>
 </nav>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="hero">
   <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div>
-  <div class="hero-badge"><span class="badge-dot"></span>Outils exclusifs — Atelier Majelan, Lyon</div>
-  <h1 class="hero-title">Votre croissance digitale,<br>révélée en <em>30 secondes</em></h1>
+  <div class="hero-eyebrow"><span class="eyebrow-dot"></span>Diagnostic gratuit &amp; instantané · Atelier Majelan · Lyon</div>
+  <h1 class="hero-title">Votre présence digitale,<br>analysée et <em class="u-line">révélée</em></h1>
   <p class="hero-sub">
-    Depuis 11 ans, l'Atelier Majelan accompagne les entrepreneurs et PME dans leur transformation numérique —
-    <strong>création de site web</strong>, <strong>référencement SEO & IA</strong>, <strong>identité visuelle</strong>,
-    <strong>réseaux sociaux</strong> et <strong>stratégie de communication</strong> sur-mesure.
-    Testez nos deux outils gratuits : mesurez votre présence digitale ou générez votre logo de marque en quelques secondes.
+    <strong>Obtenez votre diagnostic digital complet en 30 secondes</strong> — Score SEO, Design & UX, Réseaux Sociaux et Image de Marque. Analyse construite sur votre secteur, votre positionnement et vos défis réels pour des recommandations <strong>concrètes et actionnables</strong>.
   </p>
 
   <div class="tool-tabs">
@@ -509,6 +695,22 @@ body{min-height:100vh;width:100%}
   </div>
 
   <!-- DIAGNOSTIC FORM -->
+  <div class="welcome-strip" id="welcomeStripDiag">
+    <div class="ws-inner">
+      <div class="ws-icon">🔍</div>
+      <div class="ws-content">
+        <div class="ws-pre">Outil de diagnostic — Atelier Majelan</div>
+        <div class="ws-title">Votre bilan digital personnalisé en <em>30 secondes</em></div>
+        <div class="ws-sub">Renseignez les informations de votre entreprise. Plus vous êtes précis, plus le diagnostic sera précis et personnalisé — recommandations réellement actionnables en 30 secondes.</div>
+        <div class="ws-pills">
+          <span class="ws-pill">🔍 SEO & IA</span>
+          <span class="ws-pill">🖥️ Design web</span>
+          <span class="ws-pill">📱 Réseaux sociaux</span>
+          <span class="ws-pill">✦ Image de marque</span>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="form-card" id="diagForm">
     <p class="form-title">✦ Analysez votre présence en ligne</p>
     <form id="auditForm">
@@ -576,11 +778,72 @@ body{min-height:100vh;width:100%}
           <input type="text" id="siteUrl" placeholder="www.votre-site.fr">
         </div>
       </div>
-      <button type="submit" class="btn-main"><span>🚀</span>Générer mon diagnostic gratuit</button>
+      <!-- Objective selector -->
+      <div style="margin-bottom:11px">
+        <label style="display:block;margin-bottom:7px">Votre priorité digitale</label>
+        <div class="obj-grid" id="objGrid">
+          <div class="obj-card active" data-val="seo" onclick="selObj(this,'seo')"><span class="obj-icon">🔍</span><span class="obj-lbl">Visibilité Google</span></div>
+          <div class="obj-card" data-val="ux" onclick="selObj(this,'ux')"><span class="obj-icon">🖥️</span><span class="obj-lbl">Refonte site</span></div>
+          <div class="obj-card" data-val="brand" onclick="selObj(this,'brand')"><span class="obj-icon">✦</span><span class="obj-lbl">Marque & logo</span></div>
+          <div class="obj-card" data-val="social" onclick="selObj(this,'social')"><span class="obj-icon">📱</span><span class="obj-lbl">Réseaux sociaux</span></div>
+          <div class="obj-card" data-val="leads" onclick="selObj(this,'leads')"><span class="obj-icon">🎯</span><span class="obj-lbl">Générer des leads</span></div>
+          <div class="obj-card" data-val="all" onclick="selObj(this,'all')"><span class="obj-icon">🚀</span><span class="obj-lbl">Tout améliorer</span></div>
+        </div>
+        <input type="hidden" id="mainObjective" value="seo">
+      </div>
+      <!-- Challenge select -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Défi principal</label>
+          <select id="mainChallenge">
+            <option value="">Votre frein actuel…</option>
+            <option value="invisible">Mes clients ne me trouvent pas en ligne</option>
+            <option value="nosite">Pas de site ou site obsolète</option>
+            <option value="brand">Mon image de marque manque d'impact</option>
+            <option value="leads">Je génère peu de leads depuis internet</option>
+            <option value="social">Présence sociale trop faible</option>
+            <option value="competition">Mes concurrents me dépassent en ligne</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cible principale</label>
+          <select id="targetAudience">
+            <option value="">Qui ciblez-vous ?</option>
+            <option value="btob">Entreprises (B2B)</option>
+            <option value="btoc">Particuliers (B2C)</option>
+            <option value="local">Clientèle locale / de proximité</option>
+            <option value="national">Marché national</option>
+            <option value="mixed">B2B + B2C</option>
+          </select>
+        </div>
+      </div>
+      <!-- Description -->
+      <div class="form-row">
+        <div class="form-group full">
+          <label>Décrivez votre activité <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:10px">(optionnel — pour une analyse ultra-personnalisée)</span></label>
+          <input type="text" id="companyDesc" placeholder="Ex : Cabinet RH spécialisé PME depuis 8 ans, basé à Lyon, 3 consultants…">
+        </div>
+      </div>
+      <button type="submit" class="btn-main"><span>🚀</span>Lancer mon diagnostic gratuit →</button>
     </form>
   </div>
 
   <!-- LOGO FORM -->
+  <div class="welcome-strip" id="welcomeStripLogo" style="display:none">
+    <div class="ws-inner">
+      <div class="ws-icon">✦</div>
+      <div class="ws-content">
+        <div class="ws-pre">Générateur IA — Atelier Majelan</div>
+        <div class="ws-title">Créez votre <em>identité visuelle</em> en quelques secondes</div>
+        <div class="ws-sub">Entrez le nom de votre marque, choisissez vos couleurs : 8 logos vectoriels professionnels générés instantanément. Téléchargez en SVG, ou confiez la finalisation à l'Atelier Majelan.</div>
+        <div class="ws-pills">
+          <span class="ws-pill">🎨 4 templates pros</span>
+          <span class="ws-pill">📥 Export SVG</span>
+          <span class="ws-pill">🎯 Couleurs sur-mesure</span>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="form-card" id="logoForm" style="display:none">
     <p class="form-title">✦ Créez votre logo de marque</p>
     <form id="logoGenForm">
@@ -645,7 +908,7 @@ body{min-height:100vh;width:100%}
         </div>
       </div>
 
-      <button type="submit" class="btn-main"><span>✦</span>Générer mes 4 logos</button>
+      <button type="submit" class="btn-main"><span>✦</span>Générer mes 8 logos →</button>
     </form>
   </div>
 
@@ -658,11 +921,35 @@ body{min-height:100vh;width:100%}
     <div class="stat-sep"></div>
     <div class="stat-item"><div class="stat-num">Lyon</div><div class="stat-lbl">& toute la France</div></div>
   </div>
+
+  <div class="feature-strip" id="featureStripDiag">
+    <div class="feat-card">
+      <div class="feat-icon">⚡</div>
+      <div>
+        <div class="feat-text">Analyse instantanée</div>
+        <div class="feat-sub">Résultats en 30 secondes, sans compte</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎯</div>
+      <div>
+        <div class="feat-text">Personnalisé à 100%</div>
+        <div class="feat-sub">Scores adaptés à votre secteur & vos besoins</div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔓</div>
+      <div>
+        <div class="feat-text">100% gratuit</div>
+        <div class="feat-sub">Sans engagement, sans email requis</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══ LOADER ═══ -->
 <div id="loader">
-  <svg width="56" height="56" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <div class="loader-logo-ring"><svg width="56" height="56" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
     <defs><clipPath id="lc"><rect x="0" y="0" width="200" height="200" rx="32"/></clipPath></defs>
     <rect x="0" y="0" width="200" height="200" rx="32" fill="#BDD2E6"/>
     <g clip-path="url(#lc)">
@@ -671,8 +958,9 @@ body{min-height:100vh;width:100%}
       <path d="M132,180 C130,130 140,65 148,44 Q158,28 170,44 C178,65 186,130 184,180 Z" fill="#E86A2A"/>
       <path d="M160,180 C158,130 168,65 176,44 Q186,28 198,44 C206,65 214,130 212,180 Z" fill="#F5B429"/>
     </g>
-  </svg>
+  </svg></div>
   <h2 class="loader-title" id="loaderTitle">Analyse en cours…</h2>
+  <p class="loader-subtitle">Majelan croise vos données avec notre base sectorielle</p>
   <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
   <div class="loader-steps">
     <div class="loader-step" id="ls1"><div class="step-icon">🔍</div><span id="ls1t">Étape 1</span></div>
@@ -687,7 +975,7 @@ body{min-height:100vh;width:100%}
   <div class="results-header">
     <div class="res-company" id="resCompany">DIAGNOSTIC</div>
     <h2 class="res-title">Votre potentiel digital <span style="color:var(--orange)">analysé</span></h2>
-    <p class="res-sub">Scores indicatifs basés sur votre secteur — par l'équipe Majelan</p>
+    <p class="res-sub">Scores calculés sur la base de votre secteur et des benchmarks marché · par l'équipe Atelier Majelan</p>
   </div>
   <div class="gauges-row">
     <div class="gauge-wrap gw-seo gw-1">
@@ -761,11 +1049,11 @@ body{min-height:100vh;width:100%}
   <div class="cta-panel">
     <div><div class="cta-tag">✦ Prochaine étape</div></div>
     <div class="cta-title">Transformons l'analyse<br>en <em>résultats concrets</em></div>
-    <div class="cta-list">
-      <div class="cta-item"><div class="cta-check">✓</div>Audit complet offert (1h)</div>
-      <div class="cta-item"><div class="cta-check">✓</div>Stratégie personnalisée sur-mesure</div>
-      <div class="cta-item"><div class="cta-check">✓</div>Devis transparent & sans engagement</div>
-      <div class="cta-item"><div class="cta-check">✓</div>Réponse sous 24h garantie</div>
+    <div class="cta-grid">
+      <div class="cta-item"><div class="cta-check">✓</div>Audit stratégique offert — 1h avec un expert Majelan</div>
+      <div class="cta-item"><div class="cta-check">✓</div>Plan d'action personnalisé livré sous 48h</div>
+      <div class="cta-item"><div class="cta-check">✓</div>Devis transparent, zéro engagement, zéro surprise</div>
+      <div class="cta-item"><div class="cta-check">✓</div>Réponse garantie sous 24h ouvrées</div>
     </div>
     <div>
       <button class="btn-big" onclick="window.open('https://www.atelier-majelan.com/contact','_blank')"><span>🚀</span>Démarrer mon projet avec Majelan</button>
@@ -773,15 +1061,15 @@ body{min-height:100vh;width:100%}
     </div>
   </div>
   <button class="btn-reset" onclick="resetAll()">← Relancer une analyse</button>
-  <div class="footer-hint">✦ Scores indicatifs · <strong>Atelier Majelan</strong> · Communication & SEO · Lyon · <a href="https://www.atelier-majelan.com" target="_blank" style="color:var(--orange)">atelier-majelan.com</a></div>
+  <div class="footer-hint">✦ Scores estimatifs basés sur benchmarks sectoriels · <strong>Atelier Majelan</strong> · Agence Communication &amp; SEO · Lyon · <a href="https://www.atelier-majelan.com" target="_blank" style="color:var(--orange)">atelier-majelan.com</a></div>
 </div>
 
 <!-- ═══ LOGO RESULTS ═══ -->
 <div id="logoResults" class="res-section">
   <div class="results-header">
     <div class="res-company" id="lgResComp">LOGOS GÉNÉRÉS</div>
-    <h2 class="res-title">Choisissez votre <span style="color:var(--orange)">identité visuelle</span></h2>
-    <p class="res-sub" id="lgResSub">4 créations professionnelles générées selon vos couleurs et votre marque</p>
+    <h2 class="res-title">Votre <span style="color:var(--orange)">identité visuelle</span> en 4 variantes</h2>
+    <p class="res-sub" id="lgResSub">8 créations vectorielles professionnelles · Export SVG · Couleurs personnalisées</p>
   </div>
 
   <!-- Commercial banner for logo -->
@@ -790,7 +1078,7 @@ body{min-height:100vh;width:100%}
       <div class="cb-content">
         <div class="cb-pre">IDENTITÉ VISUELLE COMPLÈTE</div>
         <h3 class="cb-title">Au-delà du logo,<br><em>une charte qui vous ressemble</em></h3>
-        <p class="cb-desc">Ces logos sont un avant-goût. L'Atelier Majelan crée votre identité complète : logo final, charte graphique, templates print & digital, déclinaisons réseaux sociaux.</p>
+        <p class="cb-desc">Ces logos sont un avant-goût de votre potentiel. Majelan crée votre identité complète : logo final vectoriel, charte graphique 360°, templates print & digital, déclinaisons réseaux sociaux — le tout cohérent et mémorisable.</p>
       </div>
       <div class="cb-actions">
         <a class="cb-btn cb-btn-main" href="https://www.atelier-majelan.com/identite-visuelle" target="_blank">🎨 Voir l'offre Identité</a>
@@ -852,7 +1140,7 @@ body{min-height:100vh;width:100%}
           <button class="btn-ol" onclick="closePreview()">← Autres variantes</button>
           <a class="btn-dl" href="https://www.atelier-majelan.com/identite-visuelle" target="_blank" style="background:#1a4731;text-decoration:none">✦ Finaliser avec Majelan</a>
         </div>
-        <p style="font-size:11px;color:var(--muted);margin-top:10px">Fichier SVG vectoriel · Compatible tous supports · Modifiable</p>
+        <p style="font-size:11px;color:var(--muted);margin-top:10px">✦ Fichier SVG vectoriel · Éditable sous Illustrator, Figma ou Inkscape · Compatible tous supports print &amp; digital</p>
       </div>
     </div>
   </div>
@@ -861,7 +1149,9 @@ body{min-height:100vh;width:100%}
   <div class="footer-hint">✦ Logos illustratifs · <strong>Atelier Majelan</strong> · <a href="https://www.atelier-majelan.com" target="_blank" style="color:var(--orange)">atelier-majelan.com</a></div>
 </div>
 
+
 <script>
+
 // ══════════════════════════════════════════════
 //  COLOR DATA
 // ══════════════════════════════════════════════
@@ -1111,11 +1401,122 @@ function tmplPrism(nm, ini, tl, p, a, uid, logoUrl) {
   </svg>`;
 }
 
+
+// ── TEMPLATE 5: MONO — Bold monogram circle ──
+function tmplMono(nm, ini, tl, p, a, uid, logoUrl) {
+  const h = tl?296:272;
+  const inner = logoUrl
+    ? `<image href="${logoUrl}" x="106" y="44" width="68" height="68" clip-path="url(#mn${uid})"/>
+       <defs><clipPath id="mn${uid}"><circle cx="140" cy="78" r="34"/></clipPath></defs>`
+    : `<text x="140" y="106" text-anchor="middle" font-size="72" font-weight="900" fill="white" font-family="'DM Serif Display',Georgia,serif">${ini}</text>`;
+  return `<svg viewBox="0 0 280 ${h}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="mng${uid}" cx="35%" cy="35%">
+        <stop offset="0%" stop-color="${lc(p,20)}"/>
+        <stop offset="100%" stop-color="${p}"/>
+      </radialGradient>
+    </defs>
+    <circle cx="140" cy="88" r="70" fill="url(#mng${uid})"/>
+    <circle cx="140" cy="88" r="70" fill="none" stroke="${a}" stroke-width="3" opacity=".4"/>
+    <circle cx="140" cy="88" r="62" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+    <circle cx="182" cy="50" r="10" fill="${a}" opacity=".7"/>
+    <circle cx="100" cy="128" r="6" fill="${a}" opacity=".4"/>
+    ${inner}
+    <text x="140" y="${h-42}" text-anchor="middle" font-size="18" font-weight="700" fill="${p}" letter-spacing="1" font-family="'DM Sans',Arial,sans-serif">${nm.toUpperCase()}</text>
+    ${tl?`<text x="140" y="${h-20}" text-anchor="middle" font-size="8" fill="#aaa" letter-spacing="2.8" font-family="'DM Sans',Arial,sans-serif">${tl.toUpperCase()}</text>`:''}
+  </svg>`;
+}
+
+// ── TEMPLATE 6: ORBIT — Concentric orbital rings ──
+function tmplOrbit(nm, ini, tl, p, a, uid, logoUrl) {
+  const h = tl?302:278;
+  const inner = logoUrl
+    ? `<image href="${logoUrl}" x="116" y="60" width="48" height="48" clip-path="url(#ob${uid})"/>
+       <defs><clipPath id="ob${uid}"><circle cx="140" cy="84" r="24"/></clipPath></defs>`
+    : `<text x="140" y="101" text-anchor="middle" font-size="46" font-weight="800" fill="${p}" font-family="'DM Sans',Arial,sans-serif">${ini}</text>`;
+  return `<svg viewBox="0 0 280 ${h}" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="140" cy="88" r="76" fill="none" stroke="${p}" stroke-width="1" opacity=".12"/>
+    <circle cx="140" cy="88" r="56" fill="none" stroke="${p}" stroke-width="1.5" opacity=".2"/>
+    <circle cx="140" cy="88" r="36" fill="${p}" opacity=".06"/>
+    <circle cx="140" cy="88" r="36" fill="none" stroke="${p}" stroke-width="2" opacity=".35"/>
+    <circle cx="140" cy="88" r="24" fill="${p}"/>
+    <!-- Orbital dots -->
+    <circle cx="216" cy="88" r="7" fill="${a}"/>
+    <circle cx="140" cy="12" r="5" fill="${a}" opacity=".7"/>
+    <circle cx="68" cy="116" r="4" fill="${p}" opacity=".5"/>
+    ${inner}
+    <text x="140" y="${h-44}" text-anchor="middle" font-size="19" font-weight="700" fill="${p}" letter-spacing="-.3" font-family="'DM Sans',Arial,sans-serif">${nm.toLowerCase()}</text>
+    <line x1="80" y1="${h-32}" x2="200" y2="${h-32}" stroke="${a}" stroke-width="1.5" opacity=".4"/>
+    ${tl?`<text x="140" y="${h-16}" text-anchor="middle" font-size="8" fill="#aaa" letter-spacing="2.4" font-family="'DM Sans',Arial,sans-serif">${tl.toUpperCase()}</text>`:''}
+  </svg>`;
+}
+
+// ── TEMPLATE 7: CREST — Shield/crest badge ──
+function tmplCrest(nm, ini, tl, p, a, uid, logoUrl) {
+  const h = tl?310:284;
+  // Shield path: smooth shield shape
+  const shield = "M140,28 L196,44 L196,108 Q196,158 140,178 Q84,158 84,108 L84,44 Z";
+  const inner = logoUrl
+    ? `<image href="${logoUrl}" x="110" y="60" width="60" height="60" clip-path="url(#cr${uid})"/>
+       <defs><clipPath id="cr${uid}"><path d="${shield}"/></clipPath></defs>`
+    : `<text x="140" y="128" text-anchor="middle" font-size="62" font-weight="900" fill="white" opacity=".95" font-family="'DM Serif Display',Georgia,serif">${ini}</text>`;
+  return `<svg viewBox="0 0 280 ${h}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="crg${uid}" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="${lc(p,15)}"/>
+        <stop offset="100%" stop-color="${p}"/>
+      </linearGradient>
+    </defs>
+    <!-- Shield shadow -->
+    <path d="${shield}" fill="${p}" opacity=".15" transform="translate(4,6)"/>
+    <path d="${shield}" fill="url(#crg${uid})"/>
+    <path d="${shield}" fill="none" stroke="${a}" stroke-width="2.5" opacity=".5"/>
+    <!-- Inner detail lines -->
+    <line x1="140" y1="44" x2="140" y2="178" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+    <line x1="84" y1="76" x2="196" y2="76" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+    ${inner}
+    <text x="140" y="${h-44}" text-anchor="middle" font-size="18" font-weight="700" fill="${p}" letter-spacing=".5" font-family="'DM Sans',Arial,sans-serif">${nm.toUpperCase()}</text>
+    <rect x="112" y="${h-35}" width="56" height="2" rx="1" fill="${a}" opacity=".6"/>
+    ${tl?`<text x="140" y="${h-18}" text-anchor="middle" font-size="8" fill="#aaa" letter-spacing="2.4" font-family="'DM Sans',Arial,sans-serif">${tl.toUpperCase()}</text>`:''}
+  </svg>`;
+}
+
+// ── TEMPLATE 8: STACK — Bold horizontal text blocks ──
+function tmplStack(nm, ini, tl, p, a, uid, logoUrl) {
+  const h = tl?296:270;
+  const words = nm.split(' ');
+  const line1 = words[0] || nm;
+  const line2 = words.slice(1).join(' ');
+  const inner = logoUrl
+    ? `<image href="${logoUrl}" x="34" y="26" width="60" height="60" clip-path="url(#sk${uid})"/>
+       <defs><clipPath id="sk${uid}"><rect x="34" y="26" width="60" height="60" rx="12"/></clipPath></defs>`
+    : `<text x="64" y="75" text-anchor="middle" font-size="44" font-weight="900" fill="white" font-family="'DM Serif Display',Georgia,serif">${ini}</text>`;
+  return `<svg viewBox="0 0 280 ${h}" xmlns="http://www.w3.org/2000/svg">
+    <!-- Color block left -->
+    <rect x="28" y="20" width="72" height="72" rx="16" fill="${p}"/>
+    <rect x="28" y="20" width="72" height="72" rx="16" fill="none" stroke="${a}" stroke-width="2" opacity=".4"/>
+    <rect x="36" y="28" width="20" height="5" rx="2.5" fill="${a}" opacity=".7"/>
+    ${inner}
+    <!-- Text stack -->
+    <text x="116" y="54" font-size="${line1.length>8?22:line1.length>6?26:30}" font-weight="800" fill="${p}" font-family="'DM Sans',Arial,sans-serif">${line1.toUpperCase()}</text>
+    ${line2 ? `<text x="116" y="78" font-size="${line2.length>8?18:line2.length>6?22:26}" font-weight="400" fill="${a}" font-family="'DM Sans',Arial,sans-serif">${line2.toUpperCase()}</text>` : `<text x="116" y="74" font-size="11" font-weight="500" fill="${a}" letter-spacing="3" font-family="'DM Sans',Arial,sans-serif">STUDIO</text>`}
+    <!-- Separator line -->
+    <rect x="28" y="110" width="224" height="2" rx="1" fill="${p}" opacity=".1"/>
+    <!-- Tagline area -->
+    <text x="28" y="${h-44}" font-size="13" font-weight="500" fill="${p}" opacity=".7" font-family="'DM Sans',Arial,sans-serif">${nm}</text>
+    ${tl?`<text x="28" y="${h-22}" font-size="9" fill="#aaa" letter-spacing="2.4" font-family="'DM Sans',Arial,sans-serif">${tl.toUpperCase()}</text>`:''}
+  </svg>`;
+}
+
 const TEMPLATES = [
   {id:'nexus',   name:'Nexus Split',   desc:'Split diagonal audacieux — bicolore dynamique, impact immédiat', fn:tmplNexus},
   {id:'hexagon', name:'Hexagon Badge', desc:'Badge hexagonal premium — autorité et distinction absolue', fn:tmplHexagon},
   {id:'signal',  name:'Signal Arc',    desc:'Arcs concentriques en gradient — marques tech & innovation', fn:tmplSignal},
   {id:'prism',   name:'Prism Diamond', desc:'Diamant géométrique avec ombre — luxe et raffinement', fn:tmplPrism},
+  {id:'mono',    name:'Mono Circle',   desc:'Monogramme cercle premium — élégance et mémorabilité maximale', fn:tmplMono},
+  {id:'orbit',   name:'Orbit Rings',   desc:'Anneaux orbitaux dynamiques — marques innovantes et tech', fn:tmplOrbit},
+  {id:'crest',   name:'Crest Shield',  desc:'Blason premium — autorité, prestige et ancrage institutionnel', fn:tmplCrest},
+  {id:'stack',   name:'Stack Bold',    desc:'Blocs typographiques empilés — force et lisibilité maximale', fn:tmplStack},
 ];
 
 // ══════════════════════════════════════════════
@@ -1126,30 +1527,73 @@ function switchTab(t) {
   document.getElementById('tabLogo').classList.toggle('active',t==='logo');
   document.getElementById('diagForm').style.display = t==='diag' ? '':'none';
   document.getElementById('logoForm').style.display = t==='logo' ? '':'none';
+  const wd = document.getElementById('welcomeStripDiag');
+  const wl = document.getElementById('welcomeStripLogo');
+  const ff = document.getElementById('featureStripDiag');
+  if(wd) wd.style.display = t==='diag' ? '':'none';
+  if(wl) wl.style.display = t==='logo' ? '':'none';
+  if(ff) ff.style.display = t==='diag' ? '':'none';
 }
 
 // ══════════════════════════════════════════════
 //  LOADER
 // ══════════════════════════════════════════════
-function runLoader(task) {
+async function runLoader(task) {
   document.getElementById('hero').style.display='none';
   document.getElementById('diagResults').classList.remove('active');
   document.getElementById('logoResults').classList.remove('active');
   const ldr=document.getElementById('loader'); ldr.classList.add('active');
-  const steps = task.type==='logo'
-    ? ['Analyse de votre secteur & marque','Génération des formes vectorielles','Application de vos couleurs & typographie','Finalisation et export SVG']
-    : ['Analyse de votre positionnement SEO','Génération de votre identité visuelle cible','Simulation stratégie réseaux sociaux','Compilation du rapport Majelan'];
-  document.getElementById('loaderTitle').textContent = task.type==='logo' ? 'Majelan génère vos logos…' : 'Majelan analyse votre potentiel…';
+
+  const diagSteps = task.url
+    ? ['Collecte des données de votre site web…','Analyse de vos réseaux sociaux…','Croisement avec les benchmarks sectoriels…','Génération de votre diagnostic personnalisé…']
+    : ['Analyse de votre secteur & concurrence…','Évaluation de votre positionnement digital…','Identification de vos leviers de croissance…','Génération de votre diagnostic personnalisé…'];
+  const logoSteps = ['Analyse de votre secteur & marque…','Génération des formes vectorielles…','Application de vos couleurs & typographie…','Finalisation et export SVG…'];
+  const steps = task.type==='logo' ? logoSteps : diagSteps;
+
+  document.getElementById('loaderTitle').textContent = task.type==='logo' ? 'Majelan génère vos logos…' : 'Majelan analyse votre entreprise…';
   for(let i=1;i<=4;i++){document.getElementById('ls'+i).classList.remove('done');document.getElementById('ls'+i+'t').textContent=steps[i-1];}
   document.getElementById('loaderBar').style.width='0';
-  let cur=0;
-  function next(){
-    if(cur>=4){setTimeout(()=>{ldr.classList.remove('active');task.type==='logo'?showLogoRes(task):showDiagRes(task);},300);return;}
-    document.getElementById('ls'+(cur+1)).classList.add('done');
-    document.getElementById('loaderBar').style.width=((cur+1)/4*100)+'%';
-    cur++; setTimeout(next, 520+Math.random()*280);
+
+  const markStep = (n) => {
+    document.getElementById('ls'+n).classList.add('done');
+    document.getElementById('loaderBar').style.width=(n/4*100)+'%';
+  };
+
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  if (task.type === 'diag') {
+    // Step 1 — fetch website data
+    markStep(1);
+    if (task.url) {
+      try { task.webData = await fetchWebsiteData(task.url); } catch(e) { task.webData = null; }
+    }
+    await wait(350 + Math.random()*150);
+
+    // Step 2 — fetch social profiles
+    markStep(2);
+    if (task.webData && task.webData.socialLinks && task.webData.socialLinks.length > 0) {
+      try { task.socialData = await fetchSocialProfiles(task.webData.socialLinks); } catch(e) { task.socialData = null; }
+    }
+    await wait(300 + Math.random()*150);
+
+    // Step 3 — sector analysis
+    markStep(3);
+    await wait(280 + Math.random()*120);
+
+    // Step 4 — finalize
+    markStep(4);
+    await wait(200);
+
+  } else {
+    // Logo: instant 3-step loader
+    markStep(1); await wait(120);
+    markStep(2); await wait(120);
+    markStep(3); await wait(100);
+    markStep(4); await wait(80);
   }
-  setTimeout(next,300);
+
+  ldr.classList.remove('active');
+  task.type === 'logo' ? showLogoRes(task) : showDiagRes(task);
 }
 
 // ══════════════════════════════════════════════
@@ -1275,58 +1719,216 @@ const SERVICE_MAP = {
   brand:{url:'https://www.atelier-majelan.com/identite-visuelle/', pre:'PRIORITÉ : IDENTITÉ VISUELLE', title:'Une marque mémorable<br><em>qui inspire confiance</em>', desc:'Votre image de marque est le premier contact avec vos prospects. Majelan crée une identité visuelle cohérente et impactante du logo à la charte complète.'},
 };
 
-function getTag(s){if(s<40)return['tag-d','⚠ Critique'];if(s<60)return['tag-w','↑ À renforcer'];return['tag-g','✓ Bon niveau'];}
+function getTag(s){if(s<40)return['tag-d','↑ Levier prioritaire'];if(s<60)return['tag-w','↑ Levier clé'];return['tag-g','✓ Atout fort'];}
 function getFcTag(s){if(s<40)return'crit';if(s<60)return'warn';return'good';}
-function getFcTagTxt(s){if(s<40)return'⚠ Critique';if(s<60)return'↑ Potentiel';return'✓ Atout';}
+function getFcTagTxt(s){if(s<40)return'↑ Levier prioritaire';if(s<60)return'↑ Levier clé';return'✓ Atout fort';}
 
 const GAUGE_INSIGHTS = {
   seo: s => s >= 70
-    ? `<span class="gi-good">✓ Point fort :</span> Votre domaine bénéficie d'une base SEO solide et d'une autorité établie.`
+    ? `<span class="gi-good">✓ Atout fort :</span> Votre base SEO est solide — des optimisations de précision peuvent vous propulser en top 3 sur vos requêtes prioritaires.`
     : s >= 40
-    ? `<span class="gi-bad">↑ Axe critique :</span> Des optimisations ciblées peuvent doubler votre trafic organique.`
-    : `<span class="gi-bad">⚠ Point faible majeur :</span> Invisible sur Google — priorité absolue.`,
+    ? `<span class="gi-warn">↑ Levier clé :</span> Des optimisations ciblées sur vos requêtes de marché peuvent multiplier votre trafic organique par 2 à 3.`
+    : `<span class="gi-opp">↑ Levier prioritaire :</span> Un potentiel de visibilité important attend d'être activé — c'est l'opportunité de croissance la plus rapide pour votre activité.`,
   ux: s => s >= 70
-    ? `<span class="gi-good">✓ Point fort :</span> Expérience utilisateur fluide, favorable à la conversion.`
+    ? `<span class="gi-good">✓ Atout fort :</span> Expérience utilisateur fluide et conversion optimisée — une base solide pour maximiser chaque visite.`
     : s >= 40
-    ? `<span class="gi-bad">↑ Axe critique :</span> L'UX freine vos conversions — visiteurs perdus avant l'acte d'achat.`
-    : `<span class="gi-bad">⚠ Point faible majeur :</span> Site difficile à utiliser, taux de rebond élevé.`,
+    ? `<span class="gi-warn">↑ Levier clé :</span> Des améliorations UX ciblées peuvent augmenter significativement votre taux de transformation des visites en contacts.`
+    : `<span class="gi-opp">↑ Levier prioritaire :</span> Optimiser l'expérience web représente votre levier de conversion le plus direct et le plus rapide à activer.`,
   social: s => s >= 70
-    ? `<span class="gi-good">✓ Point fort :</span> Communauté active et engagement régulier — bonne présence.`
+    ? `<span class="gi-good">✓ Atout fort :</span> Communauté engagée et présence régulière — renforcez la conversion pour transformer cette audience en clients.`
     : s >= 40
-    ? `<span class="gi-bad">↑ Axe critique :</span> Présence irrégulière — vos concurrents captent votre audience.`
-    : `<span class="gi-bad">⚠ Point faible majeur :</span> Quasi absent des réseaux — visibilité non exploitée.`,
+    ? `<span class="gi-warn">↑ Levier clé :</span> Une stratégie éditoriale consistante peut décupler votre portée organique et ancrer votre marque dans l'esprit de vos prospects.`
+    : `<span class="gi-opp">↑ Levier prioritaire :</span> Les réseaux sociaux représentent un canal d'acquisition puissant encore inexploité pour développer votre notoriété.`,
   brand: s => s >= 70
-    ? `<span class="gi-good">✓ Point fort :</span> Image de marque cohérente et reconnaissable — actif précieux.`
+    ? `<span class="gi-good">✓ Atout fort :</span> Image de marque cohérente et mémorisable — un actif précieux qui justifie votre positionnement premium.`
     : s >= 40
-    ? `<span class="gi-bad">↑ Axe critique :</span> Identité visuelle hétérogène — manque d'impact différenciant.`
-    : `<span class="gi-bad">⚠ Point faible majeur :</span> Marque peu lisible, sans ligne graphique claire.`
+    ? `<span class="gi-warn">↑ Levier clé :</span> Harmoniser votre identité visuelle renforcerait significativement la perception de votre professionnalisme et votre crédibilité.`
+    : `<span class="gi-opp">↑ Levier prioritaire :</span> Construire une identité visuelle forte est l'investissement identitaire le plus structurant pour votre développement.`
 };
 
+
+// ══════════════════════════════════════════════
+//  SOCIAL MEDIA SCRAPING
+// ══════════════════════════════════════════════
+async function fetchSocialProfiles(socialLinks) {
+  const results = [];
+  const proxies = ['https://api.allorigins.win/get?url=', 'https://corsproxy.io/?url='];
+  
+  for (const link of socialLinks.slice(0, 3)) {
+    let profileUrl = '';
+    if (link.platform === 'Instagram') profileUrl = `https://www.instagram.com/${link.url.replace(/.*instagram\.com\//,'')}`;
+    else if (link.platform === 'LinkedIn') profileUrl = `https://www.linkedin.com/company/${link.url.replace(/.*linkedin\.com\/(company|in)\//,'')}`;
+    else if (link.platform === 'Facebook') profileUrl = `https://www.facebook.com/${link.url.replace(/.*facebook\.com\//,'')}`;
+    else continue;
+    
+    let scraped = null;
+    for (const proxy of proxies) {
+      try {
+        const ctrl = new AbortController();
+        const tid = setTimeout(() => ctrl.abort(), 7000);
+        const res = await fetch(proxy + encodeURIComponent(profileUrl), { signal: ctrl.signal });
+        clearTimeout(tid);
+        if (!res.ok) continue;
+        const data = await res.json();
+        const raw = data.contents || data.body || '';
+        if (raw.length < 100) continue;
+        scraped = raw;
+        break;
+      } catch(e) { continue; }
+    }
+    
+    if (!scraped) { results.push({ platform: link.platform, followers: null, bio: null }); continue; }
+    
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(scraped, 'text/html');
+    const getMeta = n => (doc.querySelector(`meta[name="${n}"]`)||doc.querySelector(`meta[property="${n}"]`)||{}).getAttribute?.('content')?.trim()||'';
+    
+    const description = getMeta('og:description') || getMeta('description') || '';
+    
+    // Extract follower count from description text
+    let followers = null;
+    const followerMatch = description.match(/(\d[\d\s,.]+)\s*(abonné|follower|suiveur|abonnement)/i);
+    if (followerMatch) followers = followerMatch[1].trim();
+    
+    // Bio text (first 120 chars of description without follower info)
+    const bio = description.replace(/\d[\d\s,.]+\s*(abonné|follower|suiveur)[^.]*\.?\s*/gi, '').trim().substring(0, 120) || null;
+    
+    results.push({ platform: link.platform, url: profileUrl, followers, bio });
+  }
+  
+  return results.length > 0 ? results : null;
+}
+
 const VERDICT_MAP = {
-  seo: (co, dom, sector) => {
+  seo: (co, dom, sector, obj, challenge, desc, audience, webData, socialData) => {
     const m = SECTOR_META[sector]||_defMeta; const s0=m.stats[0];
-    return `Le principal frein identifié pour <strong>${co}</strong> est son référencement naturel. Dans votre secteur, <strong>${s0.val} ${s0.txt}</strong> — et pourtant, <strong>${dom}</strong> ne capture aujourd'hui qu'une fraction du trafic potentiel disponible : les requêtes stratégiques de votre marché sont sous-représentées en première page Google, et les moteurs d'IA génératifs (ChatGPT, Perplexity) ne citent pas encore votre marque. C'est un manque à gagner direct et chiffrable. Atelier Majelan déploie une stratégie SEO en trois temps : audit technique approfondi de <strong>${dom}</strong>, production de contenus à haute valeur ajoutée calibrés sur vos requêtes prioritaires, et optimisation continue pilotée par des KPIs précis — résultats mesurables dès le 2ème mois.`;
+    const audTxt = audience==='btob' ? 'décideurs B2B' : audience==='btoc' ? 'particuliers' : audience==='local' ? 'clientèle locale' : 'prospects ciblés';
+    const objTxt = challenge==='invisible'
+      ? `Votre objectif est clair : être trouvé facilement par vos clients. C'est précisément là que se concentre le plus grand potentiel de croissance de <strong>${co}</strong>.`
+      : challenge==='leads'
+      ? `Votre ambition — générer davantage de contacts qualifiés en ligne — est au cœur de ce diagnostic. Les leviers SEO identifiés sont précisément conçus pour y répondre de manière durable.`
+      : challenge==='competition'
+      ? `Dans un marché concurrentiel, dominer les résultats de recherche est l'arme la plus efficace pour <strong>${co}</strong> afin de capter les clients avant vos concurrents.`
+      : `La visibilité en ligne est le levier de croissance le plus structurant pour <strong>${co}</strong> dans sa prochaine phase de développement.`;
+    const descTxt = desc ? ` <strong>${co}</strong>, spécialisé en <em>${desc}</em>, évolue sur un marché où les ${audTxt} utilisent activement Google et les IA génératives (ChatGPT, Perplexity) pour trouver leurs prestataires.` : '';
+    const webTxt = webData && webData.title ? ` Votre site <strong>${dom}</strong> — "${webData.title}" — dispose déjà d'une base solide sur laquelle Atelier Majelan peut construire une stratégie de visibilité ambitieuse.` : (dom ? ` <strong>${dom}</strong> est votre vitrine digitale principale — optimiser sa visibilité organique est la priorité identifiée.` : '');
+    const kws = webData && webData.keywords && webData.keywords.length > 0 ? ` Mots-clés détectés sur votre site : ${webData.keywords.slice(0,4).map(k=>`<em>${k}</em>`).join(', ')} — autant de positions à conquérir en première page.` : '';
+    return `${objTxt}${descTxt}${webTxt}${kws} Dans le secteur "${sector}", <strong>${s0.val} ${s0.txt}</strong> — une dynamique favorable que <strong>${co}</strong> peut capitaliser dès maintenant. Atelier Majelan déploie une stratégie SEO complète : audit technique approfondi de <strong>${dom||co}</strong>, production de contenus à haute valeur ajoutée calibrés sur vos requêtes prioritaires, et optimisation continue pilotée par des KPIs précis — avec des résultats visibles dès les premières semaines.`;
   },
-  ux: (co, dom, sector) => {
+  ux: (co, dom, sector, obj, challenge, desc, audience, webData, socialData) => {
     const m = SECTOR_META[sector]||_defMeta; const s2=m.stats[2]||m.stats[0];
-    return `L'analyse de <strong>${dom}</strong> révèle que l'expérience utilisateur constitue le principal point de friction dans le parcours client de <strong>${co}</strong>. Un visiteur sur deux repart sans avoir converti — non par manque d'intérêt, mais à cause d'une architecture peu claire et d'une expérience mobile insuffisante. Dans votre secteur, <strong>${s2.val} ${s2.txt}</strong>. Chaque euro investi en acquisition de trafic est partiellement perdu à l'atterrissage. Notre approche UX-first repose sur des wireframes validés par des données réelles, une refonte mobile-first et des tunnels de conversion A/B testés — avec un gain de taux de conversion moyen de +180% observé sur nos clients.`;
+    const audTxt = audience==='btob' ? 'vos prospects B2B' : 'vos clients potentiels';
+    const objTxt = challenge==='nosite'
+      ? `Vous souhaitez créer ou refondre votre présence web — c'est la décision la plus structurante pour le développement digital de <strong>${co}</strong>.`
+      : `Votre site web est votre commercial le plus actif — disponible 24h/24, 7j/7 pour convertir ${audTxt} en clients réels.`;
+    const descTxt = desc ? ` Dans le domaine de <em>${desc}</em>, l'expérience web est le premier critère de confiance évalué par ${audTxt} avant tout contact.` : '';
+    const webTxt = webData && webData.description ? ` Votre site communique déjà votre expertise — une base que nous optimisons pour maximiser chaque visite et déclencher le passage à l'acte.` : '';
+    return `${objTxt}${descTxt}${webTxt} Dans votre secteur, <strong>${s2.val} ${s2.txt}</strong>. Atelier Majelan apporte une approche UX-first complète : wireframes validés par des données comportementales réelles, refonte mobile-first pour une expérience irréprochable sur tous les écrans, et tunnels de conversion A/B testés — avec un gain moyen de +180% sur le taux de conversion observé sur nos clients.`;
   },
-  social: (co, dom, sector) => {
+  social: (co, dom, sector, obj, challenge, desc, audience, webData, socialData) => {
     const m = SECTOR_META[sector]||_defMeta; const s1=m.stats[1]||m.stats[0];
-    return `L'empreinte sociale de <strong>${co}</strong> est aujourd'hui sous-exploitée par rapport à son potentiel de marché. Dans votre secteur, <strong>${s1.val} ${s1.txt}</strong>. Pendant que vos concurrents occupent quotidiennement l'espace mental de vos prospects sur Instagram et LinkedIn, <strong>${co}</strong> reste irrégulier ou silencieux — laissant vos prospects aller vers des alternatives mieux visibles. La visibilité sociale se construit dans le temps, par la constance et la cohérence graphique. Atelier Majelan prend en charge votre stratégie éditoriale complète : calendrier de publication, création de visuels aux couleurs de votre marque, animation de communauté et campagnes de croissance mesurées.`;
+    const platf = audience==='btob' ? 'LinkedIn et Twitter/X' : audience==='local' ? 'Instagram et Facebook' : 'Instagram et LinkedIn';
+    const objTxt = `Les réseaux sociaux représentent pour <strong>${co}</strong> un canal d'acquisition et de fidélisation à fort potentiel, prêt à être activé.`;
+    const descTxt = desc ? ` Pour une activité comme <em>${desc}</em>, les réseaux sociaux peuvent représenter entre 20 et 35% des nouveaux contacts qualifiés — avec la bonne stratégie éditoriale.` : '';
+    const socialTxt = socialData && socialData.length > 0
+      ? ` Votre présence sur ${socialData.map(s=>s.platform).join(', ')} est un atout existant à amplifier — ${socialData.map(s=>s.followers?s.platform+' ('+s.followers+' abonnés)':s.platform).join(', ')}.`
+      : webData && webData.socialLinks && webData.socialLinks.length > 0
+      ? ` Votre présence sur ${webData.socialLinks.map(l=>l.platform).join(', ')} est un atout existant à amplifier et à rendre plus performant.`
+      : '';
+    return `${objTxt}${descTxt}${socialTxt||''} Dans votre secteur, <strong>${s1.val} ${s1.txt}</strong> — des chiffres qui confirment l'importance d'une présence sociale structurée. Sur ${platf}, une stratégie éditoriale consistante permet de nourrir la notoriété de <strong>${co}</strong> et de rester présent dans l'esprit de vos prospects à chaque étape de leur parcours d'achat. Atelier Majelan prend en charge votre stratégie complète : calendrier éditorial sur-mesure, création de visuels cohérents avec votre identité, animation de communauté et campagnes de croissance — avec un suivi analytique mensuel pour ajuster en temps réel.`;
   },
-  brand: (co, dom, sector) => {
+  brand: (co, dom, sector, obj, challenge, desc, audience, webData, socialData) => {
     const m = SECTOR_META[sector]||_defMeta;
-    return `L'identité de marque est le fondement invisible sur lequel repose toute votre communication. Pour <strong>${co}</strong>, l'analyse révèle un manque de cohérence visuelle entre les différents supports — site web, réseaux sociaux, documents commerciaux — qui dilue la perception de votre professionnalisme et rend votre marque difficile à mémoriser. Dans un secteur à indice de concurrence de <strong>${m.competition}/100</strong>, les prospects comparent plusieurs prestataires en quelques secondes : une identité forte est un avantage concurrentiel direct qui justifie un premium tarifaire. Atelier Majelan vous apporte un système de marque complet : logo, charte graphique, typo, palette couleurs et guidelines d'utilisation sur tous vos supports.`;
+    const audCtx = audience==='btob'
+      ? `En B2B, une identité professionnelle et cohérente est un critère de sélection à part entière : les décideurs l'évaluent consciemment avant même de lire vos offres, et une marque forte justifie un positionnement tarifaire premium.`
+      : audience==='local'
+      ? `Pour une clientèle de proximité, la reconnaissance de marque est un actif capital : une identité mémorisée génère du bouche-à-oreille, de la fidélisation et de la prescription naturelle dans votre zone de chalandise.`
+      : `Une identité forte est l'avantage concurrentiel qui différencie durablement <strong>${co}</strong> sur un marché où les prospects comparent plusieurs prestataires en quelques secondes.`;
+    const descTxt = desc ? ` Votre activité — <em>${desc}</em> — mérite une identité qui reflète avec précision votre positionnement, vos valeurs et ce qui fait l'unicité de <strong>${co}</strong> dans le secteur "${sector}".` : '';
+    const webTxt = webData && webData.title ? ` L'analyse de votre présence sur <strong>${dom}</strong> révèle une identité existante à consolider et à décliner avec cohérence sur l'ensemble de vos supports.` : '';
+    return `L'identité de marque est l'actif le plus structurant de la communication de <strong>${co}</strong>.${descTxt}${webTxt} ${audCtx} Dans un secteur à indice de concurrence de <strong>${m.competition}/100</strong>, une marque forte et cohérente est le levier de différenciation le plus durable. Atelier Majelan vous apporte un système de marque complet : diagnostic identitaire approfondi, logo principal et ses déclinaisons, charte graphique complète (typographies, palette chromatique, motifs de marque, ton éditorial) et guidelines d'utilisation sur l'ensemble de vos supports print et digitaux.`;
+  },
+  leads: (co, dom, sector, obj, challenge, desc, audience, webData, socialData) => {
+    const m = SECTOR_META[sector]||_defMeta; const s0=m.stats[0];
+    const objTxt = `Générer des leads qualifiés en ligne est l'objectif prioritaire de <strong>${co}</strong> — et c'est précisément là que Atelier Majelan excelle.`;
+    const descTxt = desc ? ` Dans le domaine de <em>${desc}</em>, le digital est aujourd'hui le canal d'acquisition le plus scalable et le plus mesurable disponible.` : '';
+    const webTxt = webData && webData.title ? ` Votre site <strong>${dom}</strong> est déjà en ligne — il ne reste plus qu'à l'optimiser pour en faire une machine à leads performante.` : '';
+    return `${objTxt}${descTxt}${webTxt} Dans votre secteur, <strong>${s0.val} ${s0.txt}</strong> — une dynamique de marché favorable qui confirme le potentiel commercial digital. Atelier Majelan construit votre machine à leads complète : SEO sur-mesure pour capter un trafic qualifié à fort intent d'achat, site web orienté conversion pour transformer ce trafic en contacts concrets, et stratégie social media pour maintenir votre visibilité et crédibilité tout au long du parcours d'achat — avec un reporting mensuel précis sur vos KPIs d'acquisition.`;
   }
 };
+
+
+
+// ══════════════════════════════════════════════
+//  WEB RESEARCH ENGINE
+// ══════════════════════════════════════════════
+async function fetchWebsiteData(url) {
+  if (!url) return null;
+  const clean = url.startsWith('http') ? url : 'https://' + url;
+  const proxies = [
+    `https://api.allorigins.win/get?url=${encodeURIComponent(clean)}`,
+    `https://corsproxy.io/?url=${encodeURIComponent(clean)}`
+  ];
+  for (const proxy of proxies) {
+    try {
+      const controller = new AbortController();
+      const tid = setTimeout(() => controller.abort(), 9000);
+      const res = await fetch(proxy, { signal: controller.signal });
+      clearTimeout(tid);
+      if (!res.ok) continue;
+      const data = await res.json();
+      const raw = data.contents || data.body || '';
+      if (!raw || raw.length < 200) continue;
+      return parseWebContent(raw, clean);
+    } catch(e) { continue; }
+  }
+  return null;
+}
+
+function parseWebContent(html, url) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const get = sel => (doc.querySelector(sel)||{}).textContent?.trim()||'';
+  const getMeta = name => (doc.querySelector(`meta[name="${name}"]`)||doc.querySelector(`meta[property="${name}"]`)||{}).getAttribute?.('content')?.trim()||'';
+
+  const title = get('title') || getMeta('og:title') || '';
+  const description = getMeta('description') || getMeta('og:description') || get('h1') || '';
+  const h1s = [...doc.querySelectorAll('h1')].map(el=>el.textContent.trim()).filter(Boolean).slice(0,3);
+  const h2s = [...doc.querySelectorAll('h2')].map(el=>el.textContent.trim()).filter(Boolean).slice(0,5);
+
+  // Extract social links
+  const socialLinks = [];
+  const socialPatterns = [
+    {platform:'Instagram', re:/instagram\.com\/([^/?#"'\s]+)/},
+    {platform:'LinkedIn', re:/linkedin\.com\/(company|in)\/([^/?#"'\s]+)/},
+    {platform:'Facebook', re:/facebook\.com\/([^/?#"'\s]+)/},
+    {platform:'Twitter', re:/twitter\.com\/([^/?#"'\s]+)/},
+    {platform:'YouTube', re:/youtube\.com\/(channel|@|c)\/([^/?#"'\s]+)/}
+  ];
+  const bodyText = doc.body?.innerHTML || '';
+  socialPatterns.forEach(({platform, re}) => {
+    if (re.test(bodyText)) socialLinks.push({platform, url: bodyText.match(re)?.[0]||''});
+  });
+
+  // Extract keywords from meta + headings
+  const metaKws = getMeta('keywords').split(/[,;]/).map(s=>s.trim()).filter(s=>s.length>2 && s.length<30);
+  const allText = [...h1s, ...h2s].join(' ').toLowerCase();
+  const keywords = [...new Set([...metaKws.slice(0,3), ...h1s.slice(0,2)])].filter(Boolean);
+
+  // SEO signals
+  const hasStructuredData = /<script[^>]+application\/ld\+json/i.test(html);
+  const hasOgTags = !!(getMeta('og:title') || getMeta('og:description'));
+  const canonical = (doc.querySelector('link[rel="canonical"]')||{}).getAttribute?.('href')||'';
+
+  return { title, description, h1s, h2s, socialLinks, keywords, hasStructuredData, hasOgTags, canonical };
+}
 
 function toggleDc(key) {
   document.getElementById('dc'+key).classList.toggle('open');
 }
 
 function showDiagRes(task) {
-  const {company, sector, url} = task;
+  const {company, sector, url, objective, challenge, desc, audience} = task;
   const d = SD[sector] || SD['Autre'];
   const meta = SECTOR_META[sector] || _defMeta;
   const dom = url ? url.replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0]
@@ -1368,26 +1970,31 @@ function showDiagRes(task) {
     });
 
     // ── Full audit panel ──
+    // Determine priority: use objective if set, else lowest score
     const lowestKey = Object.keys(scores).reduce((a,b) => scores[a]<scores[b]?a:b);
-    const sm = SERVICE_MAP[lowestKey];
+    const objKey = (objective && objective!=='all' && objective!=='leads' && SERVICE_MAP[objective]) ? objective : lowestKey;
+    const verdictKey = (objective && VERDICT_MAP[objective]) ? objective : lowestKey;
+    const sm = SERVICE_MAP[objKey];
     const globalScore = Math.round((scores.seo + scores.ux + scores.social + scores.brand) / 4);
     const avgBench = Math.round((meta.bench.seo + meta.bench.ux + meta.bench.social + meta.bench.brand) / 4);
     const CG = 226.19;
     const gOffset = CG * (1 - globalScore/100);
-    const globalTag = globalScore < 40 ? ['#ef4444','Situation critique'] : globalScore < 60 ? ['#f97316','Potentiel inexploité'] : ['#16a34a','Bonne base'];
-    const verdictFn = VERDICT_MAP[lowestKey] || VERDICT_MAP['seo'];
+    const globalTag = globalScore < 40 ? ['#f97316','Fort potentiel de croissance'] : globalScore < 60 ? ['#fbbf24','Leviers clés identifiés'] : ['#22c55e','Position solide'];
+    const verdictFn = VERDICT_MAP[verdictKey] || VERDICT_MAP['seo'];
+    const webData = task.webData || null;
+    const socialData = task.socialData || null;
     const urgentCount = Object.values(scores).filter(s=>s<50).length;
     const gapVsBench = globalScore - avgBench;
 
     const FINDING_DATA = [
       { key:'seo', label:'Référencement SEO', icon:'🔍',
-        insight: s => s<40 ? `Absent de la 1ère page sur la majorité des requêtes prioritaires — vos prospects vous cherchent et ne vous trouvent pas` : s<60 ? `Référencement partiel — ${Math.round((100-s)*0.35)} requêtes à fort potentiel encore inexploitées sur votre marché` : `Base SEO solide — optimisations de précision pour décrocher les positions top 3 restantes` },
+        insight: s => s<40 ? `Potentiel SEO majeur à activer — ${Math.round((100-s)*0.42)} requêtes prioritaires vous attendent en première page de Google` : s<60 ? `Référencement en construction — des optimisations ciblées peuvent doubler votre visibilité sur vos requêtes à fort intent` : `Base SEO solide — des optimisations de précision vous propulseront en position top 3 sur vos requêtes prioritaires` },
       { key:'ux', label:'Design & UX Web', icon:'🖥️',
-        insight: s => s<40 ? `Taux de rebond estimé >68% — la majorité de vos visiteurs repart sans agir, chaque euro de trafic est à moitié gaspillé` : s<60 ? `Frictions UX identifiées — entre 35% et 55% de vos conversions potentielles sont perdues avant l'acte d'achat` : `Expérience globalement fluide — quelques micro-optimisations peuvent encore +20% votre taux de conversion` },
+        insight: s => s<40 ? `Fort potentiel de conversion à débloquer — une refonte UX peut multiplier par 3 vos contacts générés à trafic égal` : s<60 ? `Des optimisations UX ciblées peuvent augmenter de 40 à 80% votre taux de transformation visiteur → contact` : `Expérience fluide et efficace — des micro-optimisations CRO peuvent encore améliorer votre taux de conversion de +20%` },
       { key:'social', label:'Réseaux Sociaux', icon:'📱',
-        insight: s => s<40 ? `Présence sociale quasi absente — votre audience potentielle est captée chaque jour par des concurrents actifs sur vos réseaux` : s<60 ? `Irrégularité éditoriale détectée — l'algorithme pénalise l'inconstance, votre portée organique est bridée` : `Communauté active — le next level : campagnes de croissance et contenu de conversion systématique` },
+        insight: s => s<40 ? `Un levier d'acquisition puissant à saisir — les réseaux sociaux peuvent générer 20-35% de vos nouveaux contacts qualifiés` : s<60 ? `Une stratégie éditoriale structurée peut décupler votre portée organique et ancrer votre marque dans l'esprit de vos prospects` : `Communauté engagée — activez des campagnes de conversion pour transformer cette audience en clients actifs` },
       { key:'brand', label:'Image de Marque', icon:'✦',
-        insight: s => s<40 ? `Identité visuelle hétérogène — sans cohérence entre vos supports, votre professionnalisme est sous-estimé par vos prospects` : s<60 ? `Charte visuelle incomplète — le manque de consistance entre site, print et social coûte des points de confiance` : `Marque reconnaissable — une déclinaison 360° et des guidelines solides consolideront votre positionnement premium` }
+        insight: s => s<40 ? `Construire une identité forte est l'investissement le plus structurant pour votre développement et votre différenciation` : s<60 ? `Consolider votre charte visuelle renforcera significativement la confiance de vos prospects et votre positionnement premium` : `Marque cohérente et mémorisable — une déclinaison 360° et des guidelines solides maximiseront votre impact` }
     ];
 
     const barGrad = {good:'linear-gradient(90deg,#16a34a,#4ade80)', warn:'linear-gradient(90deg,#f97316,#fb923c)', crit:'linear-gradient(90deg,#ef4444,#f87171)'};
@@ -1406,7 +2013,7 @@ function showDiagRes(task) {
         </div>
       </div>
       <div class="audit-csub">Analyse digitale complète · ${dom} · Indice de concurrence secteur : <strong style="color:#fb923c">${meta.competition}/100</strong></div>
-      <div class="audit-verdict">${verdictFn(company, dom, sector)}</div>
+      <div class="audit-verdict">${verdictFn(company, dom, sector, objective, challenge, desc, audience, webData, task.socialData||null)}</div>
     </div>
     <div class="audit-globe">
       <svg width="110" height="110" viewBox="0 0 110 110">
@@ -1542,35 +2149,35 @@ function showDiagRes(task) {
 
     // ── Detail cards (accordion) ──
     const CARDS = [
-      { key:'seo', icon:'🔍', label:'Référencement SEO', iconBg:'#fce8df',
+      { key:'seo', icon:'🔍', label:'Référencement SEO & IA', iconBg:'#fce8df',
         probs: s => [
-          s<40 ? `${company} est absent de la 1ère page Google — vos clients ne vous trouvent pas` : `Le référencement de ${dom} est partiel : des requêtes clés restent inexploitées`,
-          `L'architecture de ${dom} freine l'indexation par les moteurs de recherche et les IA`,
-          `Aucun contenu SEO actif ne capture les intentions de recherche de votre cible`
+          s<40 ? `${company} est absent ou quasi-absent de la 1ère page Google sur les requêtes prioritaires du secteur "${sector}" — vos prospects vous cherchent et trouvent vos concurrents à votre place` : `Le référencement de ${dom} est partiel : entre 60% et 80% des requêtes stratégiques de votre marché restent inexploitées, laissant un flux de trafic qualifié à la concurrence`,
+          `${dom} n'est pas référencé par les moteurs d'IA génératifs (ChatGPT, Perplexity, Gemini) — canal en forte croissance qui représente déjà 12-18% des recherches commerciales en 2026`,
+          `Contenu SEO insuffisant ou absent : sans articles de fond et pages thématiques optimisées, ${company} ne peut pas capturer les intentions de recherche longue traîne de ses prospects`
         ],
         sols: s => [
-          `Audit technique complet de ${dom} + feuille de route SEO livrée en 7 jours`,
-          `Production de ${s<40?4:2} articles/mois optimisés pour vos requêtes prioritaires`,
-          `Positionnement garanti sur Google & ChatGPT avec reporting mensuel de performance`
+          `Audit SEO technique complet de ${dom} : 68 points de contrôle + feuille de route priorisée livrée sous 7 jours ouvrés`,
+          `Stratégie de contenu SEO sur-mesure : ${s<40?'4-6':'2-4'} contenus/mois ciblant les requêtes à fort potentiel commercial de votre marché "${sector}"`,
+          `Optimisation pour les IA génératives (AEO) + Google My Business + reporting mensuel : trafic, positions, leads générés — ROI visible dès le 2ème mois`
         ]
       },
       { key:'ux', icon:'🖥️', label:'Design & Expérience Web', iconBg:'#eef2ff',
         probs: s => [
-          s<40 ? `Le site de ${company} génère un taux de rebond élevé : les visiteurs ne convertissent pas` : `L'UX de ${dom} manque de fluidité et de hiérarchie visuelle guidée`,
-          `${dom} n'est pas optimisé mobile — 68% de votre trafic est sur smartphone`,
-          `Les appels à l'action sont insuffisants : le parcours client n'est pas guidé vers la conversion`
+          s<40 ? `Le site de ${company} génère un taux de rebond estimé supérieur à 65% : la majorité de vos visiteurs repart sans agir — chaque euro investi en acquisition de trafic est en partie perdu` : `L'UX de ${dom} manque de fluidité et de hiérarchie visuelle : les visiteurs ne trouvent pas facilement ce qu'ils cherchent, ce qui coûte 35 à 50% des conversions potentielles`,
+          `${dom} n'est pas optimisé pour le mobile — or 68% du trafic web est sur smartphone en 2026 dans le secteur "${sector}" ; une page non responsive est une perte directe de clients`,
+          `Absence ou faiblesse des appels à l'action : les visiteurs de ${company} arrivent sur le site mais le tunnel de conversion (contact, devis, prise de RDV) n'est pas clairement balisé`
         ],
         sols: s => [
-          `Refonte UX complète de ${dom} avec architecture orientée conversion et résultats`,
-          `Site mobile-first ultra-rapide (Core Web Vitals >90) : expérience irréprochable`,
-          `Tunnels de conversion sur-mesure : CTAs, formulaires et landing pages testés A/B`
+          `Refonte UX complète de ${dom} : architecture orientée conversion, zoning validé, wireframes itératifs — livraison en 4 à 6 semaines avec accompagnement complet`,
+          `Site mobile-first ultra-rapide (Core Web Vitals > 90) avec score de performance Google optimal : expérience irréprochable sur tous les appareils`,
+          `Tunnels de conversion sur-mesure pour ${company} : CTAs stratégiques, formulaires multi-étapes, landing pages dédiées et A/B testing — +150 à 200% de taux de conversion observé`
         ]
       },
       { key:'social', icon:'📱', label:'Réseaux Sociaux', iconBg:'#fdf2f8',
         probs: s => [
-          s<40 ? `${company} est quasi absent des réseaux sociaux — une visibilité précieuse non exploitée` : `La présence social media de ${company} manque de régularité et de cohérence`,
-          `Les publications ne reflètent pas l'identité visuelle de ${company} et n'engagent pas la communauté`,
-          `Aucune stratégie de croissance d'audience ni de campagnes de recrutement actives`
+          s<40 ? `${company} est quasi absent des réseaux sociaux — pendant que vos concurrents du secteur "${sector}" construisent chaque jour leur audience et leur notoriété, vous laissez ce canal sans exploiter son potentiel commercial` : `La présence social media de ${company} manque de régularité : l'algorithme pénalise l'inconstance, ce qui bride votre portée organique et empêche la construction d'une communauté fidèle`,
+          `Les publications de ${company} ne reflètent pas une identité visuelle cohérente et ne génèrent pas d'engagement qualifié — format, ton, fréquence et appels à l'action sont à retravailler`,
+          `Absence de stratégie de croissance d'audience : sans plan éditorial, ${company} publie au hasard et ne capitalise pas sur les formats qui fonctionnent (Reels, carrousels, témoignages clients)`
         ],
         sols: s => [
           `Stratégie éditoriale complète : 12 publications/mois en cohérence avec votre marque`,
@@ -1578,16 +2185,16 @@ function showDiagRes(task) {
           `Gestion active : modération, engagement et campagnes de croissance d'audience`
         ]
       },
-      { key:'brand', icon:'✦', label:'Image de Marque', iconBg:'#f0fdf4',
+      { key:'brand', icon:'✦', label:'Image de Marque & Identité', iconBg:'#f0fdf4',
         probs: s => [
-          s<50 ? `L'identité visuelle de ${company} manque de cohérence entre les supports` : `La charte de ${company} gagnerait à être modernisée pour renforcer son impact`,
-          `Le logo et les visuels de ${company} ne sont pas déclinables facilement sur tous les formats`,
-          `Le positionnement de ${company} n'est pas suffisamment différenciant face à la concurrence`
+          s<40 ? `L'identité visuelle de ${company} est absente ou incohérente sur les différents points de contact — site, réseaux, print — créant une perception de manque de professionnalisme` : s<60 ? `La charte graphique de ${company} existe mais manque de cohérence entre les supports : un client qui passe de votre site à votre Instagram à vos documents ne perçoit pas une marque unifiée` : `L'identité de ${company} a une bonne base mais manque de guidelines formalisées pour assurer la cohérence à long terme`,
+          `Logo non déclinable : absence de version monochrome, version fond sombre et icon-only — 3 déclinaisons indispensables pour tout usage professionnel dans le secteur "${sector}"`,
+          `Positionnement de ${company} insuffisamment différenciant dans un secteur à concurrence ${meta.competition}/100 : votre message ne dit pas clairement pourquoi vous, plutôt qu'un concurrent`
         ],
         sols: s => [
-          `Audit complet de l'identité visuelle de ${company} avec recommandations illustrées`,
-          `Création ou refonte du logo + charte graphique complète (couleurs, typos, motifs)`,
-          `Développement du positionnement différenciant + ligne éditoriale de marque`
+          `Audit identité visuelle complet de ${company} : analyse de cohérence cross-supports, benchmark concurrentiel "${sector}", recommandations illustrées livrées en 5 jours`,
+          `Création ou refonte du système de marque : logo master + 4 déclinaisons, charte graphique complète (couleurs Pantone/CMJN/HEX, typographies, motifs, espacements, usage)`,
+          `Développement du positionnement différenciant de ${company} : proposition de valeur unique, ton éditorial de marque, templates prêts à l'emploi pour tous vos supports print & digital`
         ]
       }
     ];
@@ -1658,45 +2265,52 @@ function showDiagRes(task) {
       </div>`;
     }).join('');
 
-    // ── 3-phase Timeline ──
+    // ── 3-phase Timeline — personalized by objective ──
+    const objLabel = objective==='seo'?'Référencement':objective==='ux'?'Site Web':objective==='brand'?'Marque':objective==='social'?'Social Media':objective==='leads'?'Génération de Leads':'Digital';
+    const tlPhase1 = objective==='brand'
+      ? [`Audit identité visuelle de ${company} : analyse 360° des supports actuels`, `Diagnostic positionnement & benchmark concurrentiel secteur "${sector}"`, `Brief créatif validé : ton, univers visuel, ambitions de marque`, `Premières esquisses logo et moodboard présenté`]
+      : objective==='ux'
+      ? [`Audit UX de ${dom} : parcours utilisateur, points de friction, opportunités`, `Benchmark concurrentiel "${sector}" : ce que font vos meilleurs concurrents`, `Wireframes et architecture de site validés`, `Corrections techniques mobiles & vitesse prioritaires`]
+      : objective==='social'
+      ? [`Audit réseaux sociaux de ${company} : état des lieux, benchmark secteur`, `Définition de la stratégie éditoriale : thèmes, formats, calendrier`, `Création d'un kit graphique social aux couleurs de ${company}`, `Lancement des 8 premières publications calibrées`]
+      : [`Audit SEO technique complet de ${dom} + rapport de 68 points`, `Corrections techniques prioritaires : balises, vitesse, structure`, `Optimisation des pages existantes + Google My Business`, `Définition des 20 requêtes cibles à fort potentiel commercial`];
+    const tlPhase2 = objective==='brand'
+      ? [`Logo final + 4 déclinaisons (monochrome, fond sombre, icon, horizontal)`, `Charte graphique complète : couleurs, typographies, motifs, règles d'usage`, `Templates print & digital sur-mesure (cartes, en-têtes, présentations)`, `Déclinaisons réseaux sociaux et identité web unifiée`]
+      : objective==='ux'
+      ? [`Intégration et développement du nouveau site ${dom}`, `Mise en place des tunnels de conversion : CTAs, formulaires, landing pages`, `Tests de performance (Core Web Vitals > 90) et corrections`, `Premiers A/B tests sur les pages stratégiques`]
+      : objective==='social'
+      ? [`Production mensuelle : 12 publications, 2 Reels, stories hebdomadaires`, `Campagnes de croissance ciblées : augmentation d'audience organique`, `Analyse et reporting : portée, engagement, taux de conversion`, `Optimisation du contenu selon les performances`]
+      : [`Production de ${scores.seo<40?'4':'3'} articles SEO/mois sur vos requêtes prioritaires`, `Rédaction et optimisation de pages thématiques sectorielles`, `Netlinking : acquisition de 3 à 5 liens qualifiés par mois`, `Premiers rapports de positionnement : requêtes gagnées`];
+    const tlPhase3 = objective==='brand'
+      ? [`Campagne de lancement de la nouvelle identité de ${company}`, `Déclinaisons avancées : signalétique, packaging, PLV si applicable`, `Guidelines d'utilisation de la marque remis à l'équipe`, `Suivi et accompagnement sur 3 mois post-livraison`]
+      : objective==='ux'
+      ? [`${company} dans le top 10 de ses requêtes prioritaires grâce au nouveau site`, `Taux de conversion cible atteint : ${Math.max(2, Math.round((100-scores.ux)/20))}× l'actuel`, `Stratégie de contenu et SEO lancée pour alimenter le trafic`, `Tableau de bord analytics complet + formation équipe`]
+      : objective==='social'
+      ? [`Communauté en croissance autonome sur ${audience==='btob'?'LinkedIn':'Instagram & Facebook'}`, `Programme ambassadeurs et contenus UGC (User Generated Content)`, `Social Ads activées sur les audiences les plus engagées`, `Stratégie long terme posée avec calendrier éditorial annuel`]
+      : [`Top 3 Google sur ${Math.round((100-scores.seo)*0.2 + 3)} requêtes clés du secteur "${sector}"`, `Citation par ChatGPT, Perplexity et Gemini sur vos thématiques`, `Machine à leads SEO autonome : 15-25 leads qualifiés/mois estimés`, `Stratégie scalable définie pour les 12 prochains mois`];
     document.getElementById('timelineSection').innerHTML = `
       <div class="tl-header">
-        <div class="tl-pre">✦ Plan d'action personnalisé pour ${company}</div>
-        <div class="tl-title">La feuille de route de votre <em style="font-style:italic;color:var(--orange)">croissance digitale</em></div>
+        <div class="tl-pre">✦ Plan d'action sur-mesure — ${company} · Priorité : ${objLabel}</div>
+        <div class="tl-title">Votre feuille de route vers la <em style="font-style:italic;color:var(--orange)">croissance digitale</em></div>
       </div>
       <div class="tl-row">
         <div class="tl-card">
           <div class="tl-dot">🚀</div>
-          <div class="tl-period">J+30 — Victoires rapides</div>
-          <div class="tl-name">Fondations & Visibilité</div>
-          <div class="tl-items">
-            <div class="tl-item"><span class="tl-arrow">→</span>Audit complet de ${dom} + rapport détaillé</div>
-            <div class="tl-item"><span class="tl-arrow">→</span>Corrections SEO techniques prioritaires</div>
-            <div class="tl-item"><span class="tl-arrow">→</span>Refonte des visuels & identité sociale</div>
-            <div class="tl-item"><span class="tl-arrow">→</span>Premiers posts de marque calibrés</div>
-          </div>
+          <div class="tl-period">J+30 — Fondations</div>
+          <div class="tl-name">Diagnostic & Premiers résultats</div>
+          <div class="tl-items">${tlPhase1.map(t=>`<div class="tl-item"><span class="tl-arrow">→</span>${t}</div>`).join('')}</div>
         </div>
         <div class="tl-card">
           <div class="tl-dot">📈</div>
           <div class="tl-period">J+60 — Accélération</div>
-          <div class="tl-name">Contenu & Engagement</div>
-          <div class="tl-items">
-            <div class="tl-item"><span class="tl-arrow">→</span>Stratégie de contenu SEO & rédaction active</div>
-            <div class="tl-item"><span class="tl-arrow">→</span>Optimisations UX & conversion ciblées</div>
-            <div class="tl-item"><span class="tl-arrow">→</span>Campagnes social media mensuelles</div>
-            <div class="tl-item"><span class="tl-arrow">→</span>Premiers rapports de performance</div>
-          </div>
+          <div class="tl-name">Déploiement & Engagement</div>
+          <div class="tl-items">${tlPhase2.map(t=>`<div class="tl-item"><span class="tl-arrow">→</span>${t}</div>`).join('')}</div>
         </div>
         <div class="tl-card">
           <div class="tl-dot">🏆</div>
           <div class="tl-period">J+90 — Leadership</div>
-          <div class="tl-name">Domination & Scalabilité</div>
-          <div class="tl-items">
-            <div class="tl-item"><span class="tl-arrow">→</span>Top 3 Google sur requêtes clés du secteur</div>
-            <div class="tl-item"><span class="tl-arrow">→</span>Identité de marque cohérente 360°</div>
-            <div class="tl-item"><span class="tl-arrow">→</span>Communauté en croissance active</div>
-            <div class="tl-item"><span class="tl-arrow">→</span>Stratégie scalable long terme définie</div>
-          </div>
+          <div class="tl-name">Performance & Autonomie</div>
+          <div class="tl-items">${tlPhase3.map(t=>`<div class="tl-item"><span class="tl-arrow">→</span>${t}</div>`).join('')}</div>
         </div>
       </div>`;
 
@@ -1711,7 +2325,18 @@ function showDiagRes(task) {
 // ══════════════════════════════════════════════
 //  LOGO GENERATOR
 // ══════════════════════════════════════════════
-document.getElementById('auditForm').addEventListener('submit',e=>{e.preventDefault();const c=document.getElementById('companyName').value.trim(),s=document.getElementById('sector').value,u=document.getElementById('siteUrl').value.trim();if(!c||!s){alert('Merci de remplir le nom et le secteur !');return;}runLoader({type:'diag',company:c,sector:s,url:u});});
+document.getElementById('auditForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const c=document.getElementById('companyName').value.trim();
+  const s=document.getElementById('sector').value;
+  const u=document.getElementById('siteUrl').value.trim();
+  const obj=document.getElementById('mainObjective').value;
+  const chal=document.getElementById('mainChallenge').value;
+  const desc=(document.getElementById('companyDesc')||{}).value||'';
+  const aud=(document.getElementById('targetAudience')||{}).value||'';
+  if(!c||!s){alert('Merci de remplir le nom et le secteur !');return;}
+  runLoader({type:'diag',company:c,sector:s,url:u,objective:obj,challenge:chal,desc:desc.trim(),audience:aud});
+});
 document.getElementById('logoGenForm').addEventListener('submit',e=>{e.preventDefault();const c=document.getElementById('logoCompany').value.trim(),tl=document.getElementById('logoTagline').value.trim();if(!c){alert('Merci de saisir le nom de votre marque !');return;}logoData={company:c,tagline:tl};runLoader({type:'logo',company:c,tagline:tl});});
 
 // ══════════════════════════════════════════════
@@ -1910,7 +2535,7 @@ function showLogoRes(task) {
   document.getElementById('lgResComp').textContent = `LOGOS GÉNÉRÉS POUR ${company.toUpperCase()}`;
   document.getElementById('lgResSub').textContent = uploadedDataUrl
     ? `Analyse de votre logo actuel + ${document.querySelectorAll('#logoGrid .logo-card:not(.upload-ref-card)').length || 4} créations générées selon vos couleurs`
-    : '4 créations professionnelles générées selon vos couleurs et votre marque';
+    : '8 créations vectorielles professionnelles · Export SVG · Couleurs personnalisées';
   renderLogos(company, tagline, selPrimary, selAccent);
   buildPsSwitcher(company, tagline);
   // Run logo analysis if logo was uploaded
@@ -2003,9 +2628,14 @@ function dlSvg(idx) {
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 
-// ══════════════════════════════════════════════
+//  OBJECTIVE SELECTOR
+function selObj(el, val) {
+  document.querySelectorAll('.obj-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('mainObjective').value = val;
+}
+
 //  RESET
-// ══════════════════════════════════════════════
 function resetAll() {
   document.getElementById('diagResults').classList.remove('active');
   document.getElementById('logoResults').classList.remove('active');
@@ -2020,6 +2650,8 @@ function resetAll() {
   closePreview();
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
 </script>
+
 </body>
 </html>
